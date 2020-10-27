@@ -23,9 +23,9 @@
 .vs/
 
 # Folder containing art assets - (comment this out when getting ready to merge into main!!!)
-/[Aa]ssets/Visual/Materials/
-/[Aa]ssets/Visual/Models/
-/[Aa]ssets/Visual/Textures/
+# /[Aa]ssets/Visual/Materials/
+# /[Aa]ssets/Visual/Models/
+# /[Aa]ssets/Visual/Textures/
 
 # Gradle cache directory
 .gradle/
