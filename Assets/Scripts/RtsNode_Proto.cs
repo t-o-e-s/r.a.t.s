@@ -7,8 +7,8 @@ public class RtsNode_Proto : MonoBehaviour
 
     RtsMovement_Proto rtsMove;
     public bool nodeSelected;
-    public Vector3 nodePos; 
-
+    public Vector3 nodePos;
+    public bool unitArrived;
     private void OnMouseDown()
     {
         if (rtsMove.unitSelected == true)
@@ -17,6 +17,22 @@ public class RtsNode_Proto : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Unit")
+        {
+            unitArrived = true;
+            nodeSelected = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Unit")
+        {
+            unitArrived = false;
+        }
+    }
 
     private void Start()
     {

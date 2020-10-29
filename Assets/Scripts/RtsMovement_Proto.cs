@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class RtsMovement_Proto : MonoBehaviour
 {
-
-    Transform unitPosition;
     float movementSpeed;
     public bool unitSelected;
+    bool canMove;
     bool unitMoving;
     Canvas can;
     public Image img;
     Vector3 targetPosition;
     RtsNode_Proto rtsNode;
+    GameObject[] nodeArray;
 
     void Start()
     {
@@ -22,7 +22,9 @@ public class RtsMovement_Proto : MonoBehaviour
         can = GetComponent<Canvas>();
         img.enabled = false;
         movementSpeed = 10f;
-        rtsNode = GameObject.FindGameObjectWithTag("Node").GetComponent<RtsNode_Proto>();
+
+        nodeArray = GameObject.FindGameObjectsWithTag("Node");
+       
     }
 
     private void OnMouseOver()
@@ -52,13 +54,27 @@ public class RtsMovement_Proto : MonoBehaviour
     }
 
     private void Update()
-    {                     
-        if(rtsNode.nodeSelected == true)
+    {
+        foreach (GameObject node in nodeArray)
         {
-            targetPosition = rtsNode.nodePos;
+
+            if (node.gameObject.GetComponent<RtsNode_Proto>().nodeSelected == true)
+            {
+                targetPosition = node.gameObject.GetComponent<RtsNode_Proto>().nodePos;
+                canMove = true;
+                
+                if(node.gameObject.GetComponent<RtsNode_Proto>().unitArrived == true)
+                {
+                    canMove = false;
+                    unitSelected = false;
+                    unitMoving = false;
+                }
+            }
         }
 
-         if(unitSelected == true && rtsNode.nodeSelected == true)
+        
+
+         if(unitSelected == true && canMove == true)
         {
             this.gameObject.transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * movementSpeed);
             unitMoving = true;
