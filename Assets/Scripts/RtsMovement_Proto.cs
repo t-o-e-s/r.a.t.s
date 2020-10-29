@@ -11,7 +11,7 @@ public class RtsMovement_Proto : MonoBehaviour
     bool unitMoving;
     Canvas can;
     public Image img;
-    Vector3 targetPosition;
+    public Vector3 targetPosition;
     RtsNode_Proto rtsNode;
     GameObject[] nodeArray;
 
