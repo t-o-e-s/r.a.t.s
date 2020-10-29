@@ -9,6 +9,15 @@ public class RtsNode_Proto : MonoBehaviour
     public bool nodeSelected;
     public Vector3 nodePos;
     public bool unitArrived;
+    GameObject unit;
+
+    private void Start()
+    {
+        nodePos = gameObject.transform.position;
+        rtsMove = GameObject.FindGameObjectWithTag("Unit").GetComponent<RtsMovement_Proto>();
+        
+    }
+
     private void OnMouseDown()
     {
         if (rtsMove.unitSelected == true)
@@ -23,6 +32,8 @@ public class RtsNode_Proto : MonoBehaviour
         {
             unitArrived = true;
             nodeSelected = false;
+            rtsMove.unitMoving = false;
+            rtsMove.canMove = false;
         }
     }
 
@@ -34,9 +45,13 @@ public class RtsNode_Proto : MonoBehaviour
         }
     }
 
-    private void Start()
+   private void Update()
     {
-        nodePos = gameObject.transform.position;
-        rtsMove = GameObject.FindGameObjectWithTag("Unit").GetComponent<RtsMovement_Proto>();
+        if(rtsMove.unitMoving == true && rtsMove.targetPosition != this.transform.position)
+        {
+            this.nodeSelected = false;
+        }
     }
+    
+   
 }
