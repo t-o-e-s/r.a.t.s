@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class UnitSelection : MonoBehaviour
 {
     public Image selectInd;
     public bool unitSelected;
-
+    NavMeshAgent agent;
     private void Awake()
     {
         selectInd.enabled = false;
         unitSelected = false;
         selectInd = GetComponentInChildren<Image>();
+        agent = GetComponent<NavMeshAgent>();
+
     }
 
     private void OnMouseOver()
@@ -42,6 +45,26 @@ public class UnitSelection : MonoBehaviour
         {
             selectInd.enabled = false;
             unitSelected = false;
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "slope")
+        {
+            agent.speed = 5;
+        }
+        else
+        {
+            agent.speed = 10;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "slope")
+        {
+            agent.speed = 10;
         }
     }
 

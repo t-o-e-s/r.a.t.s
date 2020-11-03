@@ -8,6 +8,7 @@ TagManager:
   - Unit
   - Node
   - movement_tile
+  - slope
   layers:
   - Default
   - TransparentFX
