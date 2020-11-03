@@ -48,6 +48,7 @@ public class UnitSelection : MonoBehaviour
         }
     }
 
+    /*
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "slope")
@@ -66,9 +67,17 @@ public class UnitSelection : MonoBehaviour
         {
             agent.speed = 10;
         }
+    }*/
+
+    private void Update()
+    {
+        NavMeshHit navMeshHit;
+        if (NavMesh.SamplePosition(agent.transform.position, out navMeshHit, 1f, 8))
+        {
+            print(navMeshHit.mask);
+            agent.speed = 5f;
+        }
     }
 
-    
 
- 
 }
