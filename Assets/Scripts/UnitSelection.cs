@@ -72,11 +72,11 @@ public class UnitSelection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(agent.GetAreaCost = 10)
+        if(agent.GetAreaCost == 10)
         {
             agent.speed = 5;
         }
-        if(agent.GetAreaCost = 1)
+        if(agent.GetAreaCost == 1)
         {
             agent.speed = 10;
         }
