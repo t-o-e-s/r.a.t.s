@@ -11,7 +11,7 @@ public abstract class UnitController : MonoBehaviour, IUnit
     //nav agent and related fields
     protected NavMeshAgent agent;
     [SerializeField]
-    protected float speed = 10;
+    private float speed = 10;
     [SerializeField]
     protected float slowedSpeed = 5;
 
@@ -65,6 +65,8 @@ public abstract class UnitController : MonoBehaviour, IUnit
         NavMeshHit navMeshHit;
 
         if (NavMesh.SamplePosition(agent.transform.position, out navMeshHit, 1f, 8))
-            agent.speed = slowedSpeed; 
+             { agent.speed = slowedSpeed; }
+        else 
+             { agent.speed = speed; }
     }
 }
