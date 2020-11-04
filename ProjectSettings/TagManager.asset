@@ -9,6 +9,7 @@ TagManager:
   - movement_tile
   - slope
   - player_unit
+  - entity
   layers:
   - Default
   - TransparentFX

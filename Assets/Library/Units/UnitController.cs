@@ -6,12 +6,12 @@ using UnityEngine.AI;
 public abstract class UnitController : MonoBehaviour, IUnit
 {
     //will be used for the individual units under the controller
-    protected GameObject[] entities;
+    protected Dictionary<NavMeshAgent, Vector3> entities = new Dictionary<NavMeshAgent, Vector3>();
 
     //nav agent and related fields
     protected NavMeshAgent agent;
     [SerializeField]
-    private float speed = 10;
+    protected float speed = 10;
     [SerializeField]
     protected float slowedSpeed = 5;
 
@@ -41,6 +41,23 @@ public abstract class UnitController : MonoBehaviour, IUnit
 
         //all unit stats can be set within this method
         SetStats();
+
+
+        //
+        foreach (Transform t in GetComponentsInChildren<Transform>())
+        {
+            if (!t.CompareTag("entity")) continue;
+
+            Vector3 offset = transform.position - t.position;
+
+            NavMeshAgent childAgent;
+            if (t.gameObject.TryGetComponent(out childAgent))
+            {
+                entities.Add(childAgent, offset);
+            }
+        }
+        Debug.Log(entities.Count);    
+                
     }
 
     private void Update()
@@ -57,6 +74,15 @@ public abstract class UnitController : MonoBehaviour, IUnit
     public void Move(Vector3 target)
     {
         agent.SetDestination(target);
+
+        foreach (KeyValuePair<NavMeshAgent, Vector3> pair in entities)
+        {
+            // TODO - maths to recalculate the offset relative to the parent objects direction 
+
+            pair.Key.SetDestination(target + pair.Value);
+
+
+        }
     }
 
     //new implementations
@@ -64,9 +90,16 @@ public abstract class UnitController : MonoBehaviour, IUnit
     {
         NavMeshHit navMeshHit;
 
-        if (NavMesh.SamplePosition(agent.transform.position, out navMeshHit, 1f, 8))
-             { agent.speed = slowedSpeed; }
-        else 
-             { agent.speed = speed; }
+        float speedToSet = NavMesh.SamplePosition(agent.transform.position, out navMeshHit, 1f, 8) ?
+            slowedSpeed :
+            speed;
+
+        agent.speed = speed;
+
+        foreach (KeyValuePair<NavMeshAgent, Vector3> pair in entities)
+        {
+            pair.Key.speed = speed;
+
+        }
     }
 }
