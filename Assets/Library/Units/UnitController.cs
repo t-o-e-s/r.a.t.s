@@ -63,6 +63,7 @@ public abstract class UnitController : MonoBehaviour, IUnit
     private void Update()
     {
         SamplePosition();
+
     }
 
     //implementations of IUnit
@@ -88,17 +89,17 @@ public abstract class UnitController : MonoBehaviour, IUnit
     //new implementations
     protected void SamplePosition()
     {
-        NavMeshHit navMeshHit;
+        NavMeshHit navMeshHit;            
 
         float speedToSet = NavMesh.SamplePosition(agent.transform.position, out navMeshHit, 1f, 8) ?
             slowedSpeed :
             speed;
 
-        agent.speed = speed;
+        agent.speed = speedToSet;
 
         foreach (KeyValuePair<NavMeshAgent, Vector3> pair in entities)
         {
-            pair.Key.speed = speed;
+            pair.Key.speed = speedToSet;
 
         }
     }
