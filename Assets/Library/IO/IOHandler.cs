@@ -6,6 +6,7 @@ public class IOHandler : MonoBehaviour
 {
 
     HashSet<UnitController> unitBuffer = new HashSet<UnitController>();
+    bool aUnitSelected;
 
     // Start is called before the first frame update
     void Awake()
@@ -58,13 +59,27 @@ public class IOHandler : MonoBehaviour
         {
             if (unitBuffer.Contains(controller))
             {
-                //removing unit from the buffer & turning flag off
-                if (unitBuffer.Remove(controller)) controller.Flag(false);
+                if (aUnitSelected == true)
+                {
+                    //removing unit from the buffer & turning flag off
+                    if (unitBuffer.Remove(controller))
+                    {
+                        controller.Flag(false);
+                        aUnitSelected = false;
+                    }
+                }
             }
             else
             {
-                //adding unit to buffer & turning flag on
-                if (unitBuffer.Add(controller)) controller.Flag(true);
+                if (aUnitSelected == false)
+                {
+                    //adding unit to buffer & turning flag on
+                    if (unitBuffer.Add(controller))
+                    {
+                        controller.Flag(true);
+                        aUnitSelected = true;
+                    }
+                }
             }
         }
         else
