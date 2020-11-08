@@ -10,6 +10,7 @@ TagManager:
   - slope
   - player_unit
   - entity
+  - enemy_unit
   layers:
   - Default
   - TransparentFX

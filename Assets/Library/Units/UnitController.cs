@@ -8,6 +8,9 @@ public abstract class UnitController : MonoBehaviour, IUnit
     //will be used for the individual units under the controller
     protected Dictionary<NavMeshAgent, Vector3> entities = new Dictionary<NavMeshAgent, Vector3>();
 
+    //combat this unit is in
+    public CombatResolver combat = null;
+
     //nav agent and related fields
     protected NavMeshAgent agent;
     [SerializeField]
@@ -63,7 +66,6 @@ public abstract class UnitController : MonoBehaviour, IUnit
     private void Update()
     {
         SamplePosition();
-
     }
 
     //implementations of IUnit
@@ -78,15 +80,24 @@ public abstract class UnitController : MonoBehaviour, IUnit
 
         foreach (KeyValuePair<NavMeshAgent, Vector3> pair in entities)
         {
-            // TODO - maths to recalculate the offset relative to the parent objects direction 
-
+            // needs elaboration, but works
             pair.Key.SetDestination(target + pair.Value);
-
-
         }
+    }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage; 
+    }
 
+    public void Heal(float heal)
+    {
+        health += heal;
+    }
 
+    public bool InCombat()
+    {
+        return combat != null;
     }
 
     //new implementations
@@ -105,5 +116,5 @@ public abstract class UnitController : MonoBehaviour, IUnit
             pair.Key.speed = speedToSet;
 
         }
-    }
+    }   
 }

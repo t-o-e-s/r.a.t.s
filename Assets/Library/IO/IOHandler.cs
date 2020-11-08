@@ -33,11 +33,15 @@ public class IOHandler : MonoBehaviour
             switch (hit.collider.tag)
             {
                 case "movement_tile":
-                    HandleMovement(hit.collider.gameObject);
+                    if (IsUnitSelected()) HandleMovement(hit.collider.gameObject);
                     break;
 
                 case "player_unit":
-                    HandleSelection(hit.collider.gameObject);
+                    if (IsUnitSelected()) HandleSelection(hit.collider.gameObject);
+                    break;
+
+                case "enemy_unit":
+                    if (IsUnitSelected()) HandleAttack(hit.collider.gameObject);
                     break;
             }
         }
@@ -86,5 +90,30 @@ public class IOHandler : MonoBehaviour
         {
             Debug.LogError("[ERROR] - No valid controller found on: " + unit.name);
         }       
+    }
+
+    void HandleAttack(GameObject target) 
+    {
+        UnitController targetController;
+
+        if (target.TryGetComponent(out targetController))
+        {
+            if (targetController.InCombat())
+            {
+                foreach (UnitController u in unitBuffer)
+                {
+                    targetController.combat.AddRats(u);
+                }
+            }
+            else
+            {
+                GameObject resolver = new GameObject();
+            }
+        }
+    }
+
+    bool IsUnitSelected()
+    {
+        return unitBuffer.Count > 0;
     }
 }
