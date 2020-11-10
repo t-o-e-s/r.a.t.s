@@ -25,7 +25,7 @@ public class IOHandler : MonoBehaviour
     }
 
     void Cast()
-    {
+    {       
         RaycastHit hit;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 150f))
@@ -33,15 +33,15 @@ public class IOHandler : MonoBehaviour
             switch (hit.collider.tag)
             {
                 case "movement_tile":
-                    if (IsUnitSelected()) HandleMovement(hit.collider.gameObject);
+                    HandleMovement(hit.collider.gameObject);
                     break;
 
                 case "player_unit":
-                    if (IsUnitSelected()) HandleSelection(hit.collider.gameObject);
+                    HandleSelection(hit.collider.gameObject);
                     break;
 
                 case "enemy_unit":
-                    if (IsUnitSelected()) HandleAttack(hit.collider.gameObject);
+                    HandleAttack(hit.collider.gameObject);
                     break;
             }
         }
@@ -60,30 +60,15 @@ public class IOHandler : MonoBehaviour
         UnitController controller;
 
         if (unit.TryGetComponent(out controller))
-        {
-            if (unitBuffer.Contains(controller))
+        {           
+            if (!unitBuffer.Contains(controller))
             {
-                if (aUnitSelected == true)
-                {
-                    //removing unit from the buffer & turning flag off
-                    if (unitBuffer.Remove(controller))
-                    {
-                        controller.Flag(false);
-                        aUnitSelected = false;
-                    }
-                }
+                ClearBuffer();
+                Select(controller, true);
             }
             else
             {
-                if (aUnitSelected == false)
-                {
-                    //adding unit to buffer & turning flag on
-                    if (unitBuffer.Add(controller))
-                    {
-                        controller.Flag(true);
-                        aUnitSelected = true;
-                    }
-                }
+                Select(controller, false);
             }
         }
         else
@@ -103,13 +88,39 @@ public class IOHandler : MonoBehaviour
                 foreach (UnitController u in unitBuffer)
                 {
                     targetController.combat.AddRats(u);
+                    u.Move(target.transform.position);
                 }
             }
             else
             {
                 GameObject resolver = new GameObject();
+                CombatResolver combat = resolver.AddComponent<CombatResolver>();
+
+                foreach (UnitController u in unitBuffer)
+                {
+                    combat.AddRats(u);
+                    u.Move(target.transform.position);
+                }
+
+                combat.AddEnemy(targetController);
             }
         }
+    }
+
+    void ClearBuffer()
+    {
+        foreach (UnitController unit in unitBuffer)
+        {
+            Select(unit, false);
+        }
+    }
+
+    void Select(UnitController unit, bool active)
+    {
+        if (active) unitBuffer.Add(unit);
+        else unitBuffer.Remove(unit);
+
+        unit.Flag(active);
     }
 
     bool IsUnitSelected()

@@ -58,9 +58,7 @@ public abstract class UnitController : MonoBehaviour, IUnit
             {
                 entities.Add(childAgent, offset);
             }
-        }
-        Debug.Log(entities.Count);    
-                
+        }             
     }
 
     private void Update()

@@ -19,6 +19,6 @@ public class UnitGroup
 
     public void TakeDamage(float damage)
     {
-        foreach
+        
     }
 }
