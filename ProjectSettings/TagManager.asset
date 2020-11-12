@@ -10,6 +10,8 @@ TagManager:
   - slope
   - player_unit
   - entity
+  - timeTile
+  - bridge
   layers:
   - Default
   - TransparentFX
