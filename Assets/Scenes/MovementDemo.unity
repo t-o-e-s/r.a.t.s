@@ -10144,6 +10144,7 @@ GameObject:
   - component: {fileID: 549161361}
   - component: {fileID: 549161368}
   - component: {fileID: 549161367}
+  - component: {fileID: 549161369}
   m_Layer: 10
   m_Name: unitLead
   m_TagString: player_unit
@@ -10297,6 +10298,20 @@ MonoBehaviour:
   speed: 8
   slowedSpeed: 4
   health: 0
+--- !u!114 &549161369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549161360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b16f2484e4dcd4d9a0b2852086cbdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitPositions: []
+  isRewinding: 0
 --- !u!1 &549223160
 GameObject:
   m_ObjectHideFlags: 0
@@ -70143,6 +70158,7 @@ GameObject:
   - component: {fileID: 1768465593}
   - component: {fileID: 1768465592}
   - component: {fileID: 1768465591}
+  - component: {fileID: 1768465599}
   m_Layer: 10
   m_Name: unitLead (1)
   m_TagString: player_unit
@@ -70296,6 +70312,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1768465599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768465590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b16f2484e4dcd4d9a0b2852086cbdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitPositions: []
+  isRewinding: 0
 --- !u!1 &1778107796
 GameObject:
   m_ObjectHideFlags: 0

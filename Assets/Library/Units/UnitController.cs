@@ -22,7 +22,7 @@ public abstract class UnitController : MonoBehaviour, IUnit
     [SerializeField]
     float health;
 
-
+    TimeHandler timeHandler;
 
 
     // IUnit methods (left abstract/ without implementation)
@@ -38,6 +38,8 @@ public abstract class UnitController : MonoBehaviour, IUnit
         agent = GetComponent<NavMeshAgent>();
 
         flag = GetComponentInChildren<SpriteRenderer>();
+
+        timeHandler = GetComponent<TimeHandler>();
 
         //all unit stats can be set within this method
         SetStats();
