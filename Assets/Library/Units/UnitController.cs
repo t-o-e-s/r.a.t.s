@@ -24,6 +24,16 @@ public abstract class UnitController : MonoBehaviour, IUnit
 
     
 
+    enum Status
+    {
+        normal,
+        aFlame,
+        wet,
+        cold,
+        spored
+    }
+
+    Status unitStatus;
 
     // IUnit methods (left abstract/ without implementation)
     public abstract void Attack(GameObject target);
@@ -39,6 +49,7 @@ public abstract class UnitController : MonoBehaviour, IUnit
 
         flag = GetComponentInChildren<SpriteRenderer>();
 
+        unitStatus = Status.normal;
 
         //all unit stats can be set within this method
         SetStats();
@@ -64,7 +75,6 @@ public abstract class UnitController : MonoBehaviour, IUnit
     private void Update()
     {
         SamplePosition();
-
     }
 
     //implementations of IUnit
@@ -85,9 +95,6 @@ public abstract class UnitController : MonoBehaviour, IUnit
 
 
         }
-
-
-
     }
 
     //new implementations
@@ -107,4 +114,27 @@ public abstract class UnitController : MonoBehaviour, IUnit
 
         }
     }
+
+    public void StatusEffect()
+    {
+        switch(unitStatus)
+        {
+            case Status.normal:
+                break;
+            case Status.aFlame:
+                //TODO call a function for status of aFlame
+                break;
+            case Status.cold:
+                //TODO call a function for status of cold 
+                break;
+            case Status.spored:
+                //TODO call a function for status of spored
+                break;
+            case Status.wet:
+                //TODO call a function for status of wet 
+                break;
+        }
+    
+    }
+
 }
