@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class UnitController : MonoBehaviour, IUnit
+public abstract class UnitController : MonoBehaviour, IUnit, ITimed
 {
     //will be used for the individual units under the controller
     protected Dictionary<NavMeshAgent, Vector3> entities = new Dictionary<NavMeshAgent, Vector3>();
+
+    //array of applied statuses
+    protected Status[] statuses;
 
     //combat this unit is in
     public CombatResolver combat = null;
@@ -115,4 +118,17 @@ public abstract class UnitController : MonoBehaviour, IUnit
 
         }
     }   
+
+    //implementation of Record() from ITimed - used for saving position
+    public State Record()
+    {
+        return new UnitState(
+            gameObject,
+            transform.position,
+            transform.rotation,
+            health,
+            statuses,
+            !(combat == null)
+            );
+    }
 }
