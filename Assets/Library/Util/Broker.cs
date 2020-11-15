@@ -6,12 +6,14 @@ using Debug = UnityEngine.Debug;
 
 public class Broker : MonoBehaviour
 {
+    public readonly float combatDistance = 3f;
+
     HashSet<IResolvable> resolvables = new HashSet<IResolvable>();
 
     Stopwatch watch;
 
     [SerializeField]
-    int ticksPerSecond = 1;    
+    int ticksPerSecond = 3;    
 
     void Awake()
     {

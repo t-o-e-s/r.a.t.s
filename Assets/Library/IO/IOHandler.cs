@@ -83,27 +83,10 @@ public class IOHandler : MonoBehaviour
 
         if (target.TryGetComponent(out targetController))
         {
-            if (targetController.InCombat())
+            foreach (UnitController unit in unitBuffer)
             {
-                foreach (UnitController u in unitBuffer)
-                {
-                    targetController.combat.AddRats(u);
-                    u.Move(target.transform.position);
-                }
-            }
-            else
-            {
-                GameObject resolver = new GameObject();
-                CombatResolver combat = resolver.AddComponent<CombatResolver>();
-
-                foreach (UnitController u in unitBuffer)
-                {
-                    combat.AddRats(u);
-                    u.Move(target.transform.position);
-                }
-
-                combat.AddEnemy(targetController);
-            }
+                unit.Attack(targetController);
+            }          
         }
     }
 

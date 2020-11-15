@@ -14,7 +14,10 @@ public class UnitGroup
 
     public UnitGroup(HashSet<UnitController> units)
     {
-
+        foreach(UnitController unit in units)
+        {
+            attackPower += unit.attack * unit.speed; 
+        }
     }
 
     public void TakeDamage(float damage)

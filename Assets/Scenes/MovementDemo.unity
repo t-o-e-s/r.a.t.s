@@ -10120,9 +10120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae56eaf7206b5fe48858dbd2c39de316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  attack: 0
+  defense: 0
+  combat: {fileID: 0}
+  combatTarget: {fileID: 0}
   speed: 8
   slowedSpeed: 4
-  health: 0
+  combatStoppingDistance: 2
 --- !u!1 &549223160
 GameObject:
   m_ObjectHideFlags: 0
@@ -13989,9 +13994,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae56eaf7206b5fe48858dbd2c39de316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  attack: 0
+  defense: 0
+  combat: {fileID: 0}
+  combatTarget: {fileID: 0}
   speed: 8
   slowedSpeed: 4
-  health: 0
+  combatStoppingDistance: 2
 --- !u!195 &727191705
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -26347,9 +26357,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae56eaf7206b5fe48858dbd2c39de316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  attack: 0
+  defense: 0
+  combat: {fileID: 0}
+  combatTarget: {fileID: 0}
   speed: 10
   slowedSpeed: 5
-  health: 0
+  combatStoppingDistance: 2
 --- !u!136 &1315829952
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -70235,9 +70250,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae56eaf7206b5fe48858dbd2c39de316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  attack: 0
+  defense: 0
+  combat: {fileID: 0}
+  combatTarget: {fileID: 0}
   speed: 8
   slowedSpeed: 4
-  health: 0
+  combatStoppingDistance: 2
 --- !u!195 &1768465593
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -71696,7 +71716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb7a85b8f256044a92dc7b32496311f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ticksPerSecond: 6
+  ticksPerSecond: 3
 --- !u!43 &1851688897
 Mesh:
   m_ObjectHideFlags: 0
@@ -74743,6 +74763,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae56eaf7206b5fe48858dbd2c39de316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  attack: 0
+  defense: 0
+  combat: {fileID: 0}
+  combatTarget: {fileID: 0}
+  speed: 10
+  slowedSpeed: 5
+  combatStoppingDistance: 2
 --- !u!195 &2074992164
 NavMeshAgent:
   m_ObjectHideFlags: 0
