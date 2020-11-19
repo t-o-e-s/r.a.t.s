@@ -5,9 +5,12 @@ using UnityEngine.AI;
 
 public class MeleeController : UnitController
 {
-    public override void Attack(GameObject target)
+    public override void Attack(UnitController target) 
     {
-        //TODO
+        //calls unit controller base method
+        base.Attack(target);
+        //starting movement co-routine
+        StartCoroutine(MoveToAttack(target));
     }
 
     public override void SetStats()

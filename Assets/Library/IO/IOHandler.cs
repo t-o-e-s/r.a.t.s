@@ -25,7 +25,7 @@ public class IOHandler : MonoBehaviour
     }
 
     void Cast()
-    {
+    {       
         RaycastHit hit;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 150f))
@@ -38,6 +38,10 @@ public class IOHandler : MonoBehaviour
 
                 case "player_unit":
                     HandleSelection(hit.collider.gameObject);
+                    break;
+
+                case "enemy_unit":
+                    HandleAttack(hit.collider.gameObject);
                     break;
             }
         }
@@ -56,35 +60,54 @@ public class IOHandler : MonoBehaviour
         UnitController controller;
 
         if (unit.TryGetComponent(out controller))
-        {
-            if (unitBuffer.Contains(controller))
+        {           
+            if (!unitBuffer.Contains(controller))
             {
-                if (aUnitSelected == true)
-                {
-                    //removing unit from the buffer & turning flag off
-                    if (unitBuffer.Remove(controller))
-                    {
-                        controller.Flag(false);
-                        aUnitSelected = false;
-                    }
-                }
+                ClearBuffer();
+                Select(controller, true);
             }
             else
             {
-                if (aUnitSelected == false)
-                {
-                    //adding unit to buffer & turning flag on
-                    if (unitBuffer.Add(controller))
-                    {
-                        controller.Flag(true);
-                        aUnitSelected = true;
-                    }
-                }
+                Select(controller, false);
             }
         }
         else
         {
             Debug.LogError("[ERROR] - No valid controller found on: " + unit.name);
         }       
+    }
+
+    void HandleAttack(GameObject target) 
+    {
+        UnitController targetController;
+
+        if (target.TryGetComponent(out targetController))
+        {
+            foreach (UnitController unit in unitBuffer)
+            {
+                unit.Attack(targetController);
+            }          
+        }
+    }
+
+    void ClearBuffer()
+    {
+        foreach (UnitController unit in unitBuffer)
+        {
+            Select(unit, false);
+        }
+    }
+
+    void Select(UnitController unit, bool active)
+    {
+        if (active) unitBuffer.Add(unit);
+        else unitBuffer.Remove(unit);
+
+        unit.Flag(active);
+    }
+
+    bool IsUnitSelected()
+    {
+        return unitBuffer.Count > 0;
     }
 }
