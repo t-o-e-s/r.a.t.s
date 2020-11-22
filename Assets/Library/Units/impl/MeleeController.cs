@@ -9,6 +9,8 @@ public class MeleeController : UnitController
     {
         //calls unit controller base method
         base.Attack(target);
+        Debug.Log("base attack method from UnitController.cs has run.");
+
         //starting movement co-routine
         StartCoroutine(MoveToAttack(target));
     }

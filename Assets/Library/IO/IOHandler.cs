@@ -5,7 +5,8 @@ using UnityEngine;
 public class IOHandler : MonoBehaviour
 {
 
-    HashSet<UnitController> unitBuffer = new HashSet<UnitController>();
+    UnitController unitBuffer;
+
     bool aUnitSelected;
     
     // Start is called before the first frame update
@@ -33,14 +34,17 @@ public class IOHandler : MonoBehaviour
             switch (hit.collider.tag)
             {
                 case "movement_tile":
+                    Debug.Log("Handling Movement");
                     HandleMovement(hit.collider.gameObject);
                     break;
 
                 case "player_unit":
+                    Debug.Log("Handling Selection");
                     HandleSelection(hit.collider.gameObject);
                     break;
 
                 case "enemy_unit":
+                    Debug.Log("Handling Attack");
                     HandleAttack(hit.collider.gameObject);
                     break;
             }
@@ -49,31 +53,20 @@ public class IOHandler : MonoBehaviour
 
     void HandleMovement(GameObject tile)
     {
-        foreach(UnitController unit in unitBuffer)
-        {
-            unit.Move(tile.transform.position);
-        }
+        unitBuffer.Move(tile.transform.position);
     }
 
     void HandleSelection(GameObject unit)
     {
         UnitController controller;
-
+        
         if (unit.TryGetComponent(out controller))
-        {           
-            if (!unitBuffer.Contains(controller))
-            {
-                ClearBuffer();
-                Select(controller, true);
-            }
-            else
-            {
-                Select(controller, false);
-            }
+        {            
+            Select(controller);
         }
         else
         {
-            Debug.LogError("[ERROR] - No valid controller found on: " + unit.name);
+            Debug.LogError("No valid controller found on: " + unit.name);
         }       
     }
 
@@ -83,31 +76,16 @@ public class IOHandler : MonoBehaviour
 
         if (target.TryGetComponent(out targetController))
         {
-            foreach (UnitController unit in unitBuffer)
-            {
-                unit.Attack(targetController);
-            }          
+            unitBuffer.Attack(targetController);
         }
     }
 
-    void ClearBuffer()
+    void Select(UnitController unit)
     {
-        foreach (UnitController unit in unitBuffer)
-        {
-            Select(unit, false);
-        }
-    }
+        //deflag the previously selected unit
+        if (unitBuffer) unitBuffer.Flag(false);
 
-    void Select(UnitController unit, bool active)
-    {
-        if (active) unitBuffer.Add(unit);
-        else unitBuffer.Remove(unit);
-
-        unit.Flag(active);
-    }
-
-    bool IsUnitSelected()
-    {
-        return unitBuffer.Count > 0;
+        unitBuffer = unit;
+        unitBuffer.Flag(true);
     }
 }

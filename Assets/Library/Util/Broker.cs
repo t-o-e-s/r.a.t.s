@@ -30,6 +30,7 @@ public class Broker : MonoBehaviour
 
     IEnumerator Resolve()
     {
+        //everything that can resolve will do so on seperate frames to avoid stutters
         foreach (IResolvable r in resolvables)
         {
             r.Resolve();

@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public abstract class UnitController : MonoBehaviour, IUnit, ITimed
-{
-    //will be used for the individual units under the controller
-    protected Dictionary<NavMeshAgent, Vector3> entities = new Dictionary<NavMeshAgent, Vector3>();
+{    
 
     [HideInInspector]
     public bool playerUnit;
@@ -61,25 +59,8 @@ public abstract class UnitController : MonoBehaviour, IUnit, ITimed
 
         flag = GetComponentInChildren<SpriteRenderer>();
 
-        unitStatus = Status.normal;
-
         //all unit stats can be set within this method
-        SetStats();
-
-
-        //
-        foreach (Transform t in GetComponentsInChildren<Transform>())
-        {
-            if (!t.CompareTag("entity")) continue;
-
-            Vector3 offset = transform.position - t.position;
-
-            NavMeshAgent childAgent;
-            if (t.gameObject.TryGetComponent(out childAgent))
-            {
-                entities.Add(childAgent, offset);
-            }
-        }             
+        SetStats();         
     }
 
     private void Update()
@@ -93,6 +74,8 @@ public abstract class UnitController : MonoBehaviour, IUnit, ITimed
     //implementations of IUnit
     public virtual void Attack(UnitController target)
     {
+        Debug.Log(name + ": is attacking -> " + target.name);
+
         if (target.InCombat())
         {
             combat = target.combat;
@@ -115,12 +98,6 @@ public abstract class UnitController : MonoBehaviour, IUnit, ITimed
     public void Move(Vector3 target)
     {
         agent.SetDestination(target);
-
-        foreach (KeyValuePair<NavMeshAgent, Vector3> pair in entities)
-        {
-            // needs elaboration, but works
-            pair.Key.SetDestination(target + pair.Value);
-        }
     }
 
     //public methods for updating unit attributes
@@ -143,10 +120,17 @@ public abstract class UnitController : MonoBehaviour, IUnit, ITimed
     //this is defaulted to melee units, override in ranged unit controllers for more succint behaviours
     protected IEnumerator MoveToAttack(UnitController target)
     {
+        Debug.Log("agent at " + agent.transform.position.ToString() +  " will move to " + target.transform.position.ToString());
         agent.SetDestination(target.gameObject.transform.position);
+        Debug.Log(agent.destination);
+       
+        Debug.Log(agent.remainingDistance);
+    
+        Debug.Log(agent.remainingDistance > combatStoppingDistance);
 
         while (agent.remainingDistance > combatStoppingDistance)
         {
+            Debug.Log("moving");
             yield return null;
         }
 
@@ -169,12 +153,6 @@ public abstract class UnitController : MonoBehaviour, IUnit, ITimed
             speed;
 
         agent.speed = speedToSet;
-
-        foreach (KeyValuePair<NavMeshAgent, Vector3> pair in entities)
-        {
-            pair.Key.speed = speedToSet;
-
-        }
     }   
 
     //implementation of Record() from ITimed - used for saving position
@@ -189,27 +167,4 @@ public abstract class UnitController : MonoBehaviour, IUnit, ITimed
             !(combat == null)
             );
     }
-
-    public void StatusEffect()
-    {
-        switch(unitStatus)
-        {
-            case Status.normal:
-                break;
-            case Status.aFlame:
-                //TODO call a function for status of aFlame
-                break;
-            case Status.cold:
-                //TODO call a function for status of cold 
-                break;
-            case Status.spored:
-                //TODO call a function for status of spored
-                break;
-            case Status.wet:
-                //TODO call a function for status of wet 
-                break;
-        }
-    
-    }
-
 }
