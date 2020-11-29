@@ -53,6 +53,7 @@ public class IOHandler : MonoBehaviour
 
     void HandleMovement(GameObject tile)
     {
+        Coordinator.GetAdjacent(tile);
         unitBuffer.Move(tile.transform.position);
     }
 
