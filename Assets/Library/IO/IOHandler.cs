@@ -8,16 +8,25 @@ public class IOHandler : MonoBehaviour
     UnitController unitBuffer;
 
     bool aUnitSelected;
+
+    [SerializeField] int framerate = 60;
     
     // Start is called before the first frame update
     void Awake()
     {
-        
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = framerate;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Cappnig framerate
+        if (Application.targetFrameRate != framerate)
+        {
+            Application.targetFrameRate = framerate;
+        }
+
         //player left click
         if (Input.GetMouseButtonDown(0))
         {
