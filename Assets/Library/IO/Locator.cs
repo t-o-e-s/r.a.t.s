@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coordinator
+public class Locator
 {    
     public static GameObject[] GetAdjacent(GameObject tile)
     {
