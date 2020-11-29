@@ -1,3 +1,33 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Coordinator
+{    
+    public static GameObject[] GetAdjacent(GameObject tile)
+    {
+
+        //TODO ensure scalability when using tiles that are not 1:1:1
+        float offset = tile.transform.localScale.x >= tile.transform.localScale.z ?
+            tile.transform.localScale.x :
+            tile.transform.localScale.z;
+
+        //offset = offset + (offset / 2);
+
+        Vector3 origin = tile.transform.position;
+
+        Vector3[] testPoints =
+        {
+            new Vector3(origin.x + offset, origin.y, origin.z),
+            new Vector3(origin.x - offset, origin.y, origin.z),
+            new Vector3(origin.x, origin.y, origin.z + offset),
+            new Vector3(origin.x, origin.y, origin.z - offset)
+        };
+
+        HashSet<GameObject> output = new HashSet<GameObject>();
+
+        foreach(Vector3 v in testPoints)
+        {
             Collider[] colls = Physics.OverlapSphere(
                 v,
                 (offset / 4),
