@@ -11,8 +11,8 @@ public class Broker : MonoBehaviour
     HashSet<IResolvable> resolvables = new HashSet<IResolvable>();
 
     //lists for tracking active units
-    private List<GameObject> playerUnits = new List<GameObject>();
-    private List<GameObject> aiUnits = new List<GameObject>();
+    public List<GameObject> playerUnits = new List<GameObject>();
+    public List<GameObject> aiUnits = new List<GameObject>();
 
     Stopwatch watch;
 
