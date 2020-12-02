@@ -4,11 +4,10 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class Save 
+public class Save : Roster 
 {
-
-   
-    private void SaveRoster(Broker broker)
+       
+    public static void SaveRoster(Broker broker)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/availableRoster.dat");
@@ -18,14 +17,18 @@ public class Save
             //TODO Currently only saving alive units to activeUnits Roster, I still need to save the unused Warband here as well 
             foreach (GameObject playerUnit in broker.playerUnits)
             {
-            roster.activeUnits.Add(playerUnit);
+            roster.activeUnits.Add(playerUnit.name);
             }
+
+       
                              
         bf.Serialize(file, roster);
         file.Close();
+
+        Debug.Log(Application.persistentDataPath);
     }  
        
-    public void LoadRoster()
+    public static void LoadRoster()
     {
         if (File.Exists(Application.persistentDataPath + "/availableRoster.dat"))
         {
@@ -37,6 +40,5 @@ public class Save
             //We can set the data from the loaded roster here, perhaps send it back to the broker to load the new active units, or we can use the load elsewhere 
         }
     }
-
-
+    
 }

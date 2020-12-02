@@ -28,8 +28,8 @@ public class Broker : MonoBehaviour
         //populating both lists 
         playerUnits.AddRange(GameObject.FindGameObjectsWithTag("player_unit"));
         aiUnits.AddRange(GameObject.FindGameObjectsWithTag("enemy_unit"));
-        
-         
+
+        Save.SaveRoster(this);        
     }
 
     //calling the CheckUnits method to see if playerUnits and aiUnits are alive or dead 
@@ -58,7 +58,7 @@ public class Broker : MonoBehaviour
     //checks the health of the units in the list, if >= to 0 then removes them from the list
     void CheckUnits()
     {
-        foreach (GameObject player_unit in playerUnits)
+        /*foreach (GameObject player_unit in playerUnits)
         {
             if(player_unit.GetComponent<MeleeController>().health >= 0)
             {
@@ -66,11 +66,12 @@ public class Broker : MonoBehaviour
             }
         }
 
+
         foreach (GameObject aiUnits in aiUnits)
         {
             //TODO not sure where or how aiUnits health is managed 
             //code to go in here to remove them from list 
-        }
+        }*/
     }
 
 
