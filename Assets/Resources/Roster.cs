@@ -6,6 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public class Roster
 {
-    public HashSet<string> activeUnits = new HashSet<string>();
-    public HashSet<GameObject> warBand = new HashSet<GameObject>();         
+    public HashSet<UnitController> activeUnits = new HashSet<UnitController>();
+    public HashSet<UnitController> warband = new HashSet<UnitController>();
+
+
 }

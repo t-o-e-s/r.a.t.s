@@ -11,7 +11,7 @@ public class Broker : MonoBehaviour
     HashSet<IResolvable> resolvables = new HashSet<IResolvable>();
 
     //lists for tracking active units
-    public List<GameObject> playerUnits = new List<GameObject>();
+    public List<UnitController> playerUnits = new List<UnitController>();
     public List<GameObject> aiUnits = new List<GameObject>();
 
     Stopwatch watch;
@@ -25,9 +25,15 @@ public class Broker : MonoBehaviour
         watch.Start();
         InvokeRepeating("RunResolution", 0f, 1f / ticksPerSecond);
         
-        //populating both lists 
-        playerUnits.AddRange(GameObject.FindGameObjectsWithTag("player_unit"));
+        //populating both lists
         aiUnits.AddRange(GameObject.FindGameObjectsWithTag("enemy_unit"));
+
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("player_unit"))
+        {
+            UnitController unitCon;
+            if (go.TryGetComponent(out unitCon)) playerUnits.Add(unitCon);
+        }
+
 
         Save.SaveRoster(this);        
     }
