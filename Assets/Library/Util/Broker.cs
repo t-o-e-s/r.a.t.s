@@ -10,9 +10,9 @@ public class Broker : MonoBehaviour
 
     HashSet<IResolvable> resolvables = new HashSet<IResolvable>();
 
-    //lists for tracking active units
-    public List<UnitController> playerUnits = new List<UnitController>();
-    public List<GameObject> aiUnits = new List<GameObject>();
+    //HashSets for tracking active units
+    public HashSet<UnitController> playerUnits = new HashSet<UnitController>();
+    public HashSet<UnitController> aiUnits = new HashSet<UnitController>();
 
     Stopwatch watch;
 
@@ -25,17 +25,20 @@ public class Broker : MonoBehaviour
         watch.Start();
         InvokeRepeating("RunResolution", 0f, 1f / ticksPerSecond);
         
-        //populating both lists
-        aiUnits.AddRange(GameObject.FindGameObjectsWithTag("enemy_unit"));
-
+        //populating both lists        
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("player_unit"))
         {
             UnitController unitCon;
             if (go.TryGetComponent(out unitCon)) playerUnits.Add(unitCon);
         }
 
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("enemy_unit"))
+        {
+            UnitController unitCon;
+            if (go.TryGetComponent(out unitCon)) playerUnits.Add(unitCon);
+        }
 
-        Save.SaveRoster(this);        
+                
     }
 
     //calling the CheckUnits method to see if playerUnits and aiUnits are alive or dead 
