@@ -22,6 +22,7 @@ public class Save
         file.Close();
 
         Debug.Log(Application.persistentDataPath);
+        Debug.Log(roster.activeUnits.Length);
     }  
        
     public static void LoadRoster(Broker broker)
@@ -33,7 +34,7 @@ public class Save
             Roster roster = (Roster) bf.Deserialize(file);
             file.Close();
 
-            broker.playerUnits = roster.activeUnits;
+            //broker.playerUnits = roster.activeUnits;
             //We can set the data from the loaded roster here, perhaps send it back to the broker to load the new active units, or we can use the load elsewhere 
         }
     }

@@ -6,12 +6,28 @@ using UnityEngine;
 [System.Serializable]
 public class Roster
 {
-    public readonly HashSet<UnitController> activeUnits = new HashSet<UnitController>();
-    public readonly HashSet<UnitController> warband = new HashSet<UnitController>();
+    public readonly Rat[] activeUnits;
+    public readonly Rat[] warband;
 
     public Roster(HashSet<UnitController> activeUnits, HashSet<UnitController> warband)
-    { 
-        this.activeUnits = activeUnits; 
-        this.warband = warband; 
+    {
+        this.activeUnits = new Rat[activeUnits.Count];
+        this.warband = new Rat[warband.Count];
+
+        int i = 0; 
+
+
+        foreach (UnitController unit in activeUnits)
+        {
+            this.activeUnits[i++] = unit.GetRat();
+        }
+
+        i = 0;
+
+        foreach (UnitController unit in warband)
+        {
+            this.warband[i++] = unit.GetRat();
+        }
     }
+
 }

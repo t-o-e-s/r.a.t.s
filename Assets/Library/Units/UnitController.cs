@@ -49,6 +49,7 @@ public abstract class UnitController : MonoBehaviour, IUnit, ITimed
     // IUnit methods (abstract)  
     public abstract void SetStats();
 
+    Rat rat = new Rat();
 
     //implementations of monobehaviours 
     private void Awake()
@@ -61,7 +62,9 @@ public abstract class UnitController : MonoBehaviour, IUnit, ITimed
         flag = GetComponentInChildren<SpriteRenderer>();
 
         //all unit stats can be set within this method
-        SetStats();         
+        SetStats();
+
+        PopulateRat();
     }
 
     private void Update()
@@ -70,6 +73,17 @@ public abstract class UnitController : MonoBehaviour, IUnit, ITimed
         SamplePosition();
 
         //add a check for combat to keep unit attacking and moving if needed
+    }
+
+
+    void PopulateRat()
+    {
+        rat.ratName = this.gameObject.name;
+        rat.health = health;
+        rat.attack = attack;
+        rat.defense = defense;
+        rat.speed = speed;
+        rat.slowedSpeed = slowedSpeed;
     }
 
     //implementations of IUnit
@@ -168,4 +182,11 @@ public abstract class UnitController : MonoBehaviour, IUnit, ITimed
             !(combat == null)
             );
     }
+
+    public Rat GetRat()
+    {
+        return this.rat;
+    }
+
+
 }
