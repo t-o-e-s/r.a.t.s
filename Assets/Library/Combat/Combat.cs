@@ -9,37 +9,48 @@ namespace Library.Combat
         JobHandle handle;
 
         readonly Broker broker;
-        readonly UnitController attacker;
-        readonly UnitController defender;
+        readonly UnitControllerController attacker;
+        readonly UnitControllerController defender;
 
         CombatJob combatJob;
+
+        bool ready;
     
 
         public Combat(Broker broker,
-            UnitController attacker,
-            UnitController defender)
+            UnitControllerController attacker,
+            UnitControllerController defender)
         {
             this.broker = broker;
             this.attacker = attacker;
             this.defender = defender;
+
+            if (weapon.GetWeaponType() == WeaponType.Melee)
+            {
+                ready = false;
+                var moveTo = Locator.GetNearest(attacker.transform.position, defender.gameObject);
+                attacker.Move(moveTo.transform.position);
+            }
+            else
+            {
+                ready = true;
+            }
         }
     
         public void ResolveDamage()
         { 
+            if (!ready) return;
             combatJob = new CombatJob();
             handle = combatJob.Schedule();
         }
 
-        public void CacheDamage()
-        {
-            handle.Complete();
-        }
-
         public void DealDamage()
         {
-            attacker.health -= dmgCache[0];
+            handle.Complete();
+            if (!ready) return;
+            defender.health = defender.health - dmgCache[0];
         }
-
+        
         public void RefreshJob()
         {
             //TODO sort fields on unit controller and set them

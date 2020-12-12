@@ -20,9 +20,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edd50d5b-32bc-40d0-aea0-bc3d5dcd6c97" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/UnitGroup.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/UnitGroup.cs.meta" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Arsenal.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/WeaponType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/WeaponType.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Units/Unit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/CombatResolver.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/CombatResolver.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/IO/IOHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/IO/IOHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/IO/Locator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/IO/Locator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/IUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/IUnit.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/TimeHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/TimeHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/impl.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/impl/MeleeController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/impl/MeleeController.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,25 +55,40 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Library/Combat/CombatJob.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Library/Combat/Weapon/Arsenal.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Library/Units/Unit.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Library/Combat/CombatJob.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Combat/WeaponType.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/IO/Locator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Combat/Weapon/IWeapon.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Arsenal.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Units/Unit.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Units/IUnit.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1lX3lXExOXsGgM7ry3RCwJZ70hg" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -87,7 +123,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607729768568</updated>
-      <workItem from="1607729802830" duration="3430000" />
+      <workItem from="1607729802830" duration="9694000" />
+      <workItem from="1607810649245" duration="5595000" />
     </task>
     <servers />
   </component>
@@ -106,15 +143,17 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="601" y="46" key="RiderGenerateDialog" timestamp="1607729957610">
+    <state x="601" y="46" key="RiderGenerateDialog" timestamp="1607812742400">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="601" y="46" key="RiderGenerateDialog/0.0.1536.864@0.0.1536.864" timestamp="1607729957610" />
+    <state x="601" y="46" key="RiderGenerateDialog/0.0.1536.864@0.0.1536.864" timestamp="1607812742400" />
     <state x="277" y="77" key="SettingsEditor" timestamp="1607730357624">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

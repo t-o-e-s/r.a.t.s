@@ -1,24 +1,30 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Library.Combat;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using Object = UnityEngine.Object;
 
 public class Broker : MonoBehaviour
 {
-    public readonly float combatDistance = 3f;
+    public float combatDistance = 3f;
 
     HashSet<IResolvable> resolvables = new HashSet<IResolvable>();
+    
     HashSet<ICombat> combats = new HashSet<ICombat>();
-
-    Object[] combatBatches;
+    ICombat[][] combatBatches;
 
     Stopwatch watch;
 
     [SerializeField]
+    bool isTest = true;
+    [SerializeField]
     int ticksPerSecond = 3;
-
+    int frameCount = 1;
+    
+    
     [SerializeField] int performanceDivider = 1;
 
     void Awake()
@@ -26,41 +32,73 @@ public class Broker : MonoBehaviour
         watch = new Stopwatch();
         watch.Start();
         InvokeRepeating("RunResolution", 0f, 1f / ticksPerSecond);
+        if (isTest) TestSetUp();
     }
 
-    //resolving
-    void RunResolution()
+    void FixedUpdate()
     {
-        StartCoroutine("Resolve");
+        if (frameCount == 60)
+        {
+            frameCount = 1;
+            StartCoroutine(Resolve());
+        }
     }
 
     IEnumerator Resolve()
     {
-        //everything that can resolve will do so on seperate frames to avoid stutters
-        foreach (Object batch in combatBatches)
+        foreach (var batch in combatBatches)
         {
-            r.Resolve();
+            foreach (var combat in batch)
+            {
+                combat.ResolveDamage();
+            }
+
             yield return null;
         }
     }
 
     public bool Add(IResolvable resolvable)
     {
-        bool success = resolvables.Add(resolvable);
-
+        if (resolvable is ICombat c) combats.Add(c);
+        var success = resolvables.Add(resolvable);
+        if (success) UpdateBatches();
         return success;
     }
 
     public bool Remove(IResolvable resolvable)
     {
-        return resolvables.Remove(resolvable);
+        if (resolvable is ICombat c) combats.Remove(c);
+        var success = resolvables.Remove(resolvable);
+        if (success) UpdateBatches();
+        return success;
     }
 
     void UpdateBatches()
     {
-        var batchSize = combats.Count;
-        batchSize = batchSize / performanceDivider;
-        combatBatches = new Object[batchSize];
-        //TODO populate batches
+        combatBatches = new ICombat[performanceDivider][];
+        int arr = 0;
+        int i = combats.Count % performanceDivider;
+        int arrSize = combats.Count / performanceDivider;
+        arrSize = i == 0 ? arrSize : arrSize + 1;
+        i = 0; 
+        
+        foreach (var c in combats)
+        {
+            if (i == arrSize)
+            {
+                i = 0;
+                arr++;
+            }
+
+            Debug.Log(String.Format("Populated combat batch [{0}][{1}]", arr, i));
+            combatBatches[arr++][i++] = c;
+        }
     }
+
+    // This method should change depending on what needs to be implemented as the project evolves
+    void TestSetUp()
+    {
+        
+    }
+    
 }

@@ -34,8 +34,12 @@
           <e p="Combat" t="Include">
             <e p="Combat.cs" t="Include" />
             <e p="CombatJob.cs" t="Include" />
-            <e p="CombatResolver.cs" t="Include" />
             <e p="ICombat.cs" t="Include" />
+            <e p="Weapon" t="Include">
+              <e p="Arsenal.cs" t="Include" />
+              <e p="Weapon.cs" t="Include" />
+              <e p="WeaponType.cs" t="Include" />
+            </e>
           </e>
           <e p="Elements" t="Include">
             <e p="Status.cs" t="Include" />
@@ -46,13 +50,11 @@
           </e>
           <e p="Units" t="Include">
             <e p="BridgeHandler.cs" t="Include" />
-            <e p="impl" t="Include">
-              <e p="MeleeController.cs" t="Include" />
-            </e>
-            <e p="IUnit.cs" t="Include" />
+            <e p="IUnitController.cs" t="Include" />
             <e p="TimeHandler.cs" t="Include" />
             <e p="TimeMech.cs" t="Include" />
-            <e p="UnitController.cs" t="Include" />
+            <e p="Unit.cs" t="Include" />
+            <e p="UnitControllerController.cs" t="Include" />
           </e>
           <e p="Util" t="Include">
             <e p="Broker.cs" t="Include" />

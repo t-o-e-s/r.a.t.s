@@ -5,7 +5,7 @@ using UnityEngine;
 public class IOHandler : MonoBehaviour
 {
 
-    UnitController unitBuffer;
+    UnitControllerController unitBuffer;
 
     bool aUnitSelected;
 
@@ -67,11 +67,11 @@ public class IOHandler : MonoBehaviour
 
     void HandleSelection(GameObject unit)
     {
-        UnitController controller;
+        UnitControllerController controllerController;
         
-        if (unit.TryGetComponent(out controller))
+        if (unit.TryGetComponent(out controllerController))
         {            
-            Select(controller);
+            Select(controllerController);
         }
         else
         {
@@ -81,15 +81,15 @@ public class IOHandler : MonoBehaviour
 
     void HandleAttack(GameObject target) 
     {
-        UnitController targetController;
+        UnitControllerController targetControllerController;
 
-        if (target.TryGetComponent(out targetController))
+        if (target.TryGetComponent(out targetControllerController))
         {
-            unitBuffer.Attack(targetController);
+            unitBuffer.Attack(targetControllerController);
         }
     }
 
-    void Select(UnitController unit)
+    void Select(UnitControllerController unit)
     {
         //deflag the previously selected unit
         if (unitBuffer) unitBuffer.Flag(false);

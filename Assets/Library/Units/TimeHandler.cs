@@ -12,7 +12,7 @@ public class TimeHandler : MonoBehaviour
 
     //unit the script is attached to, and its unitController 
     private GameObject unit;
-    UnitController unitCont; 
+    UnitControllerController unitCont; 
 
     //is the player rewinding time, currently set to a hold system (like braid)
     public bool isRewinding;  
@@ -20,7 +20,7 @@ public class TimeHandler : MonoBehaviour
     private void Awake()
     {
         unit = gameObject;
-        unitCont = GetComponent<UnitController>();
+        unitCont = GetComponent<UnitControllerController>();
     }
 
     private void Update()

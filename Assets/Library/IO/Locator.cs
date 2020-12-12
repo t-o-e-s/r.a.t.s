@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Locator
-{    
+{
+    public static GameObject GetNearest(Vector3 origin, GameObject targetTile)
+    {
+        return GetAdjacent(targetTile)[0];
+    }
     public static GameObject[] GetAdjacent(GameObject tile)
     {
 
