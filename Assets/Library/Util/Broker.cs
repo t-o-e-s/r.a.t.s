@@ -16,6 +16,10 @@ public class Broker : MonoBehaviour
     HashSet<ICombat> combats = new HashSet<ICombat>();
     ICombat[][] combatBatches;
 
+    //HashSets for tracking active units
+    public HashSet<UnitController> playerUnits = new HashSet<UnitController>();
+    public HashSet<UnitController> aiUnits = new HashSet<UnitController>();
+
     Stopwatch watch;
 
     [SerializeField]
@@ -32,6 +36,33 @@ public class Broker : MonoBehaviour
         watch = new Stopwatch();
         watch.Start();
         InvokeRepeating("RunResolution", 0f, 1f / ticksPerSecond);
+
+        UnitController unitCon;
+        //populating both lists        
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("player_unit"))
+        {
+            
+            if (go.TryGetComponent(out unitCon)) playerUnits.Add(unitCon);
+
+           
+        }
+
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("enemy_unit"))
+        {
+        
+            if (go.TryGetComponent(out unitCon)) playerUnits.Add(unitCon);
+
+
+        }
+
+        Save.SaveRoster(this);
+    }
+
+    //calling the CheckUnits method to see if playerUnits and aiUnits are alive or dead 
+    private void FixedUpdate()
+    {
+        CheckUnits();
+        Debug.Log(playerUnits.Count);
         if (isTest) TestSetUp();
     }
 
@@ -56,6 +87,27 @@ public class Broker : MonoBehaviour
             yield return null;
         }
     }
+
+    //checks the health of the units in the list, if >= to 0 then removes them from the list
+    void CheckUnits()
+    {
+        /*foreach (GameObject player_unit in playerUnits)
+        {
+            if(player_unit.GetComponent<MeleeController>().health >= 0)
+            {
+                playerUnits.Remove(player_unit);
+            }
+        }
+
+
+        foreach (GameObject aiUnits in aiUnits)
+        {
+            //TODO not sure where or how aiUnits health is managed 
+            //code to go in here to remove them from list 
+        }*/
+    }
+
+
 
     public bool Add(IResolvable resolvable)
     {
@@ -94,6 +146,7 @@ public class Broker : MonoBehaviour
             combatBatches[arr++][i++] = c;
         }
     }
+
 
     // This method should change depending on what needs to be implemented as the project evolves
     void TestSetUp()

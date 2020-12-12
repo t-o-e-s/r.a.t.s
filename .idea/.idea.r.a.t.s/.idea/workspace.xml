@@ -20,30 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edd50d5b-32bc-40d0-aea0-bc3d5dcd6c97" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Arsenal.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/WeaponType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/WeaponType.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Library/Units/Unit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Units/Rat.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Units/Rat.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Util/Save.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Util/Save.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Util/SaveTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/Util/SaveTest.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Roster.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Roster.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/MovementDemo2.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/CombatResolver.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/CombatResolver.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/IO/IOHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/IO/IOHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/IO/Locator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/IO/Locator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/IUnit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/IUnit.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/TimeHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/TimeHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/impl.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/impl/MeleeController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/impl/MeleeController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/AI.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/AI.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Weapon.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +49,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Library/Combat/CombatJob.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Library/Combat/Weapon/Arsenal.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Samwise/Development/r.a.t.s/Assets/Library/Util/Broker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Samwise/Development/r.a.t.s/Assets/Library/Util/Broker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Library/Units/Unit.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -64,7 +58,6 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Library/Combat/CombatJob.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Combat/WeaponType.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/IO/Locator.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Combat/Weapon/IWeapon.cs" />
@@ -76,6 +69,7 @@
         <option value="$PROJECT_DIR$/Assets/Library/Units/IUnit.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" />
       </list>
     </option>
   </component>
@@ -92,6 +86,7 @@
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -124,7 +119,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607729768568</updated>
       <workItem from="1607729802830" duration="9694000" />
-      <workItem from="1607810649245" duration="5595000" />
+      <workItem from="1607810649245" duration="6332000" />
     </task>
     <servers />
   </component>
@@ -150,6 +145,14 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="147" y="69" key="MergeDialog" timestamp="1607816962433">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="147" y="69" key="MergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1607816962433" />
+    <state x="399" y="186" key="MultipleFileMergeDialog" timestamp="1607816981909">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="399" y="186" key="MultipleFileMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1607816981909" />
     <state x="601" y="46" key="RiderGenerateDialog" timestamp="1607812742400">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

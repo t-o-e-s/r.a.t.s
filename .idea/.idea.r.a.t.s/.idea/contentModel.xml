@@ -51,6 +51,7 @@
           <e p="Units" t="Include">
             <e p="BridgeHandler.cs" t="Include" />
             <e p="IUnitController.cs" t="Include" />
+            <e p="Rat.cs" t="Include" />
             <e p="TimeHandler.cs" t="Include" />
             <e p="TimeMech.cs" t="Include" />
             <e p="Unit.cs" t="Include" />
@@ -60,10 +61,13 @@
             <e p="Broker.cs" t="Include" />
             <e p="IResolvable.cs" t="Include" />
             <e p="ITimed.cs" t="Include" />
+            <e p="Save.cs" t="Include" />
+            <e p="SaveTest.cs" t="Include" />
             <e p="State.cs" t="Include" />
             <e p="UnitState.cs" t="Include" />
           </e>
         </e>
+        <e p="Roster.cs" t="Include" />
         <e p="Thirdparty" t="Include">
           <e p="RTS_Camera" t="Include">
             <e p="Scripts" t="Include">
