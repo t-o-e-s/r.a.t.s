@@ -5,7 +5,7 @@ using UnityEngine;
 public class IOHandler : MonoBehaviour
 {
 
-    UnitControllerController unitBuffer;
+    UnitController unitBuffer;
 
     bool aUnitSelected;
 
@@ -21,17 +21,9 @@ public class IOHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Cappnig framerate
-        if (Application.targetFrameRate != framerate)
-        {
-            Application.targetFrameRate = framerate;
-        }
+        if (Application.targetFrameRate != framerate) Application.targetFrameRate = framerate;
 
-        //player left click
-        if (Input.GetMouseButtonDown(0))
-        {
-            Cast();
-        }
+        if (Input.GetMouseButtonDown(0)) Cast();
     }
 
     void Cast()
@@ -62,16 +54,16 @@ public class IOHandler : MonoBehaviour
 
     void HandleMovement(GameObject tile)
     {
-        unitBuffer.Move(tile.transform.position);
+        unitBuffer.MoveTo(tile.transform.position);
     }
 
     void HandleSelection(GameObject unit)
     {
-        UnitControllerController controllerController;
+        UnitController controller;
         
-        if (unit.TryGetComponent(out controllerController))
+        if (unit.TryGetComponent(out controller))
         {            
-            Select(controllerController);
+            Select(controller);
         }
         else
         {
@@ -81,7 +73,7 @@ public class IOHandler : MonoBehaviour
 
     void HandleAttack(GameObject target) 
     {
-        UnitControllerController targetControllerController;
+        UnitController targetControllerController;
 
         if (target.TryGetComponent(out targetControllerController))
         {
@@ -89,7 +81,7 @@ public class IOHandler : MonoBehaviour
         }
     }
 
-    void Select(UnitControllerController unit)
+    void Select(UnitController unit)
     {
         //deflag the previously selected unit
         if (unitBuffer) unitBuffer.Flag(false);

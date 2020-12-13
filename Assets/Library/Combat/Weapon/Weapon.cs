@@ -22,36 +22,6 @@
             this.range = range;
             this.speed = speed;
             this.weaponType = weaponType;
-        } 
-
-        public int GetID()
-        {
-            return id;
-        }
-
-        public string GetName()
-        {
-            return name;
-        }
-
-        public float GetDamage()
-        {
-            return damage;
-        }
-
-        public float GetRange()
-        {
-            return range;
-        }
-
-        public float GetSpeed()
-        {
-            return speed;
-        }
-
-        public WeaponType GetWeaponType()
-        {
-            return weaponType;
         }
     }
 }

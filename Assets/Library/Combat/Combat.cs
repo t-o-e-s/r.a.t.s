@@ -1,4 +1,5 @@
-﻿using Unity.Collections;
+﻿using Library.Units;
+using Unity.Collections;
 using Unity.Jobs;
 
 namespace Library.Combat
@@ -9,8 +10,10 @@ namespace Library.Combat
         JobHandle handle;
 
         readonly Broker broker;
-        readonly UnitControllerController attacker;
-        readonly UnitControllerController defender;
+        readonly UnitController attacker;
+        readonly UnitController defender;
+        readonly Unit attUnit;
+        readonly Unit defUnit;
 
         CombatJob combatJob;
 
@@ -18,18 +21,22 @@ namespace Library.Combat
     
 
         public Combat(Broker broker,
-            UnitControllerController attacker,
-            UnitControllerController defender)
+            UnitController attacker,
+            UnitController defender)
         {
             this.broker = broker;
             this.attacker = attacker;
             this.defender = defender;
+            attUnit = attacker.GetUnit();
+            defUnit = defender.GetUnit();
 
-            if (weapon.GetWeaponType() == WeaponType.Melee)
+            if (attUnit.weapon.weaponType == WeaponType.Melee)
             {
                 ready = false;
-                var moveTo = Locator.GetNearest(attacker.transform.position, defender.gameObject);
-                attacker.Move(moveTo.transform.position);
+                var moveTo = Locator.GetNearest(
+                    attacker.gameObject.transform.position, 
+                    defender.gameObject);
+                attacker.MoveTo(moveTo.transform.position);
             }
             else
             {
@@ -48,7 +55,7 @@ namespace Library.Combat
         {
             handle.Complete();
             if (!ready) return;
-            defender.health = defender.health - dmgCache[0];
+            defender.unit.health = defender.unit.health - dmgCache[0];
         }
         
         public void RefreshJob()

@@ -4,10 +4,11 @@ namespace Library.Units
 {
     public interface IUnitController
     {
+        Unit GetUnit();
         void LoadAs(Unit unit);
-        void Attack(UnitControllerController target);
+        void Attack(UnitController target);
         void Flag(bool flag);
-        void Move(Vector3 target);
+        void MoveTo(Vector3 target);
         bool InCombat();
     }
 }

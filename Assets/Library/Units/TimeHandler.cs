@@ -12,7 +12,7 @@ public class TimeHandler : MonoBehaviour
 
     //unit the script is attached to, and its unitController 
     private GameObject unit;
-    UnitControllerController unitCont; 
+    UnitController unitCont; 
 
     //is the player rewinding time, currently set to a hold system (like braid)
     public bool isRewinding;  
@@ -20,7 +20,7 @@ public class TimeHandler : MonoBehaviour
     private void Awake()
     {
         unit = gameObject;
-        unitCont = GetComponent<UnitControllerController>();
+        unitCont = GetComponent<UnitController>();
     }
 
     private void Update()
@@ -49,7 +49,7 @@ public class TimeHandler : MonoBehaviour
             unitPositions.RemoveAt(unitPositions.Count - 1);
 
             //accessing the unit controller to set the destination of the agent to previous positions
-            unitCont.Move(target: destination);
+            unitCont.MoveTo(target: destination);
         }
     }
 }

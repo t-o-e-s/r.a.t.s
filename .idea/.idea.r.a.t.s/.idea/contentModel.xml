@@ -55,7 +55,7 @@
             <e p="TimeHandler.cs" t="Include" />
             <e p="TimeMech.cs" t="Include" />
             <e p="Unit.cs" t="Include" />
-            <e p="UnitControllerController.cs" t="Include" />
+            <e p="UnitController.cs" t="Include" />
           </e>
           <e p="Util" t="Include">
             <e p="Broker.cs" t="Include" />

@@ -5,8 +5,9 @@ namespace Library.Units
 {
     public struct Unit
     {
-        public readonly float health;
-        public readonly float speed;
-        public readonly Weapon Weapon;
+        public float health;
+        public float speed;
+        public Weapon weapon;
+        public Status[] statuses;
     }
 }

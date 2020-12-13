@@ -1,32 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Library.Units;
 using UnityEngine;
 
 
 [System.Serializable]
 public class Roster
 {
-    public readonly Rat[] activeUnits;
-    public readonly Rat[] warband;
+    public readonly Unit[] activeUnits;
+    public readonly Unit[] warband;
 
-    public Roster(HashSet<UnitController> activeUnits, HashSet<UnitController> warband)
+    public Roster(HashSet<IUnitController> activeUnits, HashSet<IUnitController> warband)
     {
-        this.activeUnits = new Rat[activeUnits.Count];
-        this.warband = new Rat[warband.Count];
+        this.activeUnits = new Unit[activeUnits.Count];
+        this.warband = new Unit[warband.Count];
 
         int i = 0; 
 
 
         foreach (UnitController unit in activeUnits)
         {
-            this.activeUnits[i++] = unit.GetRat();
+            this.activeUnits[i++] = unit.GetUnit();
         }
 
         i = 0;
 
         foreach (UnitController unit in warband)
         {
-            this.warband[i++] = unit.GetRat();
+            this.warband[i++] = unit.GetUnit();
         }
     }
 
