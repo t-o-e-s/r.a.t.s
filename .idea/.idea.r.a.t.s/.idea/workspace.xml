@@ -20,17 +20,120 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edd50d5b-32bc-40d0-aea0-bc3d5dcd6c97" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/camera.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/camera/SimpleCameraController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/camera/SimpleCameraController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Combat.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Combat.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/CombatJob.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/CombatJob.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/ICombat.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/ICombat.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Weapon.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Weapon/Arsenal.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Weapon/Arsenal.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Weapon/Weapon.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Weapon/Weapon.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Weapon/WeaponType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Weapon/WeaponType.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/elements.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/elements/Status.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/elements/Status.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/io.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/io/Locator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/io/Locator.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/BridgeHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/BridgeHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/Rat.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/Rat.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/TimeHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/TimeHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/TimeMech.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/TimeMech.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/IResolvable.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/IResolvable.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/ITimed.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/ITimed.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/Save.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/Save.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/SaveTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/SaveTest.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/State.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/State.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/UnitState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/UnitState.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/IO/IOHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/IO/IOHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/TimeHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/TimeHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/Unit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/Unit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Camera.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Camera/SimpleCameraController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Camera/SimpleCameraController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/CombatJob.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/CombatJob.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Weapon.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Arsenal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Arsenal.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/WeaponType.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Combat/Weapon/WeaponType.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Elements.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Elements/Status.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Elements/Status.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/IO.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/IO/IOHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/IO/IOHandler.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/IO/Locator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/IO/Locator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/BridgeHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/BridgeHandler.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/Rat.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/Rat.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/TimeHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/TimeHandler.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/TimeMech.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/TimeMech.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/Unit.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/Unit.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/Broker.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/IResolvable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/IResolvable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/ITimed.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/ITimed.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/Save.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/Save.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/SaveTest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/SaveTest.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/State.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/State.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/UnitState.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/Util/UnitState.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Roster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Roster.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,12 +145,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Library/Combat/CombatJob.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Library/Combat/Weapon/Arsenal.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Samwise/Development/r.a.t.s/Assets/Library/Util/Broker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Samwise/Development/r.a.t.s/Assets/Library/Util/Broker.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Library/Units/Unit.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -59,16 +158,20 @@
         <option value="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Arsenal.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Units/IUnit.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Units/Unit.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/IO/Locator.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/Units/TimeHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/IO/IOHandler.cs" />
         <option value="$PROJECT_DIR$/Assets/Roster.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/src/combat/ICombat.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/src/combat/Combat.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
       </list>
     </option>
   </component>
@@ -118,7 +221,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607729768568</updated>
       <workItem from="1607729802830" duration="9694000" />
-      <workItem from="1607810649245" duration="9565000" />
+      <workItem from="1607810649245" duration="16429000" />
     </task>
     <servers />
   </component>
@@ -152,13 +255,17 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="399" y="186" key="MultipleFileMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1607816981909" />
-    <state x="601" y="46" key="RiderGenerateDialog" timestamp="1607812742400">
+    <state x="601" y="46" key="RiderGenerateDialog" timestamp="1607900341184">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="601" y="46" key="RiderGenerateDialog/0.0.1536.864@0.0.1536.864" timestamp="1607812742400" />
-    <state x="277" y="77" key="SettingsEditor" timestamp="1607730357624">
+    <state x="601" y="46" key="RiderGenerateDialog/0.0.1536.864@0.0.1536.864" timestamp="1607900341184" />
+    <state x="277" y="77" key="SettingsEditor" timestamp="1607895823205">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1607730357624" />
+    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1607895823205" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1607900109934">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1607900109934" />
   </component>
 </project>

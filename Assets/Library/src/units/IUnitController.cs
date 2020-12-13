@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Library.src.units;
+using UnityEngine;
 
 namespace Library.Units
 {
@@ -6,7 +7,7 @@ namespace Library.Units
     {
         Unit GetUnit();
         void LoadAs(Unit unit);
-        void Attack(UnitController target);
+        bool Attack(UnitController target);
         void Flag(bool flag);
         void MoveTo(Vector3 target);
         bool InCombat();
