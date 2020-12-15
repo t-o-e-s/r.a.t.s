@@ -19,8 +19,8 @@ namespace Library.src.units
         [Header("Navigation")]
         [SerializeField]
         protected float slowedSpeed = 5;
-    
 
+        Animator anim;
         Broker broker;
         //sprite above the unit to dictate status
         SpriteRenderer flag;
@@ -31,6 +31,7 @@ namespace Library.src.units
             playerUnit = CompareTag("player_unit");
         
             agent = GetComponent<NavMeshAgent>();
+            anim = GetComponent<Animator>();
             broker = Camera.main.gameObject.GetComponent<Broker>();
             flag = GetComponentInChildren<SpriteRenderer>();
 
@@ -97,11 +98,20 @@ namespace Library.src.units
         IEnumerator Move(Vector3 target)
         {
             agent.SetDestination(target);
-            while (agent.remainingDistance > broker.stoppingDistance)
+            anim.SetBool("move", true);
+            var lastRot = transform.rotation.y;
+            
+            while (Vector3.Distance(target, transform.position) > broker.stoppingDistance)
             {
+                var rot = transform.rotation.y - lastRot;
+                anim.SetFloat("turning", rot);
+                lastRot = transform.rotation.y;
                 yield return null;
             }
+
+            anim.SetBool("move", false);
             agent.SetDestination(agent.transform.position);
+            
         }
 
         //position sampling for slow speeds
