@@ -1,53 +1,54 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Library.Units;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIController
+namespace Library.src.ui
 {
-    Unit unit;
-    GameObject panel;
-    
-    Text name;
-    Text health;
-    Text combat;
-
-    string nameStr;
-    string healthStr;
-    string combatStr;
-    string[] combatIndicator = new string[2] {"On", "Off"};
-    
-
-    public UIController(Unit unit, GameObject panel)
+    public class UIController
     {
-        this.unit = unit;
-        this.panel = panel;
+        Unit unit;
+        GameObject panel;
+    
+        Text name;
+        Text health;
+        Text combat;
 
-        foreach (var t in panel.GetComponentsInChildren<Text>())
+        string nameStr;
+        string healthStr;
+        string combatStr;
+        string[] combatIndicator = new string[2] {"On", "Off"};
+    
+
+        public UIController(Unit unit, GameObject panel)
         {
-            if (t.gameObject.name == "name")
+            this.unit = unit;
+            this.panel = panel;
+
+            foreach (var t in panel.GetComponentsInChildren<Text>())
             {
-                name = t;
-            }
-            else if (t.gameObject.name == "health")
-            {
-                health = t;
-                healthStr = t.text;
-            }
-            else if (t.gameObject.name == "combat")
-            {
-                name = t;
-                combatStr = t.text;
+                if (t.gameObject.name == "name")
+                {
+                    name = t;
+                }
+                else if (t.gameObject.name == "health")
+                {
+                    health = t;
+                    healthStr = t.text;
+                }
+                else if (t.gameObject.name == "combat")
+                {
+                    combat = t;
+                    combatStr = t.text;
+                }
             }
         }
-    }
 
-    public void UpdateUI()
-    {
-        name.text = unit.name;
-        health.text = String.Format(healthStr, unit.health);
-        combat.text = String.Format(combatStr, combatIndicator[unit.isFighting ? 1 : 0]);
+        public void UpdateUI()
+        {
+            name.text = unit.name;
+            health.text = String.Format(healthStr, unit.health);
+            combat.text = String.Format(combatStr, combatIndicator[unit.isFighting ? 0 : 1]);
+        }
     }
 }

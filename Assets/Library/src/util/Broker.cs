@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Library.Combat;
+using Library.Combat.Weapon;
+using Library.src.units;
 using Library.Units;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -18,6 +20,7 @@ public class Broker : MonoBehaviour
     ICombat[][] combatBatches;
 
     //HashSets for tracking active units
+    public HashSet<IUnitController> units = new HashSet<IUnitController>();
     public HashSet<IUnitController> playerUnits = new HashSet<IUnitController>();
     public HashSet<IUnitController> aiUnits = new HashSet<IUnitController>();
 
@@ -69,6 +72,21 @@ public class Broker : MonoBehaviour
             yield return null;
         }
     }
+
+    public void LoadThis(UnitController unitController)
+    {
+        if (isTest)
+        {
+            var unit = new Unit();
+            unit.name = unitController.name;
+            unit.health = 100f;
+            unit.isFighting = false;
+            unit.speed = unitController.GetSpeed();
+            unit.weapon = new Weapon();
+            unit.statuses = new Status[0];
+            unitController.unit = unit;
+        }
+    }
     
     public bool Add(IResolvable resolvable)
     {
@@ -84,6 +102,16 @@ public class Broker : MonoBehaviour
         var success = resolvables.Remove(resolvable);
         if (success) UpdateBatches();
         return success;
+    }
+
+    public bool Add(IUnitController controller)
+    {
+        return units.Add(controller);
+    }
+
+    public bool Remove(IUnitController controller)
+    {
+        return units.Remove(controller);
     }
 
     void UpdateBatches()
@@ -107,12 +135,16 @@ public class Broker : MonoBehaviour
             combatBatches[arr++][i++] = c;
         }
     }
-
-
+    
     // This method should change depending on what needs to be implemented as the project evolves
     void TestSetUp()
     {
         
+    }
+
+    public bool IsTest()
+    {
+        return isTest;
     }
     
 }

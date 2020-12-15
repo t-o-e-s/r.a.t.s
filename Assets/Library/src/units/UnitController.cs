@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Library.Combat;
+using Library.src.ui;
 using Library.Units;
 using UnityEngine;
 using UnityEngine.AI;
@@ -32,8 +33,9 @@ namespace Library.src.units
             agent = GetComponent<NavMeshAgent>();
             broker = Camera.main.gameObject.GetComponent<Broker>();
             flag = GetComponentInChildren<SpriteRenderer>();
-            
-            
+
+            broker.Add(this);
+            broker.LoadThis(this);
         }
 
         private void Update()
@@ -143,7 +145,7 @@ namespace Library.src.units
         }
         
         /*====================================
-     *     UTILITY
+     *     UI
      ===================================*/
         public void UpdateUI(GameObject panel)
         {
@@ -153,6 +155,14 @@ namespace Library.src.units
         public void UpdateUI()
         {
             ui.UpdateUI();
+        }
+        
+        /*====================================
+     *     INFO
+     ===================================*/
+        public float GetSpeed()
+        {
+            return agent.speed;
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 using Library.src.units;
 using UnityEngine;
 
@@ -6,6 +9,8 @@ namespace Library.src.ui
 {
     public class UnitInfoHandler : MonoBehaviour
     {
+        List<UnitController> unitsMonitored = new List<UnitController>();
+        
         GameObject playerPanel;
         GameObject enemyPanel;
         GameObject parent;
@@ -14,6 +19,7 @@ namespace Library.src.ui
         RectTransform enemyBaseTransform;
 
         [SerializeField] int uISpacing = 100;
+        int frame = 0;
     
         void Awake()
         {
@@ -25,8 +31,19 @@ namespace Library.src.ui
         
             GenerateUI(playerBaseTransform, GameObject.FindGameObjectsWithTag("player_unit"));
             GenerateUI(enemyBaseTransform, GameObject.FindGameObjectsWithTag("enemy_unit"));
-        
-            Destroy(this);
+        }
+
+        void Update()
+        {
+            if (frame++ == 1)
+            {
+                foreach (var unit in unitsMonitored)
+                {
+                    unit.UpdateUI();
+                }
+                
+                Destroy(this);
+            }
         }
 
         void GenerateUI(RectTransform protoPanel, GameObject[] units)
@@ -45,6 +62,7 @@ namespace Library.src.ui
                 newPanel.name = newPanel.name.Replace("(Clone)", "_" + i++);
                 uC.UpdateUI(newPanel);
                 yPos += uISpacing;
+                unitsMonitored.Add(uC);
             }
             Destroy(protoPanel.gameObject);
         }

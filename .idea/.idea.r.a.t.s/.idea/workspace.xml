@@ -20,29 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edd50d5b-32bc-40d0-aea0-bc3d5dcd6c97" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Control.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Control/main_camera.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Control/main_camera.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/UI.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/UI/enemy_panel.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/UI/enemy_panel.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/UI/friendly_panel.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/UI/friendly_panel.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Testing/hostile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Testing/hostile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Testing/hostile.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Testing/hostile.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Testing/rat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Testing/rat.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Testing/rat.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Testing/rat.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Coordination.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Coordination.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,10 +63,11 @@
         <option value="$PROJECT_DIR$/Assets/Library/src/combat/ICombat.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/src/combat/Combat.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" />
         <option value="$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" />
       </list>
     </option>
   </component>
@@ -135,7 +120,7 @@
       <updated>1607729768568</updated>
       <workItem from="1607729802830" duration="9694000" />
       <workItem from="1607810649245" duration="16429000" />
-      <workItem from="1607984871355" duration="7378000" />
+      <workItem from="1607984871355" duration="9839000" />
     </task>
     <servers />
   </component>
