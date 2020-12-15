@@ -1,7 +1,7 @@
-﻿using Library.Combat;
-using Library.Combat.Weapon;
+﻿using Library.src.combat.Weapon;
+using Library.src.elements;
 
-namespace Library.Units
+namespace Library.src.units
 {
     public struct Unit
     {

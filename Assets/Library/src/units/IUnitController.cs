@@ -1,7 +1,6 @@
-﻿using Library.src.units;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Library.Units
+namespace Library.src.units
 {
     public interface IUnitController
     {

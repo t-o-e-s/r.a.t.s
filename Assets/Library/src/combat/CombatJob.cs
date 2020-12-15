@@ -1,7 +1,7 @@
 ﻿using Unity.Collections;
 using Unity.Jobs;
 
-namespace Library.Combat
+namespace Library.src.combat
 {
     public struct CombatJob : IJob
     {

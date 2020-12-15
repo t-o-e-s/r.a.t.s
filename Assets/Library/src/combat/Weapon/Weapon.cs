@@ -1,4 +1,4 @@
-﻿namespace Library.Combat.Weapon
+﻿namespace Library.src.combat.Weapon
 {
     public struct Weapon
     {

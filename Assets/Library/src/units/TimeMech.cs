@@ -1,24 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class TimeMech : MonoBehaviour
+namespace Library.src.units
 {
-    //a time handler, doesn't matter which, its just for reading if isRewinding == true
-    public TimeHandler timeH;
-
-    //getting the bridgeHandler attached to a 'bridge rewind' point, designated in orange on map 
-    BridgeHandler bridgeH;
-
-    private void OnTriggerStay(Collider other)
+    public class TimeMech : MonoBehaviour
     {
-        bridgeH = other.gameObject.GetComponent<BridgeHandler>();
+        //a time handler, doesn't matter which, its just for reading if isRewinding == true
+        public TimeHandler timeH;
 
-        if (timeH.isRewinding == true)
+        //getting the bridgeHandler attached to a 'bridge rewind' point, designated in orange on map 
+        BridgeHandler bridgeH;
+
+        private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.tag == "timeTile" && bridgeH.bridgeUp == false)
+            bridgeH = other.gameObject.GetComponent<BridgeHandler>();
+
+            if (timeH.isRewinding == true)
             {
-                bridgeH.RewindBridge();
+                if (other.gameObject.tag == "timeTile" && bridgeH.bridgeUp == false)
+                {
+                    bridgeH.RewindBridge();
+                }
             }
         }
     }

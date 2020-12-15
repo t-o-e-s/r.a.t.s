@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using Library.Combat;
+using Library.src.combat;
 using Library.src.ui;
-using Library.Units;
+using Library.src.util;
 using UnityEngine;
 using UnityEngine.AI;
 

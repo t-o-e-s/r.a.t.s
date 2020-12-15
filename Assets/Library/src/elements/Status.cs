@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum Status 
+﻿namespace Library.src.elements
 {
-    None,
-    Aflame,
-    Fighting,
-    Spored,
-    Wet
+    public enum Status 
+    {
+        None,
+        Aflame,
+        Fighting,
+        Spored,
+        Wet
+    }
 }

@@ -1,6 +1,6 @@
 ﻿using Library.src.units;
 
-namespace Library.Combat
+namespace Library.src.combat
 {
     public interface ICombat
     {

@@ -1,27 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BridgeHandler : MonoBehaviour
+namespace Library.src.units
 {
-    public bool bridgeUp;
-    public GameObject bridge;
-
-    private void Update()
+    public class BridgeHandler : MonoBehaviour
     {
-        //default position of bridge so it is crossable
-        if(bridge.transform.position.y >= -0.8f)
+        public bool bridgeUp;
+        public GameObject bridge;
+
+        private void Update()
         {
-            bridgeUp = true;
+            //default position of bridge so it is crossable
+            if(bridge.transform.position.y >= -0.8f)
+            {
+                bridgeUp = true;
+            }
         }
-    }
 
-    //simple pulls teh bridge upwards by adding to its transform 
-    public void RewindBridge()
-    {
-        if (!bridgeUp)
+        //simple pulls teh bridge upwards by adding to its transform 
+        public void RewindBridge()
         {
-            bridge.transform.position += new Vector3(0, 1 * Time.deltaTime, 0);
+            if (!bridgeUp)
+            {
+                bridge.transform.position += new Vector3(0, 1 * Time.deltaTime, 0);
+            }
         }
     }
 }

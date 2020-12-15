@@ -1,4 +1,4 @@
-﻿namespace Library.Combat
+﻿namespace Library.src.combat.Weapon
 {
     public enum WeaponType
     {

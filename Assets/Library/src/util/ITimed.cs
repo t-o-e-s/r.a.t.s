@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ITimed
+﻿namespace Library.src.util
 {
-    State Record();
+    public interface ITimed
+    {
+        State Record();
+    }
 }

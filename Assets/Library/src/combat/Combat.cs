@@ -1,6 +1,7 @@
-﻿using Library.Combat;
+﻿using Library.src.combat.Weapon;
+using Library.src.io;
 using Library.src.units;
-using Library.Units;
+using Library.src.util;
 using Unity.Collections;
 using Unity.Jobs;
 

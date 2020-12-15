@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IResolvable {
-    void Resolve();
+﻿namespace Library.src.util
+{
+    public interface IResolvable {
+        void Resolve();
+    }
 }

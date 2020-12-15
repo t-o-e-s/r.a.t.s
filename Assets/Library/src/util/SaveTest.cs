@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SaveTest : MonoBehaviour
+namespace Library.src.util
 {
-    // Start is called before the first frame update
-    void Awake()
+    public class SaveTest : MonoBehaviour
     {
+        // Start is called before the first frame update
+        void Awake()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }

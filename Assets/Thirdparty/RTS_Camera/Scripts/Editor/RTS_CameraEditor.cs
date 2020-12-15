@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
-namespace RTS_Cam
+namespace Thirdparty.RTS_Camera.Scripts.Editor
 {
     [CustomEditor(typeof(RTS_Camera))]
-    public class RTS_CameraEditor : Editor
+    public class RTS_CameraEditor : UnityEditor.Editor
     {
         private RTS_Camera camera { get { return target as RTS_Camera; } }
 
