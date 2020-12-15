@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-namespace RTS_Cam
+namespace Thirdparty.RTS_Camera.Scripts
 {
     [RequireComponent(typeof(Camera))]
     [AddComponentMenu("RTS Camera")]

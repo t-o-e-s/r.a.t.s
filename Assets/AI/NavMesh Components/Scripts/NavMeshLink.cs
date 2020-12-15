@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
 
-namespace UnityEngine.AI
+namespace AI.NavMesh_Components.Scripts
 {
     [ExecuteInEditMode]
     [DefaultExecutionOrder(-101)]

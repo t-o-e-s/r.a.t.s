@@ -1,9 +1,9 @@
-﻿namespace PostFXEditor
-{
-	using UnityEditor;
+﻿using UnityEditor;
 
-	[CustomEditor(typeof(PostFX.TiltShift))]
-	public class TiltShiftEditor : Editor
+namespace Thirdparty.Tilt_Shift.Scripts.Editor
+{
+	[CustomEditor(typeof(TiltShift))]
+	public class TiltShiftEditor : UnityEditor.Editor
 	{
 		SerializedProperty m_Preview;
 		SerializedProperty m_Offset;

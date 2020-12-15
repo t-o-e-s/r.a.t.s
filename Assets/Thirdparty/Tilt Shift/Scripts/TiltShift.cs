@@ -1,7 +1,7 @@
-﻿namespace PostFX
-{
-	using UnityEngine;
+﻿using UnityEngine;
 
+namespace Thirdparty.Tilt_Shift.Scripts
+{
 	[RequireComponent(typeof(Camera))]
 	[ExecuteInEditMode, AddComponentMenu("Image Effects/Tilt Shift")]
 	public class TiltShift : MonoBehaviour
