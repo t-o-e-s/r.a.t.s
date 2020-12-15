@@ -49,6 +49,10 @@
               <e p="IOHandler.cs" t="Include" />
               <e p="Locator.cs" t="Include" />
             </e>
+            <e p="ui" t="Include">
+              <e p="UIController.cs" t="Include" />
+              <e p="UnitInfoHandler.cs" t="Include" />
+            </e>
             <e p="Units" t="Include">
               <e p="BridgeHandler.cs" t="Include" />
               <e p="IUnitController.cs" t="Include" />

@@ -11,5 +11,7 @@ namespace Library.Units
         void Flag(bool flag);
         void MoveTo(Vector3 target);
         bool InCombat();
+        void UpdateUI(GameObject panel);
+        void UpdateUI();
     }
 }

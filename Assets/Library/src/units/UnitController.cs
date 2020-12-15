@@ -23,6 +23,7 @@ namespace Library.src.units
         Broker broker;
         //sprite above the unit to dictate status
         SpriteRenderer flag;
+        UIController ui;
     
         private void Awake()
         {
@@ -31,6 +32,8 @@ namespace Library.src.units
             agent = GetComponent<NavMeshAgent>();
             broker = Camera.main.gameObject.GetComponent<Broker>();
             flag = GetComponentInChildren<SpriteRenderer>();
+            
+            
         }
 
         private void Update()
@@ -137,6 +140,19 @@ namespace Library.src.units
         public void LoadAs(Unit unit)
         {
             this.unit = unit;
+        }
+        
+        /*====================================
+     *     UTILITY
+     ===================================*/
+        public void UpdateUI(GameObject panel)
+        {
+            ui = new UIController(unit, panel);
+        }
+        
+        public void UpdateUI()
+        {
+            ui.UpdateUI();
         }
     }
 }
