@@ -50,6 +50,11 @@ public class IOHandler : MonoBehaviour
                     Debug.Log("Handling Attack");
                     HandleAttack(hit.collider.gameObject);
                     break;
+
+                case "loot":
+                    Debug.Log("Handling Looting");
+                    HandleLooting(hit.collider.gameObject);
+                    break;
             }
         }
     }
@@ -81,6 +86,11 @@ public class IOHandler : MonoBehaviour
         {
             unitBuffer.Attack(targetControllerController);
         }
+    }
+
+    void HandleLooting(GameObject target)
+    {
+        unitBuffer.FetchLoot(target.transform.position);
     }
 
     void Select(UnitController unit)

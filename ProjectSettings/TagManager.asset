@@ -11,6 +11,7 @@ TagManager:
   - player_unit
   - entity
   - enemy_unit
+  - loot
   layers:
   - Default
   - TransparentFX
