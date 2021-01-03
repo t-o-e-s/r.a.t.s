@@ -15,13 +15,15 @@ namespace Library.src.combat
         Unit friendlyUnit;
         //target unit (to attack)
         Unit targetUnit;
+
+        bool mutual = false;
+        bool ready = false;
         
         public Combat(Broker broker,
             Unit friendlyUnit,
             Unit targetUnit)
         {
             this.broker = broker;
-            
             this.friendlyUnit = friendlyUnit;
             this.targetUnit = targetUnit;
             
@@ -51,6 +53,16 @@ namespace Library.src.combat
         public Unit GetOpponent()
         {
             return targetUnit;
+        }
+
+        public void SetMutual(bool mutual)
+        {
+            this.mutual = mutual;
+        }
+
+        public void SetReady(bool ready)
+        {
+            this.ready = ready;
         }
     }
 }

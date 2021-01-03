@@ -7,7 +7,19 @@ namespace Library.src.io
     {
         public static GameObject GetNearest(Vector3 origin, GameObject targetTile)
         {
-            return GetAdjacent(targetTile)[0];
+            GameObject[] adjacent = GetAdjacent(targetTile);
+            var nearest = adjacent[0];
+            int i = 1;
+            while (i <= adjacent.Length)
+            {
+                if (Vector3.Distance(nearest.transform.position, origin)
+                    > Vector3.Distance(adjacent[i].transform.position, origin))
+                {
+                    nearest = adjacent[i++];
+                }
+            }
+            
+            return nearest;
         }
         public static GameObject[] GetAdjacent(GameObject tile)
         {
@@ -54,7 +66,7 @@ namespace Library.src.io
                         {
                             continue;
                         }
-                        else if (c.CompareTag("movement_tile"))
+                        if (c.CompareTag("movement_tile"))
                         {
                             output.Add(c.gameObject);
                             continue;
@@ -69,7 +81,7 @@ namespace Library.src.io
                 }
             }
 
-            Debug.Log("Found " + output.Count +" suitable tiles near " + tile.name);
+            //Debug.Log("Found " + output.Count +" suitable tiles near " + tile.name);
 
             //Converting to array for output
             GameObject[] outArr = new GameObject[output.Count];

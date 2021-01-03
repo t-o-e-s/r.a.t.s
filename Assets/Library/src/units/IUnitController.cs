@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Library.src.units
 {
@@ -6,10 +7,10 @@ namespace Library.src.units
     {
         Unit GetUnit();
         void LoadAs(Unit unit);
-        bool Attack(UnitController target);
+        void Attack(UnitController target);
+        GameObject GetOccupyingTile();
         void Flag(bool flag);
         void MoveTo(Vector3 target);
-        bool InCombat();
         void UpdateUI(GameObject panel);
         void UpdateUI();
     }

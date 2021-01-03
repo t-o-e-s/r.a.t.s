@@ -6,5 +6,9 @@ namespace Library.src.combat
     {
         Unit GetUnit();
         Unit GetOpponent();
+
+        void SetMutual(bool mutual);
+        void SetReady(bool ready);
+        
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using Library.src.combat;
+using Library.src.combat.Weapon;
+using Library.src.io;
 using Library.src.ui;
 using Library.src.util;
 using UnityEngine;
@@ -9,8 +11,8 @@ namespace Library.src.units
 {
     public class UnitController : MonoBehaviour, IUnitController, ITimed
     {
+        [HideInInspector]
         public Unit unit;
-        public ICombat combat;
         [HideInInspector]
         public bool playerUnit;
 
@@ -26,7 +28,7 @@ namespace Library.src.units
         SpriteRenderer flag;
         UIController ui;
     
-        private void Awake()
+        void Awake()
         {
             playerUnit = CompareTag("player_unit");
         
@@ -36,45 +38,62 @@ namespace Library.src.units
             flag = GetComponentInChildren<SpriteRenderer>();
 
             broker.Add(this);
-            broker.LoadThis(this);
+            broker.LoadAs(this);
         }
 
-        private void Update()
+        void Update()
         {
             //TODO implement through an InvokeRepeating() and test it, might be an easy way to claw some frames back
             SamplePosition();
         }
 
         /*====================================
-     *     COMBAT
-     ===================================*/
-        public bool Attack(UnitController target)
+        *     COMBAT
+        ===================================*/
+        void InitialAttack()
         {
-            if (combat == null) combat = new combat.Combat(broker, this, target, false);
-            else ; //TODO what if unit is already engaged? -> combat.CanBreak() 
-            //informing defending unit
-            if (target.combat == null)
+            broker.Add(unit.combat as Combat);
+            unit.combat.SetReady(true);
+            
+            if (ReferenceEquals(unit.combat.GetOpponent().combat, null))
             {
-                target.combat = new combat.Combat(broker, target, this, true);
-                target.combat.SetMutual(true);
-                combat.SetMutual(true);
+                if (unit.weapon.weaponType == WeaponType.Melee)
+                {
+                    var opponent = unit.combat.GetOpponent();
+                    var tempCombat = new Combat(broker, unit.combat.GetOpponent(), unit);
+                    tempCombat.SetMutual(true);
+                    tempCombat.SetReady(true);
+                    unit.combat.SetMutual(true);
+                    opponent.combat = tempCombat;
+                    broker.Add(tempCombat);
+                }
             }
-            return true;
-        }
-
-        public void WaitForAttacker()
-        {
-            StartCoroutine(WaitForAttacker(combat.GetOpponent()));
-
-        }
-
-        IEnumerator WaitForAttacker(UnitController attacker)
-        {
-            while (Vector3.Distance(attacker.transform.position, gameObject.transform.position) > broker.stoppingDistance)
+            else
             {
-                yield return null;
+                //TODO attack piles on
             }
-            combat.SetReady(true);
+        }
+        
+        public void Attack(UnitController target)
+        {
+            if (ReferenceEquals(unit.combat, null))
+            {
+                unit.combat = new Combat(broker, unit, target.unit);
+                GameObject targetTile = Locator.GetNearest(transform.position, target.GetOccupyingTile());
+                
+                //TODO an in range check will be needed
+                if (unit.weapon.weaponType == WeaponType.Ranged) InitialAttack();
+                else StartCoroutine(Move(targetTile.transform.position, true));
+            }
+            else if (Equals(unit.combat.GetOpponent(), target.unit))
+            {
+                //TODO calling attack on unit
+                //TODO add combat to the broker for resolution
+            }
+            else
+            {
+                //TODO handle breaking off combat
+            }
         } 
 
         public void Flag(bool flag)
@@ -82,20 +101,15 @@ namespace Library.src.units
             this.flag.enabled = flag;
         }
 
-        public bool InCombat()
-        {
-            return combat != null;
-        }
-
         /*====================================
-     *     NAVIGATION
-     ===================================*/
+        *     NAVIGATION
+        ===================================*/
         public void MoveTo(Vector3 target)
         {
-            StartCoroutine(Move(target));
+            StartCoroutine(Move(target, false));
         }
 
-        IEnumerator Move(Vector3 target)
+        IEnumerator Move(Vector3 target, bool toAttack)
         {
             agent.SetDestination(target);
             anim.SetBool("move", true);
@@ -111,7 +125,8 @@ namespace Library.src.units
 
             anim.SetBool("move", false);
             agent.SetDestination(agent.transform.position);
-            
+
+            if (toAttack) InitialAttack();
         }
 
         //position sampling for slow speeds
@@ -127,8 +142,8 @@ namespace Library.src.units
         }   
 
         /*====================================
-     *     TIME
-     ===================================*/
+        *     TIME
+        ===================================*/
         public State Record()
         {
             return new UnitState(
@@ -137,13 +152,13 @@ namespace Library.src.units
                 transform.rotation,
                 unit.health,
                 unit.statuses,
-                !(combat == null)
+                unit.combat != null
             );
         }
     
         /*====================================
-     *     UTILITY
-     ===================================*/
+        *     UTILITY
+        ===================================*/
         public Unit GetUnit()
         {
             return unit;
@@ -155,8 +170,8 @@ namespace Library.src.units
         }
         
         /*====================================
-     *     UI
-     ===================================*/
+        *     UI
+        ===================================*/
         public void UpdateUI(GameObject panel)
         {
             ui = new UIController(unit, panel);
@@ -168,11 +183,16 @@ namespace Library.src.units
         }
         
         /*====================================
-     *     INFO
-     ===================================*/
+        *     INFO
+        ===================================*/
         public float GetSpeed()
         {
             return agent.speed;
+        }
+
+        public GameObject GetOccupyingTile()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

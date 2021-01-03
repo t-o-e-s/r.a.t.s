@@ -48,7 +48,7 @@ namespace Library.src.ui
         {
             name.text = unit.name;
             health.text = String.Format(healthStr, unit.health);
-            combat.text = String.Format(combatStr, combatIndicator[unit.isFighting ? 0 : 1]);
+            combat.text = String.Format(combatStr, combatIndicator[!ReferenceEquals(unit.combat, null) ? 0 : 1]);
         }
     }
 }

@@ -17,8 +17,8 @@ namespace Library.src.util
 
         HashSet<IResolvable> resolvables = new HashSet<IResolvable>();
     
-        HashSet<ICombat> combats = new HashSet<ICombat>();
-        ICombat[][] combatBatches;
+        HashSet<IResolvable> combats = new HashSet<IResolvable>();
+        IResolvable[][] combatBatches;
 
         //HashSets for tracking active units
         public HashSet<IUnitController> units = new HashSet<IUnitController>();
@@ -67,14 +67,14 @@ namespace Library.src.util
             {
                 foreach (var combat in batch)
                 {
-                    combat.ResolveDamage();
+                    combat.Resolve();
                 }
 
                 yield return null;
             }
         }
 
-        public void LoadThis(UnitController unitController)
+        public void LoadAs(UnitController unitController)
         {
             if (isTest)
             {
@@ -82,7 +82,6 @@ namespace Library.src.util
                 var unit = new Unit();
                 unit.name = unitController.name;
                 unit.health = 100f;
-                unit.isFighting = false;
                 unit.speed = unitController.GetSpeed();
                 unit.weapon = Arsenal.Fists();
                 unit.statuses = new Status[0];
@@ -92,7 +91,7 @@ namespace Library.src.util
     
         public bool Add(IResolvable resolvable)
         {
-            if (resolvable is ICombat c) combats.Add(c);
+            if (resolvable is ICombat) combats.Add(resolvable);
             var success = resolvables.Add(resolvable);
             if (success) UpdateBatches();
             return success;
@@ -100,7 +99,7 @@ namespace Library.src.util
 
         public bool Remove(IResolvable resolvable)
         {
-            if (resolvable is ICombat c) combats.Remove(c);
+            if (resolvable is ICombat) combats.Remove(resolvable);
             var success = resolvables.Remove(resolvable);
             if (success) UpdateBatches();
             return success;
@@ -118,7 +117,7 @@ namespace Library.src.util
 
         void UpdateBatches()
         {
-            combatBatches = new ICombat[performanceDivider][];
+            combatBatches = new IResolvable[performanceDivider][];
             int arr = 0;
             int i = combats.Count % performanceDivider;
             int arrSize = combats.Count / performanceDivider;
@@ -133,7 +132,7 @@ namespace Library.src.util
                     arr++;
                 }
 
-                Debug.Log(String.Format("Populated combat batch [{0}][{1}]", arr, i));
+                //Debug.Log(String.Format("Populated combat batch [{0}][{1}]", arr, i));
                 combatBatches[arr++][i++] = c;
             }
         }
