@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8502ae184cf65c549bb7437bfbcb47ee, type: 3}
+  m_Name: Level Intro 1
+  m_EditorClassIdentifier: 
+  speakerLeft: {fileID: 11400000, guid: 71c04921e3cf630499463ac8fbbd293f, type: 2}
+  speakerRight: {fileID: 11400000, guid: ab26c32f542e6194487f77cab7a77c2f, type: 2}
+  lines:
+  - character: {fileID: 11400000, guid: 71c04921e3cf630499463ac8fbbd293f, type: 2}
+    text: Eyy laa. Where'd you dip off to last night? Proper snakey that like.
+  - character: {fileID: 11400000, guid: ab26c32f542e6194487f77cab7a77c2f, type: 2}
+    text: Ahh fuck off kid. I'm king-ding round 'ere now. Chuck us them new Air Force
+      1s before I chef you up.
+  - character: {fileID: 11400000, guid: 71c04921e3cf630499463ac8fbbd293f, type: 2}
+    text: Jog on smeg head. Ye da sells Avon. I'm going to bounce round now and spin
+      ye jaw.
+  - character: {fileID: 11400000, guid: ab26c32f542e6194487f77cab7a77c2f, type: 2}
+    text: Ite den laa. Come round and swing first. I'll go Zoro on your dad.
