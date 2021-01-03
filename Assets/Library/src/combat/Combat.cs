@@ -9,98 +9,48 @@ namespace Library.src.combat
 {
     public class Combat : ICombat, IResolvable
     {
-        public bool mutual;
-        
-        NativeArray<float> dmgCache;
-        JobHandle handle;
-
         readonly Broker broker;
-        readonly UnitController unit;
-        readonly UnitController opponent;
-
-        CombatJob combatJob;
-
-        bool ready;
-
+        
+        //this unit
+        Unit friendlyUnit;
+        //target unit (to attack)
+        Unit targetUnit;
+        
         public Combat(Broker broker,
-            UnitController unit,
-            UnitController opponent,
-            bool defending)
+            Unit friendlyUnit,
+            Unit targetUnit)
         {
             this.broker = broker;
-            this.unit = unit;
-            this.opponent = opponent;
-
-            if (!defending && unit.unit.weapon.weaponType == WeaponType.Melee)
-            {
-                ready = false;
-                var moveTo = Locator.GetNearest(
-                    unit.gameObject.transform.position, 
-                    opponent.gameObject);
-                unit.MoveTo(moveTo.transform.position);
-            }
-            else if (unit.unit.weapon.weaponType == WeaponType.Ranged)
-            {
-                ready = true;
-            }
-            else if (defending && unit.unit.weapon.weaponType == WeaponType.Melee)
-            {
-                unit.WaitForAttacker();
-            }
-            else
-            {
-                ready = false;
-            }
+            
+            this.friendlyUnit = friendlyUnit;
+            this.targetUnit = targetUnit;
+            
+            //TODO establish whether this unit is defending
+            //TODO establish whether the combat is mutual
+            //TODO move to enemy unit (call a method on the controller)
         }
-    
-        public void ResolveDamage()
-        { 
-            if (!ready) return;
-            combatJob = new CombatJob();
-            handle = combatJob.Schedule();
+        
+        public void Resolve()
+        {
+            //TODO add check if the combat 
+            DealDamage();
         }
 
         public void DealDamage()
         {
-            handle.Complete();
-            if (!ready) return;
-            opponent.unit.health -= dmgCache[0];
-        }
-        
-        public void RefreshJob()
-        {
-            //TODO sort fields on unit controller and set them
-            //combatJob.attackPower = attacker
-            //combatJob.combatSpeed = attacker
-            //combatJob.defense = defender
-            //combatJob.combatSpeed = broker
-            //combatJob.x = broker
-            combatJob.result = dmgCache;
+            //TODO calculate damage
+            var damage = 1f;
+            targetUnit.health -= damage;
         }
 
-        public UnitController GetUnit()
+        public Unit GetUnit()
         {
-            return unit;
+            return friendlyUnit;
         }
 
-        public UnitController GetOpponent()
+        public Unit GetOpponent()
         {
-            return opponent;
-        }
-
-        public void SetMutual(bool mutual)
-        {
-            this.mutual = mutual;
-        }
-
-        public void SetReady(bool ready)
-        {
-            this.ready = ready;
-        }
-
-        public void Resolve()
-        {
-            ResolveDamage();
+            return targetUnit;
         }
     }
 }
