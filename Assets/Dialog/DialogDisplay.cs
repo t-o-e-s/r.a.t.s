@@ -14,6 +14,8 @@ public class DialogDisplay : MonoBehaviour
 
     public bool convoCompleted;
 
+    public bool convoTriggered;
+
     int activeLineIndex = 0;
 
     void Awake()
@@ -40,7 +42,7 @@ public class DialogDisplay : MonoBehaviour
 
     void AdvanceConversation()
     {
-        if ((activeLineIndex < conversation.lines.Length) && !convoCompleted)
+        if ((activeLineIndex < conversation.lines.Length) && !convoCompleted && convoTriggered == true)
         {
             if (activeLineIndex == 0) SetDisplay(true);
             DisplayLine();
