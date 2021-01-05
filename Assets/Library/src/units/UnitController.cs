@@ -174,5 +174,16 @@ namespace Library.src.units
         {
             return agent.speed;
         }
+
+
+      /*====================================
+     *     Animation
+     ===================================*/
+
+        public void StopAnimation()
+        {
+            anim.SetBool("move", false);
+            agent.SetDestination(agent.transform.position);
+        }
     }
 }

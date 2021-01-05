@@ -18,6 +18,7 @@ public class DialogDisplay : MonoBehaviour
 
     int activeLineIndex = 0;
 
+   
     void Awake()
     {
         //this covo starts upon game start. Temp code whilst there is only 1 level and no start sequence. Update when we aren't booting to level directly.
@@ -40,6 +41,7 @@ public class DialogDisplay : MonoBehaviour
         {
             SetDisplay(true);
             AdvanceConversation();
+            
         }
         else if (Input.GetKeyDown(KeyCode.Return) && convoTriggered == true)
         {
@@ -55,11 +57,11 @@ public class DialogDisplay : MonoBehaviour
             if (activeLineIndex == 0) SetDisplay(true);
             DisplayLine();
             activeLineIndex += 1;
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
         else
         {
-            Time.timeScale = 1;
+            //Time.timeScale = 1;
             speakerUILeft.Hide();
             speakerUIRight.Hide();
             activeLineIndex = 0;
