@@ -35,21 +35,31 @@ public class DialogDisplay : MonoBehaviour
 
     void Update()
     {
-        //add more button mappings here
-        if (Input.GetMouseButtonDown(0))
+
+        if (convoTriggered == true && activeLineIndex <= 0)
+        {
+            SetDisplay(true);
             AdvanceConversation();
+        }
+        else if (Input.GetKeyDown(KeyCode.Return) && convoTriggered == true)
+        {
+            AdvanceConversation();
+        }
+      
     }
 
     void AdvanceConversation()
     {
-        if ((activeLineIndex < conversation.lines.Length) && !convoCompleted && convoTriggered == true)
+        if ((activeLineIndex < conversation.lines.Length) && !convoCompleted)
         {
             if (activeLineIndex == 0) SetDisplay(true);
             DisplayLine();
             activeLineIndex += 1;
+            Time.timeScale = 0;
         }
         else
         {
+            Time.timeScale = 1;
             speakerUILeft.Hide();
             speakerUIRight.Hide();
             activeLineIndex = 0;

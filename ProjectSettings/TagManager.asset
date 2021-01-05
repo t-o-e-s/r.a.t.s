@@ -12,6 +12,7 @@ TagManager:
   - entity
   - enemy_unit
   - canvas
+  - trigger
   layers:
   - Default
   - TransparentFX
