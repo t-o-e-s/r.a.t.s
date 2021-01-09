@@ -1,77 +1,114 @@
-﻿using Library.src.units;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Library.src.units;
 using UnityEngine;
 
-namespace Library.src.io
+public class IOHandler : MonoBehaviour
 {
-    public class IOHandler : MonoBehaviour
+
+    UnitController unitBuffer;
+
+    bool aUnitSelected;
+
+    int lootTotal;
+
+    [SerializeField] int framerate = 60;
+    
+    // Start is called before the first frame update
+    void Awake()
     {
-        Camera cam;
-        UnitController unitBuffer;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = framerate;
+    }
 
-        [SerializeField] int framerate = 60;
-        
-        bool aUnitSelected;
+    // Update is called once per frame
+    void Update()
+    {
+        if (Application.targetFrameRate != framerate) Application.targetFrameRate = framerate;
 
+        if (Input.GetMouseButtonDown(0)) Cast();
+    }
 
-        void Awake()
+    void Cast()
+    {       
+        RaycastHit hit;
+
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 150f))
         {
-            cam = Camera.main;
-            
-            QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = framerate;
-        }
-
-        void Update()
-        {
-            if (Application.targetFrameRate != framerate) Application.targetFrameRate = framerate;
-
-            if (Input.GetMouseButtonDown(0)) Cast();
-        }
-
-        void Cast()
-        {       
-            RaycastHit hit;
-
-            if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 150f))
+            switch (hit.collider.tag)
             {
-                switch (hit.collider.tag)
-                {
-                    case "movement_tile":
-                        HandleMovement(hit.collider.gameObject);
-                        break;
+                case "movement_tile":
+                    Debug.Log("Handling Movement");
+                    HandleMovement(hit.collider.gameObject);
+                    break;
 
-                    case "player_unit":
-                        HandleSelection(hit.collider.gameObject);
-                        break;
+                case "player_unit":
+                    Debug.Log("Handling Selection");
+                    HandleSelection(hit.collider.gameObject);
+                    break;
 
-                    case "enemy_unit":
-                        HandleAttack(hit.collider.gameObject);
-                        break;
-                }
+                case "enemy_unit":
+                    Debug.Log("Handling Attack");
+                    HandleAttack(hit.collider.gameObject);
+                    break;
+
+                case "loot":
+                    Debug.Log("Handling Looting");
+                    HandleLooting(hit.collider.gameObject);
+                    break;
             }
         }
+    }
 
-        void HandleMovement(GameObject tile)
-        {
-            unitBuffer?.MoveTo(tile.transform.position);
+    void HandleMovement(GameObject tile)
+    {
+        unitBuffer.MoveTo(tile.transform.position);
+    }
+
+    void HandleSelection(GameObject unit)
+    {
+        UnitController controller;
+        
+        if (unit.TryGetComponent(out controller))
+        {            
+            Select(controller);
         }
-
-        void HandleSelection(GameObject unit)
+        else
         {
-            if (unit.TryGetComponent(out UnitController controller)) Select(controller);
-        }
+            Debug.LogError("No valid controller found on: " + unit.name);
+        }       
+    }
 
-        void HandleAttack(GameObject target) 
+    void HandleAttack(GameObject target) 
+    {
+        UnitController targetControllerController;
+
+        if (target.TryGetComponent(out targetControllerController))
         {
-            if (target.TryGetComponent(out UnitController targetController)) unitBuffer.Attack(targetController);
+            unitBuffer.Attack(targetControllerController);
         }
+    }
 
-        void Select(UnitController unit)
-        {
-            if (unitBuffer) unitBuffer.Flag(false);
+    void HandleLooting(GameObject loot)
+    {
+        unitBuffer.FetchLoot(loot.transform.position);
+    }
 
-            unitBuffer = unit;
-            unitBuffer.Flag(true);
-        }
+    public void TakeLoot()
+    {
+        int loot;
+        Loot.GetLoot();
+        loot = Loot.LOOT_CLASS;
+        lootTotal += loot;
+        Debug.Log("Loot total =" + lootTotal);
+    }
+
+    void Select(UnitController unit)
+    {
+        //deflag the previously selected unit
+        if (unitBuffer) unitBuffer.Flag(false);
+
+        unitBuffer = unit;
+        unitBuffer.Flag(true);
     }
 }

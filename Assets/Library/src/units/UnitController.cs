@@ -32,7 +32,9 @@ namespace Library.src.units
         Brawl brawl;
         Unit? targetUnit;
 
-        void Awake()
+        IOHandler IO;
+    
+        private void Awake()
         {
             playerUnit = CompareTag("player_unit");
         
@@ -45,6 +47,8 @@ namespace Library.src.units
             broker.LoadAs(this);
 
             targetUnit = null;
+
+            IO = Camera.main.GetComponent<IOHandler>();
         }
 
         void Update()
@@ -121,7 +125,46 @@ namespace Library.src.units
                 unit.speed;
 
             agent.speed = speedToSet;
-        }   
+        }
+
+        /*====================================
+   *     Loot
+   ===================================*/
+
+        public void FetchLoot(Vector3 target)
+        {
+            StartCoroutine(MoveToLoot(target));
+        }
+
+        IEnumerator MoveToLoot(Vector3 target)
+        {
+            anim.SetBool("move", true);
+            agent.SetDestination(target);
+            var lastRot = transform.rotation.y;
+            while (Vector3.Distance(target, transform.position) > broker.stoppingDistance)
+            {
+                var rot = transform.rotation.y - lastRot;
+                anim.SetFloat("turning", rot);
+                lastRot = transform.rotation.y;
+                yield return null;
+            }
+            
+            anim.SetBool("move", false);
+            agent.SetDestination(agent.transform.position);            
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.tag == "loot")
+            {
+                
+                Destroy(other.gameObject);
+                anim.SetBool("move", false);
+                agent.SetDestination(agent.transform.position);
+                IO.TakeLoot();
+            }
+        }
+
 
         /*====================================
         *     TIME
