@@ -57,18 +57,18 @@
               <e p="IOHandler.cs" t="Include" />
               <e p="Locator.cs" t="Include" />
             </e>
-            <e p="ui" t="Include">
-              <e p="UIController.cs" t="Include" />
-              <e p="UnitInfoHandler.cs" t="Include" />
-            </e>
             <e p="Units" t="Include">
               <e p="BridgeHandler.cs" t="Include" />
               <e p="IUnitController.cs" t="Include" />
               <e p="Rat.cs" t="Include" />
+              <e p="Roster.cs" t="Include" />
               <e p="TimeHandler.cs" t="Include" />
               <e p="TimeMech.cs" t="Include" />
               <e p="Unit.cs" t="Include" />
               <e p="UnitController.cs" t="Include" />
+            </e>
+            <e p="upgrade" t="Include">
+              <e p="loot.cs" t="Include" />
             </e>
             <e p="Util" t="Include">
               <e p="Broker.cs" t="Include" />
@@ -83,7 +83,6 @@
             </e>
           </e>
         </e>
-        <e p="Roster.cs" t="Include" />
         <e p="Thirdparty" t="Include">
           <e p="RTS_Camera" t="Include">
             <e p="Scripts" t="Include">

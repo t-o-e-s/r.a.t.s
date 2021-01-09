@@ -13,5 +13,6 @@ namespace Library.src.util
         //tags
         public const string TAG_PLAYER = "player_unit";
         public const string TAG_AI = "enemy_unit";
+        public const string TAG_LOOT = "loot";
     }
 }

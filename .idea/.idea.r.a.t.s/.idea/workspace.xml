@@ -20,27 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edd50d5b-32bc-40d0-aea0-bc3d5dcd6c97" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Characters.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Characters/Rat_Swordsman_LP Variant.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Characters/Rat_Swordsman_LP Variant.prefab.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/AI.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/src/combat/Combat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Combat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LVL 1 - Tutorial/LVL 1 - Tutorial.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LVL 1 - Tutorial/LVL 1 - Tutorial.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Demo/Prototype Materials Demo/GI Blocker.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Demo/Prototype Materials Demo/GI Blocker.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Demo/Prototype Materials Demo/Neon Light.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Demo/Prototype Materials Demo/Neon Light.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Resources/Materials/Materials/prototype_512x512_blue1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Resources/Materials/Materials/prototype_512x512_blue1.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,19 +41,26 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B956647-017D-4DC1-B8D3-D25EEF012467/28/e6c6f754/CapsuleCollider.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Library/src/util/Environment.cs" />
-      <option value="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1lX3lXExOXsGgM7ry3RCwJZ70hg" />
@@ -88,7 +86,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
@@ -124,7 +122,8 @@
       <workItem from="1607984871355" duration="9839000" />
       <workItem from="1610206608718" duration="1658000" />
       <workItem from="1610208687686" duration="742000" />
-      <workItem from="1610209991863" duration="9860000" />
+      <workItem from="1610209991863" duration="10725000" />
+      <workItem from="1610223179569" duration="5931000" />
     </task>
     <servers />
   </component>

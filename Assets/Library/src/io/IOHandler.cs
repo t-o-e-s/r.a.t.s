@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Library.src.units;
+using Library.src.util;
 using UnityEngine;
 
 public class IOHandler : MonoBehaviour
 {
+    Camera mainCam;
 
     UnitController unitBuffer;
 
@@ -33,27 +35,23 @@ public class IOHandler : MonoBehaviour
     {       
         RaycastHit hit;
 
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 150f))
+        if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 150f))
         {
             switch (hit.collider.tag)
             {
                 case "movement_tile":
-                    Debug.Log("Handling Movement");
                     HandleMovement(hit.collider.gameObject);
                     break;
 
-                case "player_unit":
-                    Debug.Log("Handling Selection");
+                case EnvironmentUtil.TAG_PLAYER:
                     HandleSelection(hit.collider.gameObject);
                     break;
 
-                case "enemy_unit":
-                    Debug.Log("Handling Attack");
+                case EnvironmentUtil.TAG_AI:
                     HandleAttack(hit.collider.gameObject);
                     break;
 
-                case "loot":
-                    Debug.Log("Handling Looting");
+                case EnvironmentUtil.TAG_LOOT:
                     HandleLooting(hit.collider.gameObject);
                     break;
             }
@@ -67,25 +65,21 @@ public class IOHandler : MonoBehaviour
 
     void HandleSelection(GameObject unit)
     {
-        UnitController controller;
-        
-        if (unit.TryGetComponent(out controller))
+        if (unit.TryGetComponent(out UnitController controller))
         {            
             Select(controller);
         }
         else
         {
-            Debug.LogError("No valid controller found on: " + unit.name);
+            print("No valid controller found on: " + unit.name);
         }       
     }
 
     void HandleAttack(GameObject target) 
     {
-        UnitController targetControllerController;
-
-        if (target.TryGetComponent(out targetControllerController))
+        if (target.TryGetComponent(out UnitController controller))
         {
-            unitBuffer.Attack(targetControllerController);
+            unitBuffer.Attack(controller);
         }
     }
 
@@ -100,7 +94,7 @@ public class IOHandler : MonoBehaviour
         Loot.GetLoot();
         loot = Loot.LOOT_CLASS;
         lootTotal += loot;
-        Debug.Log("Loot total =" + lootTotal);
+        print("Loot total =" + lootTotal);
     }
 
     void Select(UnitController unit)

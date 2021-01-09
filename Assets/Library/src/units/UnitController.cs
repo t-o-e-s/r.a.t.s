@@ -1,8 +1,5 @@
 ﻿using System.Collections;
 using Library.src.combat;
-using Library.src.combat.Weapon;
-using Library.src.io;
-using Library.src.ui;
 using Library.src.util;
 using UnityEngine;
 using UnityEngine.AI;
@@ -25,16 +22,15 @@ namespace Library.src.units
         Animator anim;
         Broker broker;
         //sprite above the unit to dictate status
-        SpriteRenderer flag;
-        UIController ui;
+        SpriteRenderer flag; 
         
         //combat related fields
         Brawl brawl;
-        Unit? targetUnit;
+        Unit targetUnit;
 
-        IOHandler IO;
+        IOHandler io;
     
-        private void Awake()
+        void Awake()
         {
             playerUnit = CompareTag("player_unit");
         
@@ -48,7 +44,7 @@ namespace Library.src.units
 
             targetUnit = null;
 
-            IO = Camera.main.GetComponent<IOHandler>();
+            io = Camera.main.GetComponent<IOHandler>();
         }
 
         void Update()
@@ -62,7 +58,8 @@ namespace Library.src.units
         ===================================*/
         public void Attack(UnitController target)
         {
-            
+            targetUnit = target.unit;
+            StartCoroutine(Move(target.transform.position, true));
         }
 
         public void DealDamage()
@@ -77,14 +74,22 @@ namespace Library.src.units
             this.flag.enabled = flag;
         }
 
-        public void SetTarget(Unit? unit)
+        public void SetTarget(Unit unit)
         {
             targetUnit = unit;
         }
 
         void InitiateBrawl()
         {
+            if (targetUnit.Equals(null)) return;
             
+            //setting up brawl object
+            var brawlObject = new GameObject();
+            brawlObject.name = "brawl_" + brawlObject.GetInstanceID();
+            //setting up brawl behaviour
+            brawl = brawlObject.AddComponent<Brawl>();
+            brawl.AddUnit(this);
+            brawl.AddUnit(targetUnit.controller);
         }
 
         /*====================================
@@ -120,7 +125,7 @@ namespace Library.src.units
         {
             NavMeshHit navMeshHit;            
 
-            float speedToSet = NavMesh.SamplePosition(agent.transform.position, out navMeshHit, 1f, 8) ?
+            var speedToSet = NavMesh.SamplePosition(agent.transform.position, out navMeshHit, 1f, 8) ?
                 slowedSpeed :
                 unit.speed;
 
@@ -128,40 +133,23 @@ namespace Library.src.units
         }
 
         /*====================================
-   *     Loot
-   ===================================*/
+        *     Loot
+        ===================================*/
 
         public void FetchLoot(Vector3 target)
         {
-            StartCoroutine(MoveToLoot(target));
-        }
-
-        IEnumerator MoveToLoot(Vector3 target)
-        {
-            anim.SetBool("move", true);
-            agent.SetDestination(target);
-            var lastRot = transform.rotation.y;
-            while (Vector3.Distance(target, transform.position) > broker.stoppingDistance)
-            {
-                var rot = transform.rotation.y - lastRot;
-                anim.SetFloat("turning", rot);
-                lastRot = transform.rotation.y;
-                yield return null;
-            }
-            
-            anim.SetBool("move", false);
-            agent.SetDestination(agent.transform.position);            
+            StartCoroutine(Move(target, false));
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.tag == "loot")
+            if(other.gameObject.CompareTag("loot"))
             {
                 
                 Destroy(other.gameObject);
                 anim.SetBool("move", false);
                 agent.SetDestination(agent.transform.position);
-                IO.TakeLoot();
+                io.TakeLoot();
             }
         }
 
@@ -171,14 +159,7 @@ namespace Library.src.units
         ===================================*/
         public State Record()
         {
-            return new UnitState(
-                gameObject,
-                transform.position,
-                transform.rotation,
-                unit.health,
-                unit.statuses,
-                unit.combat != null
-            );
+            return null;
         }
     
         /*====================================
@@ -189,22 +170,13 @@ namespace Library.src.units
             return unit;
         }
 
+        public Unit GetTarget()
+        {
+            return targetUnit;
+        }
         public void LoadAs(Unit unit)
         {
             this.unit = unit;
-        }
-        
-        /*====================================
-        *     UI
-        ===================================*/
-        public void UpdateUI(GameObject panel)
-        {
-            ui = new UIController(unit, panel);
-        }
-        
-        public void UpdateUI()
-        {
-            ui.UpdateUI();
         }
         
         /*====================================
@@ -213,22 +185,6 @@ namespace Library.src.units
         public float GetSpeed()
         {
             return agent.speed;
-        }
-
-        public GameObject GetOccupyingTile()
-        {
-            Vector3 origin = new Vector3(
-                transform.position.x,
-                transform.position.y - 0.6f,
-                transform.position.z);
-            
-            Collider[] c = Physics.OverlapSphere(
-                transform.position,
-                (0.4f),
-                ~0,
-                QueryTriggerInteraction.Collide);
-
-            return c[0].gameObject;
         }
 
         bool InCombat()

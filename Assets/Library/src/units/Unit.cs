@@ -4,11 +4,11 @@ using Library.src.elements;
 
 namespace Library.src.units
 {
-    public struct Unit
+    public class Unit
     {
         //Unit info
         public string name;
-        public IUnitController controller;
+        public UnitController controller;
         
         //Stats
         public float health;

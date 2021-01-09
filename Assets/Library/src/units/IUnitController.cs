@@ -8,20 +8,16 @@ namespace Library.src.units
     {
         //Information & Utility
         Unit GetUnit();
+        Unit GetTarget();
         void LoadAs(Unit unit);
+        void Flag(bool flag);
         
         //Combat
         void Attack(UnitController target);
         void DealDamage();
-        void SetTarget(Unit? unit);
+        void SetTarget(Unit unit);
 
         //Navigation
-        GameObject GetOccupyingTile();
-        void Flag(bool flag);
         void MoveTo(Vector3 target);
-        
-        //UI
-        void UpdateUI(GameObject panel);
-        void UpdateUI();
     }
 }
