@@ -25,6 +25,8 @@ namespace Library.src.units
         //sprite above the unit to dictate status
         SpriteRenderer flag;
         UIController ui;
+
+        IOHandler IO;
     
         private void Awake()
         {
@@ -37,6 +39,8 @@ namespace Library.src.units
 
             broker.Add(this);
             broker.LoadThis(this);
+
+            IO = Camera.main.GetComponent<IOHandler>();
         }
 
         private void Update()
@@ -127,7 +131,7 @@ namespace Library.src.units
         }
 
         /*====================================
-   *     NAVIGATION
+   *     Loot
    ===================================*/
 
         public void FetchLoot(Vector3 target)
@@ -137,14 +141,32 @@ namespace Library.src.units
 
         IEnumerator MoveToLoot(Vector3 target)
         {
+            anim.SetBool("move", true);
             agent.SetDestination(target);
-            while (agent.remainingDistance > broker.stoppingDistance)
+            var lastRot = transform.rotation.y;
+            while (Vector3.Distance(target, transform.position) > broker.stoppingDistance)
             {
+                var rot = transform.rotation.y - lastRot;
+                anim.SetFloat("turning", rot);
+                lastRot = transform.rotation.y;
                 yield return null;
             }
-            agent.SetDestination(agent.transform.position);
+            
+            anim.SetBool("move", false);
+            agent.SetDestination(agent.transform.position);            
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.tag == "loot")
+            {
+                
+                Destroy(other.gameObject);
+                anim.SetBool("move", false);
+                agent.SetDestination(agent.transform.position);
+                IO.TakeLoot();
+            }
+        }
 
 
         /*====================================

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Library.src.units;
-using Library.Units;
 using UnityEngine;
 
 public class IOHandler : MonoBehaviour
@@ -10,6 +9,8 @@ public class IOHandler : MonoBehaviour
     UnitController unitBuffer;
 
     bool aUnitSelected;
+
+    int lootTotal;
 
     [SerializeField] int framerate = 60;
     
@@ -88,9 +89,18 @@ public class IOHandler : MonoBehaviour
         }
     }
 
-    void HandleLooting(GameObject target)
+    void HandleLooting(GameObject loot)
     {
-        unitBuffer.FetchLoot(target.transform.position);
+        unitBuffer.FetchLoot(loot.transform.position);
+    }
+
+    public void TakeLoot()
+    {
+        int loot;
+        Loot.GetLoot();
+        loot = Loot.LOOT_CLASS;
+        lootTotal += loot;
+        Debug.Log("Loot total =" + lootTotal);
     }
 
     void Select(UnitController unit)

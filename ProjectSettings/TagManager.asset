@@ -12,6 +12,7 @@ TagManager:
   - entity
   - enemy_unit
   - canvas
+  - loot
   layers:
   - Default
   - TransparentFX
