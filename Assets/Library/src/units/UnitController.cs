@@ -124,7 +124,28 @@ namespace Library.src.units
                 unit.speed;
 
             agent.speed = speedToSet;
-        }   
+        }
+
+        /*====================================
+   *     NAVIGATION
+   ===================================*/
+
+        public void FetchLoot(Vector3 target)
+        {
+            StartCoroutine(MoveToLoot(target));
+        }
+
+        IEnumerator MoveToLoot(Vector3 target)
+        {
+            agent.SetDestination(target);
+            while (agent.remainingDistance > broker.stoppingDistance)
+            {
+                yield return null;
+            }
+            agent.SetDestination(agent.transform.position);
+        }
+
+
 
         /*====================================
      *     TIME
