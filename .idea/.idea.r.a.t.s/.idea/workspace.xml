@@ -20,13 +20,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edd50d5b-32bc-40d0-aea0-bc3d5dcd6c97" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Characters.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Characters/Rat_Swordsman_LP Variant.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Characters/Rat_Swordsman_LP Variant.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/AI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/combat/Combat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Combat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Coordination.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Coordination.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LVL 1 - Tutorial/LVL 1 - Tutorial.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LVL 1 - Tutorial/LVL 1 - Tutorial.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Demo/Prototype Materials Demo/GI Blocker.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Demo/Prototype Materials Demo/GI Blocker.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Demo/Prototype Materials Demo/Neon Light.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Demo/Prototype Materials Demo/Neon Light.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Resources/Materials/Materials/prototype_512x512_blue1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Thirdparty/Gridbox Prototype Materials/Resources/Materials/Materials/prototype_512x512_blue1.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,37 +53,17 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B956647-017D-4DC1-B8D3-D25EEF012467/28/e6c6f754/CapsuleCollider.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/Assets/Library/Combat/CombatJob.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Combat/ICombat.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Combat/WeaponType.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Combat/Weapon/IWeapon.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Arsenal.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Units/IUnit.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Units/UnitControllerController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Util/Broker.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Combat/Weapon/Weapon.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Units/Unit.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/IO/Locator.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Units/TimeHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/IO/IOHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Roster.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Units/IUnitController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Combat/Combat.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/Units/UnitController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/src/combat/ICombat.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/src/combat/Combat.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/src/ui/UnitInfoHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Library/src/ui/UIController.cs" />
-      </list>
-    </option>
+    <changedPaths>
+      <option value="$PROJECT_DIR$/Assets/Library/src/util/Environment.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
+    </changedPaths>
   </component>
   <component name="ProjectId" id="1lX3lXExOXsGgM7ry3RCwJZ70hg" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -81,31 +75,38 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.3502052" />
-    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.3002736" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.30010834" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="selectedOptions">
-        <set />
+        <list />
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="16040">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="16040" />
+      <option name="pid" />
       <option name="selectedOptions">
-        <set />
+        <list />
       </option>
       <method v="2" />
     </configuration>
@@ -121,13 +122,16 @@
       <workItem from="1607729802830" duration="9694000" />
       <workItem from="1607810649245" duration="16429000" />
       <workItem from="1607984871355" duration="9839000" />
+      <workItem from="1610206608718" duration="1658000" />
+      <workItem from="1610208687686" duration="742000" />
+      <workItem from="1610209991863" duration="9860000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -144,91 +148,5 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1493" height="352" key="GridCell.Tab.0.bottom" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.0.center" timestamp="1607992800346">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1607992800346" />
-    <state width="1493" height="352" key="GridCell.Tab.0.left" timestamp="1607992800346">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1607992800346" />
-    <state width="1493" height="352" key="GridCell.Tab.0.right" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.1.bottom" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.1.center" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.1.left" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.1.right" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.2.bottom" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.2.bottom/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.2.center" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.2.center/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.2.left" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.2.left/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.2.right" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.2.right/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.3.bottom" timestamp="1607992800348">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.3.bottom/0.0.1536.864@0.0.1536.864" timestamp="1607992800348" />
-    <state width="1493" height="352" key="GridCell.Tab.3.center" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.3.center/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.3.left" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.3.left/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state width="1493" height="352" key="GridCell.Tab.3.right" timestamp="1607992800347">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1493" height="352" key="GridCell.Tab.3.right/0.0.1536.864@0.0.1536.864" timestamp="1607992800347" />
-    <state x="147" y="69" key="MergeDialog" timestamp="1607816962433">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="147" y="69" key="MergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1607816962433" />
-    <state x="399" y="186" key="MultipleFileMergeDialog" timestamp="1607816981909">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="399" y="186" key="MultipleFileMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1607816981909" />
-    <state x="601" y="46" key="RiderGenerateDialog" timestamp="1607900341184">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="601" y="46" key="RiderGenerateDialog/0.0.1536.864@0.0.1536.864" timestamp="1607900341184" />
-    <state x="277" y="77" key="SettingsEditor" timestamp="1607993024776">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1607993024776" />
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1607900109934">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1607900109934" />
   </component>
 </project>

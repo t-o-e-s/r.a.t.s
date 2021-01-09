@@ -16,7 +16,8 @@ namespace Library.src.units
         public Status[] statuses;
         
         //Combat fields
-        public ICombat combat;
+        public Brawl brawl;
         public Weapon weapon;
+
     }
 }

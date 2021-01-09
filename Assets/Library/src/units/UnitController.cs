@@ -27,7 +27,11 @@ namespace Library.src.units
         //sprite above the unit to dictate status
         SpriteRenderer flag;
         UIController ui;
-    
+        
+        //combat related fields
+        Brawl brawl;
+        Unit? targetUnit;
+
         void Awake()
         {
             playerUnit = CompareTag("player_unit");
@@ -39,6 +43,8 @@ namespace Library.src.units
 
             broker.Add(this);
             broker.LoadAs(this);
+
+            targetUnit = null;
         }
 
         void Update()
@@ -50,55 +56,31 @@ namespace Library.src.units
         /*====================================
         *     COMBAT
         ===================================*/
-        void InitialAttack()
-        {
-            broker.Add(unit.combat as Combat);
-            unit.combat.SetReady(true);
-            
-            if (ReferenceEquals(unit.combat.GetOpponent().combat, null))
-            {
-                if (unit.weapon.weaponType == WeaponType.Melee)
-                {
-                    var opponent = unit.combat.GetOpponent();
-                    var tempCombat = new Combat(broker, unit.combat.GetOpponent(), unit);
-                    tempCombat.SetMutual(true);
-                    tempCombat.SetReady(true);
-                    unit.combat.SetMutual(true);
-                    opponent.combat = tempCombat;
-                    broker.Add(tempCombat);
-                }
-            }
-            else
-            {
-                //TODO attack piles on
-            }
-        }
-        
         public void Attack(UnitController target)
         {
-            if (ReferenceEquals(unit.combat, null))
-            {
-                unit.combat = new Combat(broker, unit, target.unit);
-                GameObject targetTile = Locator.GetNearest(transform.position, target.GetOccupyingTile());
-                
-                //TODO an in range check will be needed
-                if (unit.weapon.weaponType == WeaponType.Ranged) InitialAttack();
-                else StartCoroutine(Move(targetTile.transform.position, true));
-            }
-            else if (Equals(unit.combat.GetOpponent(), target.unit))
-            {
-                //TODO calling attack on unit
-                //TODO add combat to the broker for resolution
-            }
-            else
-            {
-                //TODO handle breaking off combat
-            }
-        } 
+            
+        }
+
+        public void DealDamage()
+        {
+            //TODO calculate damage
+            //TODO give damage to enumerator
+            //TODO deal it to enemy
+        }
 
         public void Flag(bool flag)
         {
             this.flag.enabled = flag;
+        }
+
+        public void SetTarget(Unit? unit)
+        {
+            targetUnit = unit;
+        }
+
+        void InitiateBrawl()
+        {
+            
         }
 
         /*====================================
@@ -126,7 +108,7 @@ namespace Library.src.units
             anim.SetBool("move", false);
             agent.SetDestination(agent.transform.position);
 
-            if (toAttack) InitialAttack();
+            if (toAttack && !InCombat()) InitiateBrawl();
         }
 
         //position sampling for slow speeds
@@ -192,7 +174,24 @@ namespace Library.src.units
 
         public GameObject GetOccupyingTile()
         {
-            throw new System.NotImplementedException();
+            Vector3 origin = new Vector3(
+                transform.position.x,
+                transform.position.y - 0.6f,
+                transform.position.z);
+            
+            Collider[] c = Physics.OverlapSphere(
+                transform.position,
+                (0.4f),
+                ~0,
+                QueryTriggerInteraction.Collide);
+
+            return c[0].gameObject;
+        }
+
+        bool InCombat()
+        {
+            return targetUnit != null
+                   || !brawl.Equals(null);
         }
     }
 }

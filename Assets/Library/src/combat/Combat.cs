@@ -1,9 +1,5 @@
-﻿using Library.src.combat.Weapon;
-using Library.src.io;
-using Library.src.units;
+﻿using Library.src.units;
 using Library.src.util;
-using Unity.Collections;
-using Unity.Jobs;
 
 namespace Library.src.combat
 {
@@ -26,10 +22,6 @@ namespace Library.src.combat
             this.broker = broker;
             this.friendlyUnit = friendlyUnit;
             this.targetUnit = targetUnit;
-            
-            //TODO establish whether this unit is defending
-            //TODO establish whether the combat is mutual
-            //TODO move to enemy unit (call a method on the controller)
         }
         
         public void Resolve()
