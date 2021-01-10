@@ -22,6 +22,8 @@ namespace Library.src.combat
         //collider used to demarcate the brawl
         CapsuleCollider col;
 
+        bool end = false;
+
 
         /*
          * =====================
@@ -48,11 +50,12 @@ namespace Library.src.combat
 
         void Update()
         {
-            if (watch.ElapsedMilliseconds == EnvironmentUtil.BRAWL_RESOLUTION_INTERVAL)
+            if (watch.ElapsedMilliseconds >= EnvironmentUtil.BRAWL_RESOLUTION_INTERVAL)
             {
                 StartCoroutine(Fight());
                 watch.Restart();
             }
+            if (end) End();
         }
 
         void OnTriggerEnter(Collider other)
@@ -173,16 +176,19 @@ namespace Library.src.combat
             {
                 success = aiUnits.Remove(unitController);
             }
-            
+
+            if (success && FightShouldEnd())
+            {
+                end = true;
+                return success;
+            }
             if (success) UpdatePosition();
             return false;
         }
         
         void UpdatePosition()
         {
-            var participants = new UnitController[playerUnits.Count + aiUnits.Count];
-            playerUnits.CopyTo(participants, 0);
-            aiUnits.CopyTo(participants, playerUnits.Count);
+            var participants = AllUnits();
             
 
             if (participants.Count() == 1)
@@ -197,6 +203,26 @@ namespace Library.src.combat
                 centroid += uC.transform.position;
             }
             transform.position = centroid / participants.Length;
+        }
+
+        UnitController[] AllUnits()
+        {
+            var participants = new UnitController[playerUnits.Count + aiUnits.Count];
+            playerUnits.CopyTo(participants, 0);
+            aiUnits.CopyTo(participants, playerUnits.Count);
+            return participants;
+        }
+
+        bool FightShouldEnd()
+        {
+            return (playerUnits.Count == 0 && aiUnits.Count >= 0)
+                   || (playerUnits.Count >= 0 && aiUnits.Count == 0);
+        }
+
+        void End()
+        {
+            print("[Update] - " + gameObject.name + " brawl ending.");
+            Destroy(gameObject);
         }
 
     }

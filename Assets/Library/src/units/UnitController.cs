@@ -47,12 +47,6 @@ namespace Library.src.units
             broker.LoadAs(this);
         }
 
-        void Update()
-        {
-            //TODO implement through an InvokeRepeating() and test it, might be an easy way to claw some frames back
-            SamplePosition();
-        }
-
         /*====================================
         *     COMBAT
         ===================================*/
@@ -64,7 +58,16 @@ namespace Library.src.units
 
         public void DealDamage()
         {
-            //TODO calculate damage
+            //TODO create a proper damage calculation
+            var damage = playerUnit ? 10f : 5f;
+            targetUnit.health -= damage;
+            if (targetUnit.health <= 0f)
+            {
+                targetUnit.controller.Die();
+                if (brawl) brawl.RemoveUnit(targetUnit.controller);
+                targetUnit = null;
+            }
+
             //TODO give damage to enumerator
             //TODO deal it to enemy
         }
@@ -90,6 +93,11 @@ namespace Library.src.units
             brawl = brawlObject.AddComponent<Brawl>();
             brawl.AddUnit(this);
             brawl.AddUnit(targetUnit.controller);
+        }
+
+        public void Die()
+        {
+            Destroy(gameObject);
         }
 
         /*====================================
