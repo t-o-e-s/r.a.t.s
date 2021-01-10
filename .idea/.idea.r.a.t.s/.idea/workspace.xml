@@ -20,7 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edd50d5b-32bc-40d0-aea0-bc3d5dcd6c97" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,21 +42,26 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B956647-017D-4DC1-B8D3-D25EEF012467/52/1d760ffc/RaycastHit.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B956647-017D-4DC1-B8D3-D25EEF012467/28/e6c6f754/CapsuleCollider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Library/src/util/Environment.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/camera/FreeLookInput.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/Roster.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" />
-      <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
       <option value="$PROJECT_DIR$/.gitignore" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1lX3lXExOXsGgM7ry3RCwJZ70hg" />
@@ -68,7 +76,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
-    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.30010834" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -82,7 +90,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
@@ -92,10 +100,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="10912">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="10912" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -117,7 +125,7 @@
       <workItem from="1610208687686" duration="742000" />
       <workItem from="1610209991863" duration="10725000" />
       <workItem from="1610223179569" duration="9940000" />
-      <workItem from="1610286492861" duration="1948000" />
+      <workItem from="1610286492861" duration="3634000" />
     </task>
     <servers />
   </component>
@@ -141,5 +149,50 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs</url>
+          <line>83</line>
+          <properties documentPath="D:\Projects\r.a.t.s\Assets\Library\src\units\UnitController.cs" initialLine="83" containingFunctionPresentation="method 'InitiateBrawl'">
+            <startOffsets>
+              <option value="2126" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2154" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs</url>
+          <line>86</line>
+          <properties documentPath="D:\Projects\r.a.t.s\Assets\Library\src\units\UnitController.cs" initialLine="86" containingFunctionPresentation="method 'InitiateBrawl'">
+            <startOffsets>
+              <option value="2226" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2261" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs</url>
+          <line>119</line>
+          <properties documentPath="D:\Projects\r.a.t.s\Assets\Library\src\units\UnitController.cs" initialLine="119" containingFunctionPresentation="method 'Move'">
+            <startOffsets>
+              <option value="3395" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3423" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -19,6 +19,8 @@ public class IOHandler : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        mainCam = Camera.main;
+        
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = framerate;
     }

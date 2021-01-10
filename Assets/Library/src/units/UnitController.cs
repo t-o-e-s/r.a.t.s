@@ -189,8 +189,8 @@ namespace Library.src.units
 
         bool InCombat()
         {
-            return targetUnit != null
-                   || !brawl.Equals(null);
+            return targetUnit != null 
+                   && !brawl;
         }
     }
 }
