@@ -110,11 +110,13 @@ namespace Library.src.units
 
         IEnumerator Move(Vector3 target, bool toAttack)
         {
+            var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
+            
             agent.SetDestination(target);
             anim.SetBool("move", true);
             var lastRot = transform.rotation.y;
             
-            while (Vector3.Distance(target, transform.position) > EnvironmentUtil.STOPPING_DISTANCE)
+            while (Vector3.Distance(target, transform.position) > stoppingDistance)
             {
                 var rot = transform.rotation.y - lastRot;
                 anim.SetFloat("turning", rot);
