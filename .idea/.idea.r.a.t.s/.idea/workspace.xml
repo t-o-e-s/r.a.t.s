@@ -21,9 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="edd50d5b-32bc-40d0-aea0-bc3d5dcd6c97" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +44,13 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B956647-017D-4DC1-B8D3-D25EEF012467/52/1d760ffc/RaycastHit.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B956647-017D-4DC1-B8D3-D25EEF012467/28/e6c6f754/CapsuleCollider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
@@ -53,15 +60,15 @@
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Library/src/util/Environment.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/camera/FreeLookInput.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/Roster.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" />
-      <option value="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" />
       <option value="$PROJECT_DIR$/.gitignore" />
       <option value="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1lX3lXExOXsGgM7ry3RCwJZ70hg" />
@@ -125,7 +132,7 @@
       <workItem from="1610208687686" duration="742000" />
       <workItem from="1610209991863" duration="10725000" />
       <workItem from="1610223179569" duration="9940000" />
-      <workItem from="1610286492861" duration="3634000" />
+      <workItem from="1610286492861" duration="6503000" />
     </task>
     <servers />
   </component>
@@ -155,26 +162,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs</url>
-          <line>83</line>
-          <properties documentPath="D:\Projects\r.a.t.s\Assets\Library\src\units\UnitController.cs" initialLine="83" containingFunctionPresentation="method 'InitiateBrawl'">
-            <startOffsets>
-              <option value="2126" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2154" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs</url>
           <line>86</line>
           <properties documentPath="D:\Projects\r.a.t.s\Assets\Library\src\units\UnitController.cs" initialLine="86" containingFunctionPresentation="method 'InitiateBrawl'">
             <startOffsets>
-              <option value="2226" />
+              <option value="2233" />
             </startOffsets>
             <endOffsets>
-              <option value="2261" />
+              <option value="2268" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="8" />
@@ -184,13 +178,26 @@
           <line>119</line>
           <properties documentPath="D:\Projects\r.a.t.s\Assets\Library\src\units\UnitController.cs" initialLine="119" containingFunctionPresentation="method 'Move'">
             <startOffsets>
-              <option value="3395" />
+              <option value="3402" />
             </startOffsets>
             <endOffsets>
-              <option value="3423" />
+              <option value="3430" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs</url>
+          <line>191</line>
+          <properties documentPath="D:\Projects\r.a.t.s\Assets\Library\src\units\UnitController.cs" initialLine="191" containingFunctionPresentation="method 'InCombat'">
+            <startOffsets>
+              <option value="5201" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5264" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

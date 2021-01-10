@@ -73,6 +73,6 @@ namespace Library.src.util
         {
             return isTest;
         }
-    
+
     }
 }

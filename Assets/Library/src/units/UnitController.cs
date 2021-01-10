@@ -25,7 +25,7 @@ namespace Library.src.units
         SpriteRenderer flag; 
         
         //combat related fields
-        Brawl brawl;
+        Brawl brawl = null;
         Unit targetUnit;
 
         IOHandler io;
@@ -190,7 +190,7 @@ namespace Library.src.units
         bool InCombat()
         {
             return targetUnit != null 
-                   && !brawl;
+                   && brawl != null;
         }
     }
 }
