@@ -1,37 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Cinemachine;
 using UnityEngine;
-using Cinemachine;
 
-[RequireComponent(typeof(CinemachineFreeLook))]
-public class FreeLookInput : MonoBehaviour
+namespace Library.src.camera
 {
-    CinemachineFreeLook freeLookCamera;
-
-    string XAxisName = "Mouse X";
-    string YAxisName = "Mouse Y";
-
-    //Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(CinemachineFreeLook))]
+    public class FreeLookInput : MonoBehaviour
     {
-        freeLookCamera = GetComponent<CinemachineFreeLook>();
-        freeLookCamera.m_XAxis.m_InputAxisName = "";
-        freeLookCamera.m_YAxis.m_InputAxisName = "";
-    }
+        CinemachineFreeLook freeLookCamera;
 
-    //Update is called once per frame
-    void Update()
-    {
-        //Need to figure out how to lock camera when we need to (eg. when dialogue is playing)
-        if (Input.GetMouseButton(2))
+        string xAxisName = "Mouse X";
+        string yAxisName = "Mouse Y";
+
+        void Start()
         {
-            freeLookCamera.m_XAxis.m_InputAxisValue = Input.GetAxis(XAxisName);
-            freeLookCamera.m_YAxis.m_InputAxisValue = Input.GetAxis(YAxisName);
+            freeLookCamera = GetComponent<CinemachineFreeLook>();
+            freeLookCamera.m_XAxis.m_InputAxisName = "";
+            freeLookCamera.m_YAxis.m_InputAxisName = "";
         }
-        else
+
+        void Update()
         {
-            freeLookCamera.m_XAxis.m_InputAxisValue = 0;
-            freeLookCamera.m_YAxis.m_InputAxisValue = 0;
+            //Need to figure out how to lock camera when we need to (eg. when dialogue is playing)
+            if (Input.GetMouseButton(2))
+            {
+                freeLookCamera.m_XAxis.m_InputAxisValue = Input.GetAxis(xAxisName);
+                freeLookCamera.m_YAxis.m_InputAxisValue = Input.GetAxis(yAxisName);
+            }
+            else
+            {
+                freeLookCamera.m_XAxis.m_InputAxisValue = 0;
+                freeLookCamera.m_YAxis.m_InputAxisValue = 0;
+            }
         }
     }
 }

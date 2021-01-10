@@ -14,7 +14,7 @@ namespace Library.src.units
         public bool playerUnit;
 
         //nav agent and related fields
-        protected NavMeshAgent agent;
+        NavMeshAgent agent;
         [Header("Navigation")]
         [SerializeField]
         protected float slowedSpeed = 5;
@@ -39,12 +39,12 @@ namespace Library.src.units
             broker = Camera.main.gameObject.GetComponent<Broker>();
             flag = GetComponentInChildren<SpriteRenderer>();
 
-            broker.Add(this);
-            broker.LoadAs(this);
-
             targetUnit = null;
 
             io = Camera.main.GetComponent<IOHandler>();
+            
+            broker.Add(this);
+            broker.LoadAs(this);
         }
 
         void Update()
@@ -106,7 +106,7 @@ namespace Library.src.units
             anim.SetBool("move", true);
             var lastRot = transform.rotation.y;
             
-            while (Vector3.Distance(target, transform.position) > broker.stoppingDistance)
+            while (Vector3.Distance(target, transform.position) > EnvironmentUtil.STOPPING_DISTANCE)
             {
                 var rot = transform.rotation.y - lastRot;
                 anim.SetFloat("turning", rot);

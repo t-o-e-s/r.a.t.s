@@ -14,5 +14,8 @@ namespace Library.src.util
         public const string TAG_PLAYER = "player_unit";
         public const string TAG_AI = "enemy_unit";
         public const string TAG_LOOT = "loot";
+        
+        //pathfinding info
+        public const float STOPPING_DISTANCE = 0.3f;
     }
 }

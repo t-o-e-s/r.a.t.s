@@ -10,7 +10,7 @@ public class Roster
     public readonly Unit[] activeUnits;
     public readonly Unit[] warband;
 
-    public Roster(HashSet<IUnitController> activeUnits, HashSet<IUnitController> warband)
+    public Roster(ICollection<IUnitController> activeUnits, ICollection<IUnitController> warband)
     {
         this.activeUnits = new Unit[activeUnits.Count];
         this.warband = new Unit[warband.Count];
@@ -18,15 +18,17 @@ public class Roster
         int i = 0; 
 
 
-        foreach (UnitController unit in activeUnits)
+        foreach (var unitController in activeUnits)
         {
+            var unit = (UnitController) unitController;
             this.activeUnits[i++] = unit.GetUnit();
         }
 
         i = 0;
 
-        foreach (UnitController unit in warband)
+        foreach (var unitController in warband)
         {
+            var unit = (UnitController) unitController;
             this.warband[i++] = unit.GetUnit();
         }
     }

@@ -41,8 +41,6 @@
             </e>
             <e p="Combat" t="Include">
               <e p="Brawl.cs" t="Include" />
-              <e p="Combat.cs" t="Include" />
-              <e p="ICombat.cs" t="Include" />
               <e p="Weapon" t="Include">
                 <e p="Arsenal.cs" t="Include" />
                 <e p="Weapon.cs" t="Include" />

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,18 +13,16 @@ namespace Library.src.combat
     public class Brawl : MonoBehaviour
     {
         //collections for units
-        HashSet<UnitController> playerUnits = new HashSet<UnitController>();
-        HashSet<UnitController> aiUnits = new HashSet<UnitController>();
+        readonly HashSet<UnitController> playerUnits = new HashSet<UnitController>();
+        readonly HashSet<UnitController> aiUnits = new HashSet<UnitController>();
 
+        //used in timing combat resolution - this might fit on the broker, it might also work on a frame count we shall see
+        readonly Stopwatch watch = new Stopwatch();
+        
         //collider used to demarcate the brawl
         CapsuleCollider col;
 
-        //used in timing combat resolution - this might fit on the broker, it might also work on a frame count we shall see
-        Stopwatch watch = new Stopwatch();
 
-        int participants = 0;
-        
-        
         /*
          * =====================
          *  Unity Functions
@@ -60,7 +57,7 @@ namespace Library.src.combat
 
         void OnTriggerEnter(Collider other)
         {
-            if (participants >= EnvironmentUtil.BRAWL_MAX_PARTICIPANT) return;
+            if (playerUnits.Count + aiUnits.Count >= EnvironmentUtil.BRAWL_MAX_PARTICIPANT) return;
             if (!other.gameObject.TryGetComponent(out UnitController controller)) return;
                 
             switch (other.tag)
@@ -68,12 +65,10 @@ namespace Library.src.combat
                 case (EnvironmentUtil.TAG_PLAYER):
                     playerUnits.Add(controller);
                     if (controller.GetTarget().Equals(null)) GiveTarget(controller);
-                    participants++;
                     break;
                 case (EnvironmentUtil.TAG_AI):
                     aiUnits.Add(controller);
                     GiveTarget(controller);
-                    participants++;
                     break;
             }
             
@@ -82,7 +77,6 @@ namespace Library.src.combat
 
         void OnTriggerExit(Collider other)
         {
-            if (participants >= EnvironmentUtil.BRAWL_MAX_PARTICIPANT) return;
             if (!other.gameObject.TryGetComponent(out UnitController controller)) return;
                 
             switch (other.tag)
@@ -148,6 +142,8 @@ namespace Library.src.combat
          */
         public bool AddUnit(UnitController unitController)
         {
+            if (unitController.Equals(null)) return false;
+            
             if (unitController.CompareTag(EnvironmentUtil.TAG_PLAYER))
             {
                 return playerUnits.Add(unitController);
@@ -162,6 +158,8 @@ namespace Library.src.combat
         
         public bool RemoveUnit(UnitController unitController)
         {
+            if (unitController.Equals(null)) return false;
+            
             if (unitController.CompareTag(EnvironmentUtil.TAG_PLAYER))
             {
                 return playerUnits.Remove(unitController);
