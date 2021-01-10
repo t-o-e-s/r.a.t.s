@@ -69,6 +69,14 @@ namespace Library.src.util
         
         }
 
+        public static Brawl InitBrawl()
+        {
+            var brawlObject = new GameObject();
+            brawlObject.name = "brawl_" + brawlObject.GetInstanceID().ToString().Replace("-", "");
+            //setting up brawl behaviour
+            return brawlObject.AddComponent<Brawl>();
+        }
+
         public bool IsTest()
         {
             return isTest;

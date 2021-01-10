@@ -87,10 +87,7 @@ namespace Library.src.units
             if (targetUnit.Equals(null)) return;
             
             //setting up brawl object
-            var brawlObject = new GameObject();
-            brawlObject.name = "brawl_" + brawlObject.GetInstanceID();
-            //setting up brawl behaviour
-            brawl = brawlObject.AddComponent<Brawl>();
+            brawl = Broker.InitBrawl();
             brawl.AddUnit(this);
             brawl.AddUnit(targetUnit.controller);
         }

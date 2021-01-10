@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edd50d5b-32bc-40d0-aea0-bc3d5dcd6c97" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,11 +62,11 @@
       <option value="$PROJECT_DIR$/Assets/Library/src/units/Roster.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/Unit.cs" />
       <option value="$PROJECT_DIR$/.gitignore" />
-      <option value="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/io/IOHandler.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
     </changedPaths>
   </component>
@@ -131,7 +131,7 @@
       <workItem from="1610208687686" duration="742000" />
       <workItem from="1610209991863" duration="10725000" />
       <workItem from="1610223179569" duration="9940000" />
-      <workItem from="1610286492861" duration="10019000" />
+      <workItem from="1610286492861" duration="10827000" />
     </task>
     <servers />
   </component>
@@ -161,13 +161,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs</url>
-          <line>99</line>
+          <line>96</line>
           <properties documentPath="D:\Projects\r.a.t.s\Assets\Library\src\units\UnitController.cs" initialLine="94" containingFunctionPresentation="method 'Die'">
             <startOffsets>
-              <option value="2713" />
+              <option value="2538" />
             </startOffsets>
             <endOffsets>
-              <option value="2733" />
+              <option value="2558" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="17" />
