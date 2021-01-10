@@ -339,6 +339,7 @@ MonoBehaviour:
   conversation: {fileID: 11400000, guid: 5ec0379bfaf659a47a24a1d1c3ef979b, type: 2}
   speakerLeft: {fileID: 7592956680910978342}
   speakerRight: {fileID: 7592956680136429976}
+  convoCompleted: 0
 --- !u!1 &7592956680668474258
 GameObject:
   m_ObjectHideFlags: 0
