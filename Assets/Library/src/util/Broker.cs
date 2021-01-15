@@ -21,7 +21,8 @@ namespace Library.src.util
         [SerializeField]
         bool isTest = true;
         int frameCount = 1;
-
+        [SerializeField] [Range(0.1f,1.0f)] public float combatSpeed;
+        
         void Awake()
         {
             IUnitController unit;
