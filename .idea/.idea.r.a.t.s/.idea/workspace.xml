@@ -20,8 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edd50d5b-32bc-40d0-aea0-bc3d5dcd6c97" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/time.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/time/ITimeSensitive.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/time/ITimeSensitive.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/time/records.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/time/records/Record.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/time/records/Record.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/time/records/UnitRecord.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Library/src/time/records/UnitRecord.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.r.a.t.s/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/util/ITimed.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Library/src/util/ITimed.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,22 +52,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B956647-017D-4DC1-B8D3-D25EEF012467/52/1d760ffc/RaycastHit.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B956647-017D-4DC1-B8D3-D25EEF012467/28/e6c6f754/CapsuleCollider.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-  </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Library/src/util/Environment.cs" />
@@ -66,6 +63,9 @@
       <option value="$PROJECT_DIR$/Assets/Library/src/util/EnvironmentUtil.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/IUnitController.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/combat/Brawl.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/time/records/Record.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/time/records/UnitRecord.cs" />
+      <option value="$PROJECT_DIR$/Assets/Library/src/time/ITimeSensitive.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/util/Broker.cs" />
       <option value="$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs" />
     </changedPaths>
@@ -106,10 +106,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="11084">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="11084" />
+      <option name="pid" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -132,6 +132,7 @@
       <workItem from="1610209991863" duration="10725000" />
       <workItem from="1610223179569" duration="9940000" />
       <workItem from="1610286492861" duration="10827000" />
+      <workItem from="1610757416695" duration="3689000" />
     </task>
     <servers />
   </component>
@@ -161,15 +162,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Library/src/units/UnitController.cs</url>
-          <line>96</line>
-          <properties documentPath="D:\Projects\r.a.t.s\Assets\Library\src\units\UnitController.cs" initialLine="94" containingFunctionPresentation="method 'Die'">
-            <startOffsets>
-              <option value="2538" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2558" />
-            </endOffsets>
-          </properties>
+          <line>121</line>
+          <properties documentPath="D:\Projects\r.a.t.s\Assets\Library\src\units\UnitController.cs" initialLine="94" containingFunctionPresentation="method 'Die'" />
           <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>

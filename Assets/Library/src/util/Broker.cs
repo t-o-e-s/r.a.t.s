@@ -77,7 +77,7 @@ namespace Library.src.util
             //setting up brawl behaviour
             return brawlObject.AddComponent<Brawl>();
         }
-
+        
         public bool IsTest()
         {
             return isTest;

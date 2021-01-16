@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\samwi\AppData\Local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\samwi\AppData\Local\JetBrains\Rider2020.3\resharper-host\Local\Transient\Rider\v203\SolutionCaches\_r.a.t.s.967901500.00" t="ExcludeRecursive" />
-    <e p="D:\Projects\r.a.t.s" t="IncludeRecursive">
+    <e p="C:\Users\Samwise\AppData\Local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Samwise\AppData\Local\JetBrains\Rider2020.3\resharper-host\Local\Transient\Rider\v203\SolutionCaches\_r.a.t.s.135282347.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Samwise\Development\r.a.t.s" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -55,6 +55,13 @@
               <e p="IOHandler.cs" t="Include" />
               <e p="Locator.cs" t="Include" />
             </e>
+            <e p="time" t="Include">
+              <e p="ITimeSensitive.cs" t="Include" />
+              <e p="records" t="Include">
+                <e p="Record.cs" t="Include" />
+                <e p="UnitRecord.cs" t="Include" />
+              </e>
+            </e>
             <e p="Units" t="Include">
               <e p="BridgeHandler.cs" t="Include" />
               <e p="IUnitController.cs" t="Include" />
@@ -72,7 +79,6 @@
               <e p="Broker.cs" t="Include" />
               <e p="EnvironmentUtil.cs" t="Include" />
               <e p="IResolvable.cs" t="Include" />
-              <e p="ITimed.cs" t="Include" />
               <e p="PauseControl.cs" t="Include" />
               <e p="Save.cs" t="Include" />
               <e p="SaveTest.cs" t="Include" />

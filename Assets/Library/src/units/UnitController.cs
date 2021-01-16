@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Library.src.combat;
+using Library.src.time;
+using Library.src.time.records;
 using Library.src.util;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Library.src.units
 {
-    public class UnitController : MonoBehaviour, IUnitController, ITimed
+    public class UnitController : MonoBehaviour, IUnitController, ITimeSensitive
     {
         [HideInInspector]
         public Unit unit;
@@ -21,6 +24,7 @@ namespace Library.src.units
 
         Animator anim;
         Broker broker;
+        IOHandler io;
         //sprite above the unit to dictate status
         SpriteRenderer flag; 
         
@@ -37,11 +41,13 @@ namespace Library.src.units
         public float health;
         bool isAttacker;
         bool inCombat;
+        
+        //time fields
+        bool isForwarding = false;
+        bool isRewinding = false;
 
-        IOHandler io;
 
 
-    
         void Awake()
         {
             playerUnit = CompareTag("player_unit");
@@ -57,6 +63,25 @@ namespace Library.src.units
             
             broker.Add(this);
             broker.LoadAs(this);
+        }
+
+        void Update()
+        {
+            //TODO reduce these check to once every x frames to improve performance
+            if (isForwarding)
+            {
+                //TODO move to IOHandler
+                GetNextRecord();
+            }
+            else if (isRewinding)
+            {
+                //TODO move to IOHandler
+                GetLastRecord();
+            }
+            else
+            {
+                SaveRecord();
+            }
         }
 
         /*====================================
@@ -203,7 +228,7 @@ namespace Library.src.units
             StartCoroutine(Move(target, false));
         }
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.CompareTag("loot"))
             {
@@ -217,13 +242,28 @@ namespace Library.src.units
 
 
         /*====================================
-        *     TIME
+        *     TIME SENSITIVE
         ===================================*/
-        public State Record()
+        public bool SaveRecord()
         {
-            return null;
+            throw new System.NotImplementedException();
         }
-    
+
+        public Record GetLastRecord()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Record GetNextRecord()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ClearRecords()
+        {
+            throw new System.NotImplementedException();
+        }
+
         /*====================================
         *     UTILITY
         ===================================*/
@@ -236,6 +276,7 @@ namespace Library.src.units
         {
             return targetUnit;
         }
+        
         public void LoadAs(Unit unit)
         {
             this.unit = unit;
