@@ -27,6 +27,8 @@
 
 # Visual Studio cache directory
 .vs/
+# Idea Directory
+.idea/
 
 # Folder containing art assets - (comment this out when getting ready to merge into main!!!)
 !/[Aa]ssets/Visual/Materials/
