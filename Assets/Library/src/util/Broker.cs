@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using Library.src.combat;
 using Library.src.combat.Weapon;
 using Library.src.elements;
+using Library.src.time;
 using Library.src.units;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Library.src.util
 {
@@ -17,6 +14,8 @@ namespace Library.src.util
         public readonly HashSet<IUnitController> units = new HashSet<IUnitController>();
         public readonly HashSet<IUnitController> playerUnits = new HashSet<IUnitController>();
         public readonly HashSet<IUnitController> aiUnits = new HashSet<IUnitController>();
+        //tracking time sensitive objects
+        public readonly HashSet<TimeSensitive> recordables = new HashSet<TimeSensitive>();
 
         [SerializeField]
         bool isTest = true;
@@ -55,11 +54,14 @@ namespace Library.src.util
         
         public bool Add(IUnitController controller)
         {
+            
+            if (controller is TimeSensitive timeSensitive) recordables.Add(timeSensitive);
             return units.Add(controller);
         }
 
         public bool Remove(IUnitController controller)
         {
+            if (controller is TimeSensitive timeSensitive) recordables.Remove(timeSensitive);
             return units.Remove(controller);
         }
 
