@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Library.src.time;
 using Library.src.units;
 using Library.src.util;
 using UnityEngine;
 
 public class IOHandler : MonoBehaviour
 {
+    Broker broker;
+    
     Camera mainCam;
 
+    //buffers
     UnitController unitBuffer;
+    TimeSensitive timedBuffer;
+
+    Time time;
 
     bool aUnitSelected;
 
@@ -20,6 +27,7 @@ public class IOHandler : MonoBehaviour
     void Awake()
     {
         mainCam = Camera.main;
+        TryGetComponent(out broker);
         
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = framerate;
@@ -29,8 +37,15 @@ public class IOHandler : MonoBehaviour
     void Update()
     {
         if (Application.targetFrameRate != framerate) Application.targetFrameRate = framerate;
-
+        
         if (Input.GetMouseButtonDown(0)) Cast();
+        
+        //reverse time
+        if (Input.GetKeyDown(KeyCode.R)) HandleRewind(timedBuffer);
+
+        foreach (var timed in broker.recordables) timed.Record();
+        
+        
     }
 
     void Cast()
@@ -67,14 +82,9 @@ public class IOHandler : MonoBehaviour
 
     void HandleSelection(GameObject unit)
     {
-        if (unit.TryGetComponent(out UnitController controller))
-        {            
-            Select(controller);
-        }
-        else
-        {
-            print("No valid controller found on: " + unit.name);
-        }       
+        if (unit.TryGetComponent(out UnitController controller)) Select(controller);
+        unit.TryGetComponent(out timedBuffer);
+
     }
 
     void HandleAttack(GameObject target) 
@@ -88,6 +98,12 @@ public class IOHandler : MonoBehaviour
     void HandleLooting(GameObject loot)
     {
         unitBuffer.FetchLoot(loot.transform.position);
+    }
+
+    void HandleRewind(TimeSensitive timed)
+    {
+        if (timed.IsRewinding()) timed.Stop();
+        else timed.Rewind();
     }
 
     public void TakeLoot()
@@ -106,5 +122,12 @@ public class IOHandler : MonoBehaviour
 
         unitBuffer = unit;
         unitBuffer.Flag(true);
+
+        timedBuffer = null;
+    }
+
+    public static void Log(Object obj, string message)
+    {
+        print("[" + obj.name + "] - " + message);
     }
 }
