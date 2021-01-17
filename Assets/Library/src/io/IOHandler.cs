@@ -107,4 +107,9 @@ public class IOHandler : MonoBehaviour
         unitBuffer = unit;
         unitBuffer.Flag(true);
     }
+
+    public static void Log(Object obj, string message)
+    {
+        print("[" + obj.name + "] - " + message);
+    }
 }
