@@ -27,20 +27,8 @@ namespace Library.src.units
         //combat related fields
         Brawl brawl = null;
         Unit targetUnit;
-        [SerializeField] [Range(1.0f, 100.0f)]
-        public float attackPower;
-        [SerializeField] [Range(1, 10)]
-        int attackRate;
-        [SerializeField] float defence;
-        [SerializeField]
-        [Range(0, 100)]
-        public float health;
-        bool isAttacker;
-        bool inCombat;
 
         IOHandler io;
-
-
     
         void Awake()
         {
@@ -66,66 +54,23 @@ namespace Library.src.units
         {
             targetUnit = target.unit;
             StartCoroutine(Move(target.transform.position, true));
-            //StartCoroutine(FaceOponent(target.transform.position));
-            isAttacker = true;
-        }     
-        
+        }
+
         public void DealDamage()
         {
-            this.transform.LookAt(targetUnit.controller.transform.position);
-            inCombat = true;
-            anim.SetBool("inBrawl", true);           
-            float x;
-
-            if (isAttacker == true)
-            {
-                x = 1.0f;
-            }
-            else
-            {
-                x = 0.5f;
-            }
-
-            float damageDone = broker.combatSpeed * (attackPower * (attackRate / 10f)) - (targetUnit.controller.defence * x);
-            targetUnit.health -= damageDone;
-            Debug.Log(targetUnit.health);
-
+            //TODO create a proper damage calculation
+            var damage = playerUnit ? 10f : 5f;
+            targetUnit.health -= damage;
             if (targetUnit.health <= 0f)
             {
                 targetUnit.controller.Die();
                 if (brawl) brawl.RemoveUnit(targetUnit.controller);
                 targetUnit = null;
-                isAttacker = false;
-                inCombat = false;
-                anim.SetBool("inBrawl", false);
             }
 
             //TODO give damage to enumerator
             //TODO deal it to enemy
         }
-
-       /* IEnumerator FaceOponent(Vector3 target)
-        {           
-            {
-                this.transform.LookAt(targetUnit.controller.transform.position);
-
-                var lastRot = transform.rotation.y;
-
-                while (inCombat == true)
-                {
-                    var rot = transform.rotation.y - lastRot;
-                    anim.SetFloat("turning", rot);
-                    lastRot = transform.rotation.y;
-                    yield return null;
-                }
-            }
-        }*/
-
-        public void FightAnimation()
-        {                        
-            anim.SetTrigger("isSlashing");
-        }
-        
 
         public void Flag(bool flag)
         {
