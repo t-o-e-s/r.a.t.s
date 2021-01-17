@@ -1,12 +1,15 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Library.src.combat;
+using Library.src.time;
+using Library.src.time.records;
 using Library.src.util;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Library.src.units
 {
-    public class UnitController : MonoBehaviour, IUnitController, ITimed
+    public class UnitController : TimeSensitive, IUnitController
     {
         [HideInInspector]
         public Unit unit;
@@ -29,7 +32,7 @@ namespace Library.src.units
         Unit targetUnit;
 
         IOHandler io;
-    
+
         void Awake()
         {
             playerUnit = CompareTag("player_unit");
@@ -148,7 +151,7 @@ namespace Library.src.units
             StartCoroutine(Move(target, false));
         }
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.CompareTag("loot"))
             {
@@ -160,15 +163,6 @@ namespace Library.src.units
             }
         }
 
-
-        /*====================================
-        *     TIME
-        ===================================*/
-        public State Record()
-        {
-            return null;
-        }
-    
         /*====================================
         *     UTILITY
         ===================================*/
@@ -198,6 +192,39 @@ namespace Library.src.units
         {
             return targetUnit != null 
                    && brawl != null;
+        }
+        
+        /*====================================
+        *     INFO
+        ===================================*/
+        public override void Record()
+        {
+            previousRecords.Add(RecordUnit(unit));
+        }
+
+        public override void PlayRecord(Record record)
+        {
+            if (rewindRoutine == null)
+            {
+                StopAllCoroutines();
+                rewindRoutine = StartCoroutine(PlayRecordRoutine((UnitRecord) record));
+            }
+        }
+
+        IEnumerator PlayRecordRoutine(UnitRecord record)
+        {
+            agent.SetDestination(record.position);
+            do
+            {
+                while (agent.remainingDistance > EnvironmentUtil.STOPPING_DISTANCE)
+                {
+                    yield return null;
+                }
+
+                agent.SetDestination(((UnitRecord) PreviousRecord()).position);
+            } while (IsRewinding());
+
+            rewindRoutine = null;
         }
     }
 }
