@@ -18,5 +18,10 @@ namespace Library.src.util
         
         //pathfinding info
         public const float STOPPING_DISTANCE = 0.3f;
+        
+        //animator fields
+        public const string REWIND_PREFIX = "_r";
+        public const string MOVEMENT = "move";
+        
     }
 }
