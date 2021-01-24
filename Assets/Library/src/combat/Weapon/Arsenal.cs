@@ -4,7 +4,7 @@
     {
         public static Weapon Fists()
         {
-            return new Weapon(0, "fists", 1, 1, 1, WeaponType.Melee);
+            return new Weapon(0, "fists", 25f, 1f, 6f, WeaponType.Melee);
         }
     }
 }
