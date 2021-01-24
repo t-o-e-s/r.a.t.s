@@ -22,7 +22,9 @@ namespace Library.src.units
         Animator anim;
         Broker broker;
         //sprite above the unit to dictate status
-        SpriteRenderer flag; 
+        SpriteRenderer flag;
+        //healthbar object above the unit to dictate health, help pls
+        GameObject healthBar;
         
         //combat related fields
         Brawl brawl;
