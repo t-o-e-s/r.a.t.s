@@ -110,7 +110,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &1728738530
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerUnit: 0
   slowedSpeed: 5
+  defence: 0
 --- !u!95 &1728738535
 Animator:
   serializedVersion: 3
@@ -350,7 +351,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6ceac5b6d7861504fa2af466818cc64a,
         type: 3}
       propertyPath: m_Name
-      value: Rat_Swordsman_LP
+      value: Rat_Swordsman_LP Variant
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6ceac5b6d7861504fa2af466818cc64a,
         type: 3}

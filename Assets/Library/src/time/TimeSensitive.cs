@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Library.src.animation;
 using Library.src.time.records;
 using Library.src.units;
 using UnityEngine;
@@ -9,7 +10,9 @@ namespace Library.src.time
     {
         protected readonly List<Record> nextRecords = new List<Record>();
         protected readonly List<Record> previousRecords = new List<Record>();
-        
+
+        protected IAnimationController anim;
+
         protected Coroutine rewindRoutine;
 
 
@@ -27,10 +30,11 @@ namespace Library.src.time
 
         public void Rewind()
         {
+            anim.Rewind(true);
             PlayRecord(PreviousRecord());
         }
 
-        public  Record RecordUnit(Unit unit)
+        public Record RecordUnit(Unit unit)
         {
             return new UnitRecord(unit);
         }
@@ -53,6 +57,7 @@ namespace Library.src.time
         {
             StopCoroutine(rewindRoutine);
             rewindRoutine = null;
+            anim.Rewind(false);
         }
     }
 }

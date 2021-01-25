@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Library.src.animation;
+using Library.src.animation.impl;
 using Library.src.combat;
 using Library.src.time;
 using Library.src.time.records;
@@ -11,41 +13,47 @@ namespace Library.src.units
 {
     public class UnitController : TimeSensitive, IUnitController
     {
+        //unit
         [HideInInspector]
         public Unit unit;
         [HideInInspector]
         public bool playerUnit;
 
-        //nav agent and related fields
+        //navigation
         NavMeshAgent agent;
         [Header("Navigation")]
         [SerializeField]
         protected float slowedSpeed = 5;
 
-        Animator anim;
-        Broker broker;
         //sprite above the unit to dictate status
         SpriteRenderer flag; 
         
         //combat related fields
-        Brawl brawl = null;
+        Brawl brawl;
         Unit targetUnit;
+        [SerializeField] float defence;
+        bool isAttacker;
 
+        //referenced from camera
+        Broker broker;
         IOHandler io;
 
+
+    
         void Awake()
         {
             playerUnit = CompareTag("player_unit");
         
             agent = GetComponent<NavMeshAgent>();
-            anim = GetComponent<Animator>();
-            broker = Camera.main.gameObject.GetComponent<Broker>();
+            anim = new RatAnimationController(GetComponent<Animator>());
             flag = GetComponentInChildren<SpriteRenderer>();
 
             targetUnit = null;
 
-            io = Camera.main.GetComponent<IOHandler>();
-            
+            var cam = Camera.main;
+            broker = cam.GetComponent<Broker>();
+            io = cam.GetComponent<IOHandler>();
+
             broker.Add(this);
             broker.LoadAs(this);
         }
@@ -57,23 +65,31 @@ namespace Library.src.units
         {
             targetUnit = target.unit;
             StartCoroutine(Move(target.transform.position, true));
-        }
-
+            isAttacker = true;
+        }     
+        
         public void DealDamage()
         {
-            //TODO create a proper damage calculation
-            var damage = playerUnit ? 10f : 5f;
-            targetUnit.health -= damage;
+            var x = isAttacker ? 1.0f : 0.5f;
+
+            var damageDone = unit.weapon.damage * (unit.weapon.speed / 10f) - targetUnit.controller.defence * x;
+            targetUnit.health -= damageDone;
+
             if (targetUnit.health <= 0f)
             {
                 targetUnit.controller.Die();
                 if (brawl) brawl.RemoveUnit(targetUnit.controller);
                 targetUnit = null;
+                isAttacker = false;
+                anim.SetBrawling(false);
             }
-
-            //TODO give damage to enumerator
-            //TODO deal it to enemy
         }
+
+        public void FightAnimation()
+        {                        
+            anim.SetSlash();
+        }
+        
 
         public void Flag(bool flag)
         {
@@ -113,33 +129,20 @@ namespace Library.src.units
             var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
             
             agent.SetDestination(target);
-            anim.SetBool("move", true);
+            anim.SetMoving(true);
             var lastRot = transform.rotation.y;
             
             while (Vector3.Distance(target, transform.position) > stoppingDistance)
             {
-                var rot = transform.rotation.y - lastRot;
-                anim.SetFloat("turning", rot);
+                anim.SetTurning(transform.rotation.y - lastRot);
                 lastRot = transform.rotation.y;
                 yield return null;
             }
 
-            anim.SetBool("move", false);
+            anim.SetMoving(false);
             agent.SetDestination(agent.transform.position);
 
             if (toAttack && !InCombat()) InitiateBrawl();
-        }
-
-        //position sampling for slow speeds
-        protected void SamplePosition()
-        {
-            NavMeshHit navMeshHit;            
-
-            var speedToSet = NavMesh.SamplePosition(agent.transform.position, out navMeshHit, 1f, 8) ?
-                slowedSpeed :
-                unit.speed;
-
-            agent.speed = speedToSet;
         }
 
         /*====================================
@@ -151,13 +154,13 @@ namespace Library.src.units
             StartCoroutine(Move(target, false));
         }
 
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.CompareTag("loot"))
             {
                 
                 Destroy(other.gameObject);
-                anim.SetBool("move", false);
+                anim.SetMoving(false);
                 agent.SetDestination(agent.transform.position);
                 io.TakeLoot();
             }

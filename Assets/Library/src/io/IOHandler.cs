@@ -49,14 +49,14 @@ public class IOHandler : MonoBehaviour
     }
 
     void Cast()
-    {       
+    {   
         RaycastHit hit;
 
         if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 150f))
         {
             switch (hit.collider.tag)
             {
-                case "movement_tile":
+                case EnvironmentUtil.TAG_MOVEMENT_TILE:
                     HandleMovement(hit.collider.gameObject);
                     break;
 
@@ -117,7 +117,6 @@ public class IOHandler : MonoBehaviour
 
     void Select(UnitController unit)
     {
-        //deflag the previously selected unit
         if (unitBuffer) unitBuffer.Flag(false);
 
         unitBuffer = unit;

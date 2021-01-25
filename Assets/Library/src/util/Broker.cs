@@ -71,6 +71,7 @@ namespace Library.src.util
         
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         public static Brawl InitBrawl()
         {
             var brawlObject = new GameObject();
