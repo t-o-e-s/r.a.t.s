@@ -31,21 +31,18 @@ namespace Library.src.units
         //combat related fields
         Brawl brawl = null;
         Unit targetUnit;
-        [SerializeField] [Range(1.0f, 100.0f)]
-        public float attackPower;
-        [SerializeField] [Range(1, 10)]
-        int attackRate;
         [SerializeField] float defence;
-        [SerializeField]
-        [Range(0, 100)]
-        public float health;
         bool isAttacker;
         bool inCombat;
+
         
         //time fields
         bool isForwarding = false;
         bool isRewinding = false;
 
+
+        bool inVisionCone;
+        bool isMoving;
 
 
         void Awake()
@@ -64,8 +61,6 @@ namespace Library.src.units
             targetUnit = null;
 
             io = Camera.main.GetComponent<IOHandler>();
-
-            healthBar.GetComponent<UnitUIManager>().Setup(unit);
 
         }
 
@@ -94,16 +89,17 @@ namespace Library.src.units
         public void Attack(UnitController target)
         {
             targetUnit = target.unit;
-            StartCoroutine(Move(target.transform.position, true));
-            //StartCoroutine(FaceOponent(target.transform.position));
+            StartCoroutine(AttackMove(target.transform.position, true));
+            inCombat = true;
             isAttacker = true;
         }     
         
         public void DealDamage()
         {
-            this.transform.LookAt(targetUnit.controller.transform.position);
-            inCombat = true;
-            anim.SetBool("inBrawl", true);           
+            isMoving = false;
+            //this.transform.LookAt(targetUnit.controller.transform.position);
+            FightAnimation();
+            anim.SetBool("inBrawl", true);
             float x;
 
             if (isAttacker == true)
@@ -115,7 +111,7 @@ namespace Library.src.units
                 x = 0.5f;
             }
 
-            float damageDone = broker.combatSpeed * (attackPower * (attackRate / 10f)) - (targetUnit.controller.defence * x);
+            float damageDone = broker.combatSpeed * (unit.weapon.damage * (unit.weapon.speed / 10f)) - (targetUnit.controller.defence * x);
             targetUnit.health -= damageDone;
             Debug.Log(targetUnit.health);
 
@@ -132,26 +128,32 @@ namespace Library.src.units
             //TODO give damage to enumerator
             //TODO deal it to enemy
         }
+        IEnumerator AttackMove(Vector3 target, bool toAttack)
+        {
+            var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
 
-       /* IEnumerator FaceOponent(Vector3 target)
-        {           
+            agent.SetDestination(target);
+            anim.SetBool("move", true);
+            var lastRot = transform.rotation.y;
+
+            while (Vector3.Distance(target, transform.position) > stoppingDistance)
             {
-                this.transform.LookAt(targetUnit.controller.transform.position);
-
-                var lastRot = transform.rotation.y;
-
-                while (inCombat == true)
-                {
-                    var rot = transform.rotation.y - lastRot;
-                    anim.SetFloat("turning", rot);
-                    lastRot = transform.rotation.y;
-                    yield return null;
-                }
+                var rot = transform.rotation.y - lastRot;
+                anim.SetFloat("turning", rot);
+                lastRot = transform.rotation.y;
+                yield return null;
             }
-        }*/
 
-        public void FightAnimation()
-        {                        
+            anim.SetBool("inBrawl", true);
+            anim.SetBool("move", false);
+            agent.SetDestination(agent.transform.position);
+
+            if (toAttack && !InCombat()) InitiateBrawl();
+        }
+
+        public void FightAnimation()      
+        {
+
             anim.SetTrigger("isSlashing");
         }
         
@@ -181,6 +183,31 @@ namespace Library.src.units
             Destroy(gameObject);
         }
 
+        public void LookAtUnit(UnitController unit)
+        {
+            if (inVisionCone == true)
+            {
+                StartCoroutine(Turn(unit));
+                this.transform.LookAt(unit.transform.position);               
+            }
+            
+        }
+
+        IEnumerator Turn(UnitController unit)
+        { 
+
+            while (inVisionCone == true && unit.isMoving == true)
+            {   
+                anim.SetFloat("turning", 1f);
+                
+                yield return null;
+            }
+
+            
+            anim.SetFloat("turning", 0f);
+
+        }
+
         /*====================================
         *     NAVIGATION
         ===================================*/
@@ -192,7 +219,7 @@ namespace Library.src.units
         IEnumerator Move(Vector3 target, bool toAttack)
         {
             var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
-            
+            isMoving = true;
             agent.SetDestination(target);
             anim.SetBool("move", true);
             var lastRot = transform.rotation.y;
@@ -207,7 +234,7 @@ namespace Library.src.units
 
             anim.SetBool("move", false);
             agent.SetDestination(agent.transform.position);
-
+            isMoving = false;
             if (toAttack && !InCombat()) InitiateBrawl();
         }
 
@@ -232,7 +259,7 @@ namespace Library.src.units
             StartCoroutine(Move(target, false));
         }
 
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if(other.gameObject.CompareTag("loot"))
             {
@@ -242,8 +269,23 @@ namespace Library.src.units
                 agent.SetDestination(agent.transform.position);
                 io.TakeLoot();
             }
+
+            if(other.gameObject.CompareTag("player_unit"))
+            {
+                inVisionCone = true;
+                LookAtUnit(other.GetComponent<UnitController>());
+            }
+
         }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.CompareTag("player_unit"))
+            {
+                inVisionCone = false;
+               
+            }
+        }
 
         /*====================================
         *     TIME SENSITIVE
