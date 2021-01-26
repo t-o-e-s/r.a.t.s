@@ -30,7 +30,8 @@ namespace Library.src.units
         [SerializeField] float defence;
         bool isAttacker;
         bool inCombat;
-
+        bool inVisionCone;
+        bool isMoving;
         IOHandler io;
 
 
@@ -66,7 +67,8 @@ namespace Library.src.units
         public void DealDamage()
         {
             //this.transform.LookAt(targetUnit.controller.transform.position);
-                     
+            FightAnimation();
+            anim.SetBool("inBrawl", true);
             float x;
 
             if (isAttacker == true)
@@ -118,8 +120,9 @@ namespace Library.src.units
             if (toAttack && !InCombat()) InitiateBrawl();
         }
 
-        public void FightAnimation()
-        {                        
+        public void FightAnimation()      
+        {
+
             anim.SetTrigger("isSlashing");
         }
         
@@ -149,6 +152,31 @@ namespace Library.src.units
             Destroy(gameObject);
         }
 
+        public void LookAtUnit(UnitController unit)
+        {
+            if (inVisionCone == true)
+            {
+                StartCoroutine(Turn(unit));
+                this.transform.LookAt(unit.transform.position);               
+            }
+            
+        }
+
+        IEnumerator Turn(UnitController unit)
+        { 
+
+            while (inVisionCone == true && unit.isMoving == true)
+            {   
+                anim.SetFloat("turning", 1f);
+                
+                yield return null;
+            }
+
+            
+            anim.SetFloat("turning", 0f);
+
+        }
+
         /*====================================
         *     NAVIGATION
         ===================================*/
@@ -160,7 +188,7 @@ namespace Library.src.units
         IEnumerator Move(Vector3 target, bool toAttack)
         {
             var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
-            
+            isMoving = true;
             agent.SetDestination(target);
             anim.SetBool("move", true);
             var lastRot = transform.rotation.y;
@@ -175,7 +203,7 @@ namespace Library.src.units
 
             anim.SetBool("move", false);
             agent.SetDestination(agent.transform.position);
-
+            isMoving = false;
             if (toAttack && !InCombat()) InitiateBrawl();
         }
 
@@ -200,7 +228,7 @@ namespace Library.src.units
             StartCoroutine(Move(target, false));
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if(other.gameObject.CompareTag("loot"))
             {
@@ -210,8 +238,23 @@ namespace Library.src.units
                 agent.SetDestination(agent.transform.position);
                 io.TakeLoot();
             }
+
+            if(other.gameObject.CompareTag("player_unit"))
+            {
+                inVisionCone = true;
+                LookAtUnit(other.GetComponent<UnitController>());
+            }
+
         }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.CompareTag("player_unit"))
+            {
+                inVisionCone = false;
+               
+            }
+        }
 
         /*====================================
         *     TIME
