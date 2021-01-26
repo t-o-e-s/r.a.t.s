@@ -11,6 +11,7 @@ namespace Library.src.units
         Unit GetTarget();
         void LoadAs(Unit unit);
         void Flag(bool flag);
+        void Die();
         
         //Combat
         void Attack(UnitController target);

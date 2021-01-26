@@ -22,6 +22,8 @@ namespace Library.src.combat
         //collider used to demarcate the brawl
         CapsuleCollider col;
 
+        bool end = false;
+
 
         /*
          * =====================
@@ -48,11 +50,12 @@ namespace Library.src.combat
 
         void Update()
         {
-            if (watch.ElapsedMilliseconds == EnvironmentUtil.BRAWL_RESOLUTION_INTERVAL)
+            if (watch.ElapsedMilliseconds >= EnvironmentUtil.BRAWL_RESOLUTION_INTERVAL)
             {
                 StartCoroutine(Fight());
                 watch.Restart();
             }
+            if (end) End();
         }
 
         void OnTriggerEnter(Collider other)
@@ -109,7 +112,8 @@ namespace Library.src.combat
             {
                 foreach (var uC in collection)
                 {
-                    uC.DealDamage();                                                                                                                                                                                                
+                    uC.DealDamage();
+                    uC.FightAnimation();
                 }
                 yield return null;
             }
@@ -142,39 +146,84 @@ namespace Library.src.combat
          */
         public bool AddUnit(UnitController unitController)
         {
+            bool success = false;
+            
             if (unitController.Equals(null)) return false;
             
             if (unitController.CompareTag(EnvironmentUtil.TAG_PLAYER))
             {
-                return playerUnits.Add(unitController);
+                success = playerUnits.Add(unitController);
             }
             if (unitController.CompareTag(EnvironmentUtil.TAG_AI))
             {
-                return aiUnits.Add(unitController);
+                success = aiUnits.Add(unitController);
             }
 
-            return false;
+            if (success) UpdatePosition();
+            return success;
         }  
         
         public bool RemoveUnit(UnitController unitController)
         {
+            bool success = false;
+            
             if (unitController.Equals(null)) return false;
             
             if (unitController.CompareTag(EnvironmentUtil.TAG_PLAYER))
             {
-                return playerUnits.Remove(unitController);
+                success = playerUnits.Remove(unitController);
             }
             if (unitController.CompareTag(EnvironmentUtil.TAG_AI))
             {
-                return aiUnits.Remove(unitController);
+                success = aiUnits.Remove(unitController);
             }
-            
+
+            if (success && FightShouldEnd())
+            {
+                end = true;
+                return success;
+            }
+            if (success) UpdatePosition();
             return false;
         }
         
         void UpdatePosition()
         {
-            //TODO calculate a median position for the brawl object dependant on the location of participating units
+            var participants = AllUnits();
+            
+
+            if (participants.Count() == 1)
+            {
+                transform.position = participants[0].transform.position;
+                return;
+            }
+
+            var centroid = Vector3.zero;
+            foreach (var uC in participants)
+            {
+                centroid += uC.transform.position;
+            }
+            transform.position = centroid / participants.Length;
+        }
+
+        UnitController[] AllUnits()
+        {
+            var participants = new UnitController[playerUnits.Count + aiUnits.Count];
+            playerUnits.CopyTo(participants, 0);
+            aiUnits.CopyTo(participants, playerUnits.Count);
+            return participants;
+        }
+
+        bool FightShouldEnd()
+        {
+            return (playerUnits.Count == 0 && aiUnits.Count >= 0)
+                   || (playerUnits.Count >= 0 && aiUnits.Count == 0);
+        }
+
+        void End()
+        {
+            print("[Update] - " + gameObject.name + " brawl ending.");
+            Destroy(gameObject);
         }
 
     }

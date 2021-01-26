@@ -62,7 +62,7 @@ public class IOHandler : MonoBehaviour
 
     void HandleMovement(GameObject tile)
     {
-        unitBuffer.MoveTo(tile.transform.position);
+        if (unitBuffer) unitBuffer.MoveTo(tile.transform.position);
     }
 
     void HandleSelection(GameObject unit)

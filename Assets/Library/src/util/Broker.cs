@@ -21,7 +21,8 @@ namespace Library.src.util
         [SerializeField]
         bool isTest = true;
         int frameCount = 1;
-
+        [SerializeField] [Range(0.1f,1.0f)] public float combatSpeed;
+        
         void Awake()
         {
             IUnitController unit;
@@ -69,10 +70,18 @@ namespace Library.src.util
         
         }
 
+        public static Brawl InitBrawl()
+        {
+            var brawlObject = new GameObject();
+            brawlObject.name = "brawl_" + brawlObject.GetInstanceID().ToString().Replace("-", "");
+            //setting up brawl behaviour
+            return brawlObject.AddComponent<Brawl>();
+        }
+        
         public bool IsTest()
         {
             return isTest;
         }
-    
+
     }
 }

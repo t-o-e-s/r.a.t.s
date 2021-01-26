@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Library.src.combat;
+using Library.src.time;
+using Library.src.time.records;
 using Library.src.util;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Library.src.units
 {
-    public class UnitController : MonoBehaviour, IUnitController, ITimed
+    public class UnitController : MonoBehaviour, IUnitController, ITimeSensitive
     {
         [HideInInspector]
         public Unit unit;
@@ -21,17 +24,32 @@ namespace Library.src.units
 
         Animator anim;
         Broker broker;
+        IOHandler io;
         //sprite above the unit to dictate status
         SpriteRenderer flag;
         //healthbar object above the unit to dictate health, help pls
         GameObject healthBar;
         
         //combat related fields
-        Brawl brawl;
+        Brawl brawl = null;
         Unit targetUnit;
+        [SerializeField] [Range(1.0f, 100.0f)]
+        public float attackPower;
+        [SerializeField] [Range(1, 10)]
+        int attackRate;
+        [SerializeField] float defence;
+        [SerializeField]
+        [Range(0, 100)]
+        public float health;
+        bool isAttacker;
+        bool inCombat;
+        
+        //time fields
+        bool isForwarding = false;
+        bool isRewinding = false;
 
-        IOHandler io;
-    
+
+
         void Awake()
         {
             playerUnit = CompareTag("player_unit");
@@ -51,8 +69,21 @@ namespace Library.src.units
 
         void Update()
         {
-            //TODO implement through an InvokeRepeating() and test it, might be an easy way to claw some frames back
-            SamplePosition();
+            //TODO reduce these check to once every x frames to improve performance
+            if (isForwarding)
+            {
+                //TODO move to IOHandler
+                GetNextRecord();
+            }
+            else if (isRewinding)
+            {
+                //TODO move to IOHandler
+                GetLastRecord();
+            }
+            else
+            {
+                SaveRecord();
+            }
         }
 
         /*====================================
@@ -62,14 +93,66 @@ namespace Library.src.units
         {
             targetUnit = target.unit;
             StartCoroutine(Move(target.transform.position, true));
-        }
-
+            //StartCoroutine(FaceOponent(target.transform.position));
+            isAttacker = true;
+        }     
+        
         public void DealDamage()
         {
-            //TODO calculate damage
+            this.transform.LookAt(targetUnit.controller.transform.position);
+            inCombat = true;
+            anim.SetBool("inBrawl", true);           
+            float x;
+
+            if (isAttacker == true)
+            {
+                x = 1.0f;
+            }
+            else
+            {
+                x = 0.5f;
+            }
+
+            float damageDone = broker.combatSpeed * (attackPower * (attackRate / 10f)) - (targetUnit.controller.defence * x);
+            targetUnit.health -= damageDone;
+            Debug.Log(targetUnit.health);
+
+            if (targetUnit.health <= 0f)
+            {
+                targetUnit.controller.Die();
+                if (brawl) brawl.RemoveUnit(targetUnit.controller);
+                targetUnit = null;
+                isAttacker = false;
+                inCombat = false;
+                anim.SetBool("inBrawl", false);
+            }
+
             //TODO give damage to enumerator
             //TODO deal it to enemy
         }
+
+       /* IEnumerator FaceOponent(Vector3 target)
+        {           
+            {
+                this.transform.LookAt(targetUnit.controller.transform.position);
+
+                var lastRot = transform.rotation.y;
+
+                while (inCombat == true)
+                {
+                    var rot = transform.rotation.y - lastRot;
+                    anim.SetFloat("turning", rot);
+                    lastRot = transform.rotation.y;
+                    yield return null;
+                }
+            }
+        }*/
+
+        public void FightAnimation()
+        {                        
+            anim.SetTrigger("isSlashing");
+        }
+        
 
         public void Flag(bool flag)
         {
@@ -86,12 +169,14 @@ namespace Library.src.units
             if (targetUnit.Equals(null)) return;
             
             //setting up brawl object
-            var brawlObject = new GameObject();
-            brawlObject.name = "brawl_" + brawlObject.GetInstanceID();
-            //setting up brawl behaviour
-            brawl = brawlObject.AddComponent<Brawl>();
+            brawl = Broker.InitBrawl();
             brawl.AddUnit(this);
             brawl.AddUnit(targetUnit.controller);
+        }
+
+        public void Die()
+        {
+            Destroy(gameObject);
         }
 
         /*====================================
@@ -104,11 +189,13 @@ namespace Library.src.units
 
         IEnumerator Move(Vector3 target, bool toAttack)
         {
+            var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
+            
             agent.SetDestination(target);
             anim.SetBool("move", true);
             var lastRot = transform.rotation.y;
             
-            while (Vector3.Distance(target, transform.position) > EnvironmentUtil.STOPPING_DISTANCE)
+            while (Vector3.Distance(target, transform.position) > stoppingDistance)
             {
                 var rot = transform.rotation.y - lastRot;
                 anim.SetFloat("turning", rot);
@@ -143,7 +230,7 @@ namespace Library.src.units
             StartCoroutine(Move(target, false));
         }
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.CompareTag("loot"))
             {
@@ -157,13 +244,28 @@ namespace Library.src.units
 
 
         /*====================================
-        *     TIME
+        *     TIME SENSITIVE
         ===================================*/
-        public State Record()
+        public bool SaveRecord()
         {
-            return null;
+            throw new System.NotImplementedException();
         }
-    
+
+        public Record GetLastRecord()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Record GetNextRecord()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ClearRecords()
+        {
+            throw new System.NotImplementedException();
+        }
+
         /*====================================
         *     UTILITY
         ===================================*/
@@ -176,6 +278,7 @@ namespace Library.src.units
         {
             return targetUnit;
         }
+        
         public void LoadAs(Unit unit)
         {
             this.unit = unit;
@@ -192,7 +295,7 @@ namespace Library.src.units
         bool InCombat()
         {
             return targetUnit != null 
-                   && !brawl;
+                   && brawl != null;
         }
     }
 }
