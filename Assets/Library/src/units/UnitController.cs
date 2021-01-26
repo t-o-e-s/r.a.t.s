@@ -66,6 +66,7 @@ namespace Library.src.units
         
         public void DealDamage()
         {
+            isMoving = false;
             //this.transform.LookAt(targetUnit.controller.transform.position);
             FightAnimation();
             anim.SetBool("inBrawl", true);
