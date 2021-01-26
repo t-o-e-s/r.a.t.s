@@ -25,10 +25,8 @@ namespace Library.src.units
         Animator anim;
         Broker broker;
         IOHandler io;
-        //sprite above the unit to dictate status
-        SpriteRenderer flag;
         //healthbar object above the unit to dictate health, help pls
-        GameObject healthBar;
+        Canvas healthBar;
         
         //combat related fields
         Brawl brawl = null;
@@ -52,19 +50,23 @@ namespace Library.src.units
 
         void Awake()
         {
+            agent = GetComponent<NavMeshAgent>();
+            broker = Camera.main.gameObject.GetComponent<Broker>();
+
+            broker.Add(this);
+            broker.LoadAs(this);
+
             playerUnit = CompareTag("player_unit");
         
-            agent = GetComponent<NavMeshAgent>();
             anim = GetComponent<Animator>();
-            broker = Camera.main.gameObject.GetComponent<Broker>();
-            flag = GetComponentInChildren<SpriteRenderer>();
+            healthBar = GetComponentInChildren<Canvas>();
 
             targetUnit = null;
 
             io = Camera.main.GetComponent<IOHandler>();
-            
-            broker.Add(this);
-            broker.LoadAs(this);
+
+            healthBar.GetComponent<UnitUIManager>().Setup(unit);
+
         }
 
         void Update()
@@ -156,7 +158,7 @@ namespace Library.src.units
 
         public void Flag(bool flag)
         {
-            this.flag.enabled = flag;
+            this.healthBar.enabled = flag;
         }
 
         public void SetTarget(Unit unit)
