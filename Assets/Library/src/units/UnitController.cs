@@ -14,7 +14,7 @@ namespace Library.src.units
         public bool playerUnit;
 
         //nav agent and related fields
-        NavMeshAgent agent;
+        public NavMeshAgent agent;
         [Header("Navigation")]
         [SerializeField]
         protected float slowedSpeed = 5;
@@ -27,15 +27,13 @@ namespace Library.src.units
         //combat related fields
         Brawl brawl = null;
         Unit targetUnit;
-        [SerializeField] float defence;
-        bool isAttacker;
-        bool inCombat;
-        bool inVisionCone;
+        [SerializeField] public float defence;
+        public bool isAttacker;
+        public bool inCombat;
+        public bool inVisionCone;
         bool isMoving;
         IOHandler io;
 
-
-    
         void Awake()
         {
             playerUnit = CompareTag("player_unit");
@@ -51,6 +49,13 @@ namespace Library.src.units
             
             broker.Add(this);
             broker.LoadAs(this);
+        }
+
+        private void Update()
+        {
+           // if (!agent.pathPending && agent.remainingDistance < 0.5f && inCombat == false)
+             //   PatrolBehaviour();
+            
         }
 
         /*====================================
@@ -123,7 +128,6 @@ namespace Library.src.units
 
         public void FightAnimation()      
         {
-
             anim.SetTrigger("isSlashing");
         }
         
@@ -151,6 +155,7 @@ namespace Library.src.units
         public void Die()
         {
             Destroy(gameObject);
+            inCombat = false;
         }
 
         public void LookAtUnit(UnitController unit)
@@ -158,7 +163,8 @@ namespace Library.src.units
             if (inVisionCone == true)
             {
                 StartCoroutine(Turn(unit));
-                this.transform.LookAt(unit.transform.position);               
+                this.transform.LookAt(unit.transform.position);
+                anim.SetBool("move", false);
             }
             
         }
@@ -183,7 +189,7 @@ namespace Library.src.units
         ===================================*/
         public void MoveTo(Vector3 target)
         {
-            StartCoroutine(Move(target, false));
+            StartCoroutine(Move(target, false));           
         }
 
         IEnumerator Move(Vector3 target, bool toAttack)
@@ -239,13 +245,6 @@ namespace Library.src.units
                 agent.SetDestination(agent.transform.position);
                 io.TakeLoot();
             }
-
-            if(other.gameObject.CompareTag("player_unit"))
-            {
-                inVisionCone = true;
-                LookAtUnit(other.GetComponent<UnitController>());
-            }
-
         }
 
         private void OnTriggerExit(Collider other)
@@ -294,6 +293,7 @@ namespace Library.src.units
         {
             return targetUnit != null 
                    && brawl != null;
-        }
+        }      
+
     }
 }
