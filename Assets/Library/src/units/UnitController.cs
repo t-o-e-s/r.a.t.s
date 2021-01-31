@@ -37,6 +37,10 @@ namespace Library.src.units
         //referenced from camera
         Broker broker;
         IOHandler io;
+        
+        //routines
+        Coroutine movementRoutine;
+        Coroutine recordRoutine;
 
 
     
@@ -45,7 +49,7 @@ namespace Library.src.units
             playerUnit = CompareTag("player_unit");
         
             agent = GetComponent<NavMeshAgent>();
-            anim = new RatAnimationController(GetComponent<Animator>());
+            anim = new RatAnimationController(GetComponent<Animator>(), this);
             flag = GetComponentInChildren<SpriteRenderer>();
 
             targetUnit = null;
@@ -64,7 +68,7 @@ namespace Library.src.units
         public void Attack(UnitController target)
         {
             targetUnit = target.unit;
-            StartCoroutine(Move(target.transform.position, true));
+            movementRoutine = StartCoroutine(Move(target.transform.position, true));
             isAttacker = true;
         }     
         
@@ -121,7 +125,7 @@ namespace Library.src.units
         ===================================*/
         public void MoveTo(Vector3 target)
         {
-            StartCoroutine(Move(target, false));
+            movementRoutine = StartCoroutine(Move(target, false));
         }
 
         IEnumerator Move(Vector3 target, bool toAttack)
@@ -151,7 +155,7 @@ namespace Library.src.units
 
         public void FetchLoot(Vector3 target)
         {
-            StartCoroutine(Move(target, false));
+            movementRoutine = StartCoroutine(Move(target, false));
         }
 
         private void OnTriggerEnter(Collider other)
@@ -209,14 +213,15 @@ namespace Library.src.units
         {
             if (rewindRoutine == null)
             {
-                StopAllCoroutines();
+                StopCoroutine(movementRoutine);
                 rewindRoutine = StartCoroutine(PlayRecordRoutine((UnitRecord) record));
             }
         }
 
         IEnumerator PlayRecordRoutine(UnitRecord record)
         {
-            agent.SetDestination(record.position);
+            var currentRecord = record;
+            agent.SetDestination(currentRecord.position);
             do
             {
                 while (agent.remainingDistance > EnvironmentUtil.STOPPING_DISTANCE)
@@ -224,10 +229,25 @@ namespace Library.src.units
                     yield return null;
                 }
 
-                agent.SetDestination(((UnitRecord) PreviousRecord()).position);
-            } while (IsRewinding());
+                previousRecords.Remove(currentRecord);
+                currentRecord = (UnitRecord) PreviousRecord();
+                agent.SetDestination(currentRecord.position);
+                
+            } while (previousRecords.Count > 0);
 
+            Stop();
+        }
+
+        public override void Stop()
+        {
+            print("stopping");
+            StopCoroutine(rewindRoutine);
             rewindRoutine = null;
+            
+            nextRecords.Clear();
+            previousRecords.Clear();
+            
+            anim.Idle();
         }
     }
 }

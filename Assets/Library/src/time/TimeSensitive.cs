@@ -41,8 +41,7 @@ namespace Library.src.time
 
         public bool IsRewinding()
         {
-            return rewindRoutine != null 
-                   && previousRecords.Count > 0;
+            return rewindRoutine != null;
         }
 
         protected Record PreviousRecord()
@@ -53,9 +52,11 @@ namespace Library.src.time
             return record;
         }
 
-        public void Stop()
+        public virtual void Stop()
         {
             StopCoroutine(rewindRoutine);
+            nextRecords.Clear();
+            previousRecords.Clear();
             rewindRoutine = null;
             anim.Rewind(false);
         }

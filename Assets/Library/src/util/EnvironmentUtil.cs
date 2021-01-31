@@ -25,6 +25,10 @@ namespace Library.src.util
         public const string MOVEMENT = "move";
         public const string SLASH = "slashing";
         public const string TURNING = "turning";
+        
+        //naming variables
+        //child object containing 3d model
+        public const string MODEL = "model";
 
     }
 }
