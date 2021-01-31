@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Fire
+  - Node
+  - movement_tile
+  - slope
+  - player_unit
+  - entity
+  - enemy_unit
+  - canvas
+  - loot
   layers:
   - Default
   - TransparentFX
@@ -13,11 +22,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - pathfinding
+  - player
+  - unitLead
+  - unitEntity
+  - environment
   - 
   - 
   - 
