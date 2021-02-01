@@ -112,8 +112,7 @@ namespace Library.src.combat
             {
                 foreach (var uC in collection)
                 {
-                    uC.DealDamage();
-                    uC.FightAnimation();
+                    uC.DealDamage();                                                                                                                                                                                                
                 }
                 yield return null;
             }
