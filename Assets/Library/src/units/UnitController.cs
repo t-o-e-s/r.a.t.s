@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using Library.src.combat;
+using Library.src.time;
+using Library.src.time.records;
 using Library.src.util;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Library.src.units
 {
-    public class UnitController : MonoBehaviour, IUnitController, ITimed
+    public class UnitController : MonoBehaviour, IUnitController, ITimeSensitive
     {
         [HideInInspector]
         public Unit unit;
@@ -14,7 +16,7 @@ namespace Library.src.units
         public bool playerUnit;
 
         //nav agent and related fields
-        public NavMeshAgent agent;
+        NavMeshAgent agent;
         [Header("Navigation")]
         [SerializeField]
         protected float slowedSpeed = 5;
@@ -33,6 +35,17 @@ namespace Library.src.units
         public bool inVisionCone;
         bool isMoving;
         IOHandler io;
+        [SerializeField] [Range(1.0f, 100.0f)]
+        public float attackPower;
+        [SerializeField] [Range(1, 10)]
+        int attackRate;
+        [SerializeField]
+        [Range(0, 100)]
+        public float health;
+        
+        //time fields
+        bool isForwarding = false;
+        bool isRewinding = false;
 
         void Awake()
         {
@@ -64,17 +77,16 @@ namespace Library.src.units
         public void Attack(UnitController target)
         {
             targetUnit = target.unit;
-            StartCoroutine(AttackMove(target.transform.position, true));
-            inCombat = true;
+            StartCoroutine(Move(target.transform.position, true));
+            //StartCoroutine(FaceOponent(target.transform.position));
             isAttacker = true;
         }     
         
         public void DealDamage()
         {
-            isMoving = false;
-            //this.transform.LookAt(targetUnit.controller.transform.position);
-            FightAnimation();
-            anim.SetBool("inBrawl", true);
+            this.transform.LookAt(targetUnit.controller.transform.position);
+            inCombat = true;
+            anim.SetBool("inBrawl", true);           
             float x;
 
             if (isAttacker == true)
@@ -86,7 +98,7 @@ namespace Library.src.units
                 x = 0.5f;
             }
 
-            float damageDone = broker.combatSpeed * (unit.weapon.damage * (unit.weapon.speed / 10f)) - (targetUnit.controller.defence * x);
+            float damageDone = 1 * (attackPower * (attackRate / 10f)) - (targetUnit.controller.defence * x);
             targetUnit.health -= damageDone;
             Debug.Log(targetUnit.health);
 
@@ -103,31 +115,26 @@ namespace Library.src.units
             //TODO give damage to enumerator
             //TODO deal it to enemy
         }
-        IEnumerator AttackMove(Vector3 target, bool toAttack)
-        {
-            var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
 
-            agent.SetDestination(target);
-            anim.SetBool("move", true);
-            var lastRot = transform.rotation.y;
-
-            while (Vector3.Distance(target, transform.position) > stoppingDistance)
+       /* IEnumerator FaceOponent(Vector3 target)
+        {           
             {
-                var rot = transform.rotation.y - lastRot;
-                anim.SetFloat("turning", rot);
-                lastRot = transform.rotation.y;
-                yield return null;
+                this.transform.LookAt(targetUnit.controller.transform.position);
+
+                var lastRot = transform.rotation.y;
+
+                while (inCombat == true)
+                {
+                    var rot = transform.rotation.y - lastRot;
+                    anim.SetFloat("turning", rot);
+                    lastRot = transform.rotation.y;
+                    yield return null;
+                }
             }
+        }*/
 
-            anim.SetBool("inBrawl", true);
-            anim.SetBool("move", false);
-            agent.SetDestination(agent.transform.position);
-
-            if (toAttack && !InCombat()) InitiateBrawl();
-        }
-
-        public void FightAnimation()      
-        {
+        public void FightAnimation()
+        {                        
             anim.SetTrigger("isSlashing");
         }
         
@@ -155,33 +162,6 @@ namespace Library.src.units
         public void Die()
         {
             Destroy(gameObject);
-            inCombat = false;
-        }
-
-        public void LookAtUnit(UnitController unit)
-        {
-            if (inVisionCone == true)
-            {
-                StartCoroutine(Turn(unit));
-                this.transform.LookAt(unit.transform.position);
-                anim.SetBool("move", false);
-            }
-            
-        }
-
-        IEnumerator Turn(UnitController unit)
-        { 
-
-            while (inVisionCone == true && unit.isMoving == true)
-            {   
-                anim.SetFloat("turning", 1f);
-                
-                yield return null;
-            }
-
-            
-            anim.SetFloat("turning", 0f);
-
         }
 
         /*====================================
@@ -189,13 +169,13 @@ namespace Library.src.units
         ===================================*/
         public void MoveTo(Vector3 target)
         {
-            StartCoroutine(Move(target, false));           
+            StartCoroutine(Move(target, false));
         }
 
         IEnumerator Move(Vector3 target, bool toAttack)
         {
             var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
-            isMoving = true;
+            
             agent.SetDestination(target);
             anim.SetBool("move", true);
             var lastRot = transform.rotation.y;
@@ -210,7 +190,7 @@ namespace Library.src.units
 
             anim.SetBool("move", false);
             agent.SetDestination(agent.transform.position);
-            isMoving = false;
+
             if (toAttack && !InCombat()) InitiateBrawl();
         }
 
@@ -235,7 +215,7 @@ namespace Library.src.units
             StartCoroutine(Move(target, false));
         }
 
-        private void OnTriggerStay(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.CompareTag("loot"))
             {
@@ -247,14 +227,6 @@ namespace Library.src.units
             }
         }
 
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject.CompareTag("player_unit"))
-            {
-                inVisionCone = false;
-               
-            }
-        }
 
         /*====================================
         *     TIME
@@ -276,6 +248,7 @@ namespace Library.src.units
         {
             return targetUnit;
         }
+        
         public void LoadAs(Unit unit)
         {
             this.unit = unit;
@@ -293,7 +266,26 @@ namespace Library.src.units
         {
             return targetUnit != null 
                    && brawl != null;
-        }      
+        }
 
+        public bool SaveRecord()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Record GetLastRecord()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Record GetNextRecord()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ClearRecords()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
