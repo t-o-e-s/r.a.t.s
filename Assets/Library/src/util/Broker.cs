@@ -15,7 +15,7 @@ namespace Library.src.util
         public readonly HashSet<IUnitController> playerUnits = new HashSet<IUnitController>();
         public readonly HashSet<IUnitController> aiUnits = new HashSet<IUnitController>();
         //tracking time sensitive objects
-        public readonly HashSet<TimeSensitive> recordables = new HashSet<TimeSensitive>();
+        public readonly HashSet<ITimeSensitive> recordables = new HashSet<ITimeSensitive>();
 
         [SerializeField]
         bool isTest = true;
@@ -55,13 +55,13 @@ namespace Library.src.util
         public bool Add(IUnitController controller)
         {
             
-            if (controller is TimeSensitive timeSensitive) recordables.Add(timeSensitive);
+            if (controller is ITimeSensitive timeSensitive) recordables.Add(timeSensitive);
             return units.Add(controller);
         }
 
         public bool Remove(IUnitController controller)
         {
-            if (controller is TimeSensitive timeSensitive) recordables.Remove(timeSensitive);
+            if (controller is ITimeSensitive timeSensitive) recordables.Remove(timeSensitive);
             return units.Remove(controller);
         }
 
@@ -78,7 +78,7 @@ namespace Library.src.util
             //setting up brawl behaviour
             return brawlObject.AddComponent<Brawl>();
         }
-
+        
         public bool IsTest()
         {
             return isTest;

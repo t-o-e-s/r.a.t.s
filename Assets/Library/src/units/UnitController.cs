@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Library.src.combat;
 using Library.src.time;
 using Library.src.time.records;
@@ -9,7 +8,7 @@ using UnityEngine.AI;
 
 namespace Library.src.units
 {
-    public class UnitController : TimeSensitive, IUnitController
+    public class UnitController : MonoBehaviour, IUnitController, ITimeSensitive
     {
         [HideInInspector]
         public Unit unit;
@@ -30,8 +29,23 @@ namespace Library.src.units
         //combat related fields
         Brawl brawl = null;
         Unit targetUnit;
-
+        [SerializeField] public float defence;
+        public bool isAttacker;
+        public bool inCombat;
+        public bool inVisionCone;
+        bool isMoving;
         IOHandler io;
+        [SerializeField] [Range(1.0f, 100.0f)]
+        public float attackPower;
+        [SerializeField] [Range(1, 10)]
+        int attackRate;
+        [SerializeField]
+        [Range(0, 100)]
+        public float health;
+        
+        //time fields
+        bool isForwarding = false;
+        bool isRewinding = false;
 
         void Awake()
         {
@@ -50,6 +64,13 @@ namespace Library.src.units
             broker.LoadAs(this);
         }
 
+        private void Update()
+        {
+           // if (!agent.pathPending && agent.remainingDistance < 0.5f && inCombat == false)
+             //   PatrolBehaviour();
+            
+        }
+
         /*====================================
         *     COMBAT
         ===================================*/
@@ -57,23 +78,66 @@ namespace Library.src.units
         {
             targetUnit = target.unit;
             StartCoroutine(Move(target.transform.position, true));
-        }
-
+            //StartCoroutine(FaceOponent(target.transform.position));
+            isAttacker = true;
+        }     
+        
         public void DealDamage()
         {
-            //TODO create a proper damage calculation
-            var damage = playerUnit ? 10f : 5f;
-            targetUnit.health -= damage;
+            this.transform.LookAt(targetUnit.controller.transform.position);
+            inCombat = true;
+            anim.SetBool("inBrawl", true);           
+            float x;
+
+            if (isAttacker == true)
+            {
+                x = 1.0f;
+            }
+            else
+            {
+                x = 0.5f;
+            }
+
+            float damageDone = 1 * (attackPower * (attackRate / 10f)) - (targetUnit.controller.defence * x);
+            targetUnit.health -= damageDone;
+            Debug.Log(targetUnit.health);
+
             if (targetUnit.health <= 0f)
             {
                 targetUnit.controller.Die();
                 if (brawl) brawl.RemoveUnit(targetUnit.controller);
                 targetUnit = null;
+                isAttacker = false;
+                inCombat = false;
+                anim.SetBool("inBrawl", false);
             }
 
             //TODO give damage to enumerator
             //TODO deal it to enemy
         }
+
+       /* IEnumerator FaceOponent(Vector3 target)
+        {           
+            {
+                this.transform.LookAt(targetUnit.controller.transform.position);
+
+                var lastRot = transform.rotation.y;
+
+                while (inCombat == true)
+                {
+                    var rot = transform.rotation.y - lastRot;
+                    anim.SetFloat("turning", rot);
+                    lastRot = transform.rotation.y;
+                    yield return null;
+                }
+            }
+        }*/
+
+        public void FightAnimation()
+        {                        
+            anim.SetTrigger("isSlashing");
+        }
+        
 
         public void Flag(bool flag)
         {
@@ -163,6 +227,15 @@ namespace Library.src.units
             }
         }
 
+
+        /*====================================
+        *     TIME
+        ===================================*/
+        public State Record()
+        {
+            return null;
+        }
+    
         /*====================================
         *     UTILITY
         ===================================*/
@@ -175,6 +248,7 @@ namespace Library.src.units
         {
             return targetUnit;
         }
+        
         public void LoadAs(Unit unit)
         {
             this.unit = unit;
@@ -193,38 +267,25 @@ namespace Library.src.units
             return targetUnit != null 
                    && brawl != null;
         }
-        
-        /*====================================
-        *     INFO
-        ===================================*/
-        public override void Record()
+
+        public bool SaveRecord()
         {
-            previousRecords.Add(RecordUnit(unit));
+            throw new System.NotImplementedException();
         }
 
-        public override void PlayRecord(Record record)
+        public Record GetLastRecord()
         {
-            if (rewindRoutine == null)
-            {
-                StopAllCoroutines();
-                rewindRoutine = StartCoroutine(PlayRecordRoutine((UnitRecord) record));
-            }
+            throw new System.NotImplementedException();
         }
 
-        IEnumerator PlayRecordRoutine(UnitRecord record)
+        public Record GetNextRecord()
         {
-            agent.SetDestination(record.position);
-            do
-            {
-                while (agent.remainingDistance > EnvironmentUtil.STOPPING_DISTANCE)
-                {
-                    yield return null;
-                }
+            throw new System.NotImplementedException();
+        }
 
-                agent.SetDestination(((UnitRecord) PreviousRecord()).position);
-            } while (IsRewinding());
-
-            rewindRoutine = null;
+        public void ClearRecords()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
