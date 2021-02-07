@@ -26,22 +26,22 @@ public class BrawlerStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!unitCon.agent.pathPending && unitCon.agent.remainingDistance < 0.5f && unitCon.inCombat == false)
-             PatrolBehaviour();
-
+        if (unitCon.inCombat == false)
+        {
+            if (!unitCon.agent.pathPending && unitCon.agent.remainingDistance < 0.5f)
+                PatrolBehaviour();
+        }
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
         switch (other.gameObject.tag)
-        {
-            case null:
-                PatrolBehaviour();
-                break;
-            case "player_unit":
-                PursueBehaviour(other.gameObject.GetComponent<UnitController>());
-                break;
+        {            
+            case EnvironmentUtil.TAG_PLAYER:
+                CombatBehaviour(other.gameObject.GetComponent<UnitController>());
+                Debug.Log("in combat");
+                break;          
         }           
     }
 
@@ -55,20 +55,20 @@ public class BrawlerStateMachine : MonoBehaviour
         node = (node + 1) % nodeArray.Length;
     }
 
-    public void PursueBehaviour(UnitController playerUnit)
+    public void CombatBehaviour(UnitController playerUnit)
     {
         if (playerUnit.isAttacker == false)
         {
+            Debug.Log("UnitAttacking");
             unitCon.Attack(playerUnit);
         }
         else if (playerUnit.isAttacker == true)
         {
+            Debug.Log("UnitDefending");
             unitCon.inCombat = true;
             unitCon.MoveTo(unitCon.agent.transform.position);
-            unitCon.LookAtUnit(playerUnit);
+            unitCon.LookAtUnit(playerUnit.transform.position);
         }
-    }
-
-   
+    }  
 
 }

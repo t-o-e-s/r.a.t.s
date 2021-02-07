@@ -67,7 +67,7 @@ namespace Library.src.combat
             {
                 case (EnvironmentUtil.TAG_PLAYER):
                     playerUnits.Add(controller);
-                    if (controller.GetTarget().Equals(null)) GiveTarget(controller);
+                    if (controller.GetTarget() == null) GiveTarget(controller);
                     break;
                 case (EnvironmentUtil.TAG_AI):
                     aiUnits.Add(controller);

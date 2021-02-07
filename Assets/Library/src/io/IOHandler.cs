@@ -43,7 +43,7 @@ public class IOHandler : MonoBehaviour
         //reverse time
         if (Input.GetKeyDown(KeyCode.R)) HandleRewind(timedBuffer);
 
-        foreach (var timed in broker.recordables) timed.Record();
+        //foreach (var timed in broker.recordables) timed.Record();
         
         
     }
