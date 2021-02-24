@@ -15,7 +15,7 @@ public class BrawlerStateMachine : MonoBehaviour
     //patrol related fields 
     public GameObject[] nodeArray;
     private int node = 0;
-
+    
     void Awake()
     {       
         unitCon = GetComponent<UnitController>();
@@ -37,13 +37,30 @@ public class BrawlerStateMachine : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         switch (other.gameObject.tag)
-        {            
+        {
             case EnvironmentUtil.TAG_PLAYER:
                 CombatBehaviour(other.gameObject.GetComponent<UnitController>());
                 Debug.Log("in combat");
-                break;          
-        }           
+                break;
+        }
     }
+
+    /*private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == EnvironmentUtil.TAG_PLAYER)
+        {
+            unitCon.unitClose = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == EnvironmentUtil.TAG_PLAYER)
+        {
+            unitCon.unitClose = false;
+        }
+    }*/
+
 
     public void PatrolBehaviour()
     {
@@ -57,6 +74,8 @@ public class BrawlerStateMachine : MonoBehaviour
 
     public void CombatBehaviour(UnitController playerUnit)
     {
+       //unitCon.Halt();
+
         if (playerUnit.isAttacker == false)
         {
             Debug.Log("UnitAttacking");
