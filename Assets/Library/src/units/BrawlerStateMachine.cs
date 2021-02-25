@@ -15,7 +15,7 @@ public class BrawlerStateMachine : MonoBehaviour
     //patrol related fields 
     public GameObject[] nodeArray;
     private int node = 0;
-
+    
     void Awake()
     {       
         unitCon = GetComponent<UnitController>();
@@ -26,9 +26,11 @@ public class BrawlerStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!unitCon.agent.pathPending && unitCon.agent.remainingDistance < 0.5f && unitCon.inCombat == false)
-             PatrolBehaviour();
-
+        if (unitCon.inCombat == false)
+        {
+            if (!unitCon.agent.pathPending && unitCon.agent.remainingDistance < 0.5f)
+                PatrolBehaviour();
+        }
     }
 
 
@@ -36,14 +38,29 @@ public class BrawlerStateMachine : MonoBehaviour
     {
         switch (other.gameObject.tag)
         {
-            case null:
-                PatrolBehaviour();
+            case EnvironmentUtil.TAG_PLAYER:
+                CombatBehaviour(other.gameObject.GetComponent<UnitController>());
+                Debug.Log("in combat");
                 break;
-            case "player_unit":
-                PursueBehaviour(other.gameObject.GetComponent<UnitController>());
-                break;
-        }           
+        }
     }
+
+    /*private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == EnvironmentUtil.TAG_PLAYER)
+        {
+            unitCon.unitClose = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == EnvironmentUtil.TAG_PLAYER)
+        {
+            unitCon.unitClose = false;
+        }
+    }*/
+
 
     public void PatrolBehaviour()
     {
@@ -55,20 +72,22 @@ public class BrawlerStateMachine : MonoBehaviour
         node = (node + 1) % nodeArray.Length;
     }
 
-    public void PursueBehaviour(UnitController playerUnit)
+    public void CombatBehaviour(UnitController playerUnit)
     {
+       //unitCon.Halt();
+
         if (playerUnit.isAttacker == false)
         {
+            Debug.Log("UnitAttacking");
             unitCon.Attack(playerUnit);
         }
         else if (playerUnit.isAttacker == true)
         {
+            Debug.Log("UnitDefending");
             unitCon.inCombat = true;
             unitCon.MoveTo(unitCon.agent.transform.position);
-            unitCon.LookAtUnit(playerUnit);
+            unitCon.LookAtUnit(playerUnit.transform.position);
         }
-    }
-
-   
+    }  
 
 }
