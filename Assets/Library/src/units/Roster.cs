@@ -15,7 +15,7 @@ public class Roster
         this.activeUnits = new Unit[activeUnits.Count];
         this.warband = new Unit[warband.Count];
 
-        int i = 0; 
+        var i = 0; 
 
 
         foreach (var unitController in activeUnits)

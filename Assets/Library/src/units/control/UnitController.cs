@@ -178,14 +178,14 @@ namespace Library.src.units
         {
             var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
             var lastRot = transform.rotation.y;
-            targetPos = target != null ? target.position : targetPos;
+            targetPos = !target.Equals(null) ? target.position : targetPos;
 
             agent.SetDestination(targetPos);
             anim.SetBool("move", true);
 
             while (Vector3.Distance(targetPos, transform.position) > stoppingDistance)
             {
-                targetPos = target != null ? target.position : targetPos;
+                targetPos = !target.Equals(null) ? target.position : targetPos;
                 agent.SetDestination(targetPos);
                 var rot = transform.rotation.y - lastRot;
                 anim.SetFloat("turning", rot);
