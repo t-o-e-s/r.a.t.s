@@ -1,134 +1,110 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Library.src.time;
-using Library.src.units;
+﻿using Library.src.time;
 using Library.src.units.control;
 using Library.src.util;
 using UnityEngine;
 
-public class IOHandler : MonoBehaviour
+namespace Library.src.io
 {
-    Broker broker;
-    
-    Camera mainCam;
-
-    //buffers
-    UnitController unitBuffer;
-    TimeSensitive timedBuffer;
-
-    Time time;
-
-    bool aUnitSelected;
-
-    int lootTotal;
-
-    [SerializeField] int framerate = 60;
-    
-    // Start is called before the first frame update
-    void Awake()
+    public class IOHandler : MonoBehaviour
     {
-        mainCam = Camera.main;
-        TryGetComponent(out broker);
-        
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = framerate;
-    }
+        Camera mainCam;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Application.targetFrameRate != framerate) Application.targetFrameRate = framerate;
-        
-        if (Input.GetMouseButtonDown(0)) Cast();
-        
-        //reverse time
-        if (Input.GetKeyDown(KeyCode.R)) HandleRewind(timedBuffer);
+        //buffers
+        UnitController unitBuffer;
+        TimeSensitive timedBuffer;
 
-        //foreach (var timed in broker.recordables) timed.Record();
-        
-        
-    }
+        Time time;
 
-    void Cast()
-    {       
-        RaycastHit hit;
+        bool aUnitSelected;
+        int lootTotal;
 
-        if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 150f))
+        [SerializeField] int framerate = 60;
+    
+        void Awake()
         {
-            switch (hit.collider.tag)
+            mainCam = Camera.main;
+        
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = framerate;
+        }
+
+        void Update()
+        {
+            if (Application.targetFrameRate != framerate) Application.targetFrameRate = framerate;
+        
+            if (Input.GetMouseButtonDown(0)) Cast();
+        
+            //reverse time
+            if (Input.GetKeyDown(KeyCode.R)) HandleRewind(timedBuffer);
+        }
+
+        void Cast()
+        {       
+            RaycastHit hit;
+
+            if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 150f))
             {
-                case "movement_tile":
-                    HandleMovement(hit.collider.gameObject);
-                    break;
+                switch (hit.collider.tag)
+                {
+                    case "movement_tile":
+                        HandleMovement(hit.collider.gameObject);
+                        break;
 
-                case EnvironmentUtil.TAG_PLAYER:
-                    HandleSelection(hit.collider.gameObject);
-                    break;
+                    case EnvironmentUtil.TAG_PLAYER:
+                        HandleSelection(hit.collider.gameObject);
+                        break;
 
-                case EnvironmentUtil.TAG_AI:
-                    HandleAttack(hit.collider.gameObject);
-                    break;
+                    case EnvironmentUtil.TAG_AI:
+                        HandleAttack(hit.collider.gameObject);
+                        break;
 
-                case EnvironmentUtil.TAG_LOOT:
-                    HandleLooting(hit.collider.gameObject);
-                    break;
+                    case EnvironmentUtil.TAG_LOOT:
+                        HandleLooting(hit.collider.gameObject);
+                        break;
+                }
             }
         }
-    }
 
-    void HandleMovement(GameObject tile)
-    {
-        if (unitBuffer) unitBuffer.MoveTo(tile.transform.position);
-    }
-
-    void HandleSelection(GameObject unit)
-    {
-        if (unit.TryGetComponent(out UnitController controller)) Select(controller);
-        unit.TryGetComponent(out timedBuffer);
-
-    }
-
-    void HandleAttack(GameObject target) 
-    {
-        if (target.TryGetComponent(out UnitController controller))
+        void HandleMovement(GameObject tile)
         {
-            unitBuffer.Attack(controller);
+            if (unitBuffer) unitBuffer.Move(tile.transform.position);
         }
-    }
 
-    void HandleLooting(GameObject loot)
-    {
-        unitBuffer.FetchLoot(loot.transform.position);
-    }
+        void HandleSelection(GameObject unit)
+        {
+            if (unit.TryGetComponent(out UnitController controller)) Select(controller);
+            unit.TryGetComponent(out timedBuffer);
 
-    void HandleRewind(TimeSensitive timed)
-    {
-        if (timed.IsRewinding()) timed.Stop();
-        else timed.Rewind();
-    }
+        }
 
-    public void TakeLoot()
-    {
-        int loot;
-        Loot.GetLoot();
-        loot = Loot.LOOT_CLASS;
-        lootTotal += loot;
-        print("Loot total =" + lootTotal);
-    }
+        void HandleAttack(GameObject target) 
+        {
+            if (target.TryGetComponent(out UnitController controller))
+            {
+                unitBuffer.Attack(controller);
+            }
+        }
 
-    void Select(UnitController unit)
-    {
-        //deflag the previously selected unit
-        if (unitBuffer) unitBuffer.Flag(false);
+        void HandleLooting(GameObject loot)
+        {
+            unitBuffer.FetchLoot(loot.transform.position);
+        }
 
-        unitBuffer = unit;
-        unitBuffer.Flag(true);
+        void HandleRewind(TimeSensitive timed)
+        {
+            if (timed.IsRewinding()) timed.Stop();
+            else timed.Rewind();
+        }
 
-        timedBuffer = null;
-    }
+        void Select(UnitController unit)
+        {
+            //deflag the previously selected unit
+            if (unitBuffer) unitBuffer.Flag(false);
 
-    public static void Log(Object obj, string message)
-    {
-        print("[" + obj.name + "] - " + message);
+            unitBuffer = unit;
+            unitBuffer.Flag(true);
+
+            timedBuffer = null;
+        }
     }
 }

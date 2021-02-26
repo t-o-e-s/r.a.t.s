@@ -11,8 +11,7 @@ namespace Library.src.time
         protected readonly List<Record> previousRecords = new List<Record>();
         
         protected Coroutine rewindRoutine;
-
-
+        
         public abstract void Record();
         public abstract void PlayRecord(Record record);
 
@@ -30,7 +29,7 @@ namespace Library.src.time
             PlayRecord(PreviousRecord());
         }
 
-        public  Record RecordUnit(Unit unit)
+        public Record RecordUnit(Unit unit)
         {
             return new UnitRecord(unit);
         }

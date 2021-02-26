@@ -17,29 +17,18 @@ namespace Library.src.util
         public readonly HashSet<IUnitController> hostileUnits = new HashSet<IUnitController>();
         //tracking time sensitive objects
         public readonly HashSet<ITimeSensitive> recordables = new HashSet<ITimeSensitive>();
-
-        [SerializeField]
-        bool isTest = true;
-        int frameCount = 1;
-
-        void Awake()
-        {
-            IUnitController unit;
-            foreach (var go in GameObject.FindGameObjectsWithTag("player_unit"))
-            {
-                if (go.TryGetComponent(out unit)) playerUnits.Add(unit);
-            }
-            foreach (var go in GameObject.FindGameObjectsWithTag("enemy_unit"))
-            {
-                if (go.TryGetComponent(out unit)) playerUnits.Add(unit);
-            }
         
-            if (isTest) TestSetUp();
+        public static Brawl InitBrawl()
+        {
+            var brawlObject = new GameObject();
+            brawlObject.name = "brawl_" + brawlObject.GetInstanceID().ToString().Replace("-", "");
+            //setting up brawl behaviour
+            return brawlObject.AddComponent<Brawl>();
         }
 
         public void Load(UnitController unitController)
         {
-            if (isTest)
+            if (IsTest())
             {
                 //instantiates a new unit object and loads it onto the controller
                 unitController.unit = Unit.CreateUnit(
@@ -52,7 +41,13 @@ namespace Library.src.util
                     Arsenal.Fists());
             }
 
-            Add(unitController);
+            if (Add(unitController)) print("Succesfully loaded: " + unitController.name);
+            else print("Failed to load: " + unitController.name);
+        }
+        
+        public bool IsTest()
+        {
+            return Application.isEditor;
         }
         
         bool Add(IUnitController controller)
@@ -61,30 +56,10 @@ namespace Library.src.util
             return units.Add(controller);
         }
 
-        public bool Remove(IUnitController controller)
+        bool Remove(IUnitController controller)
         {
             if (controller is ITimeSensitive timeSensitive) recordables.Remove(timeSensitive);
             return units.Remove(controller);
         }
-
-        // This method should change depending on what needs to be implemented as the project evolves
-        void TestSetUp()
-        {
-        
-        }
-
-        public static Brawl InitBrawl()
-        {
-            var brawlObject = new GameObject();
-            brawlObject.name = "brawl_" + brawlObject.GetInstanceID().ToString().Replace("-", "");
-            //setting up brawl behaviour
-            return brawlObject.AddComponent<Brawl>();
-        }
-        
-        public bool IsTest()
-        {
-            return isTest;
-        }
-
     }
 }
