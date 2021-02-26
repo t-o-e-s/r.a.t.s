@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Library.src.animation;
 using Library.src.combat;
 using Library.src.time;
 using Library.src.time.records;
@@ -10,6 +11,16 @@ namespace Library.src.units
 {
     public class UnitController : MonoBehaviour, IUnitController, ITimeSensitive
     {
+        AnimationHandler animator;
+        
+        
+        
+        
+        
+        
+        
+        
+        
         [HideInInspector]
         public Unit unit;
         [HideInInspector]
@@ -20,10 +31,8 @@ namespace Library.src.units
         [Header("Navigation")]
         [SerializeField]
         protected float slowedSpeed = 5;
-        Coroutine movementRoutine = null;
-
-
-        Animator anim;
+        Coroutine movementRoutine;
+        
         Broker broker;
         //sprite above the unit to dictate status
         SpriteRenderer flag; 
@@ -34,7 +43,6 @@ namespace Library.src.units
         [SerializeField] public float defence;
         public bool isAttacker;
         public bool inCombat;
-        public bool inVisionCone;
         bool isMoving;
         IOHandler io;
         [SerializeField] [Range(1.0f, 100.0f)]
@@ -54,7 +62,6 @@ namespace Library.src.units
             playerUnit = CompareTag("player_unit");
         
             agent = GetComponent<NavMeshAgent>();
-            anim = GetComponent<Animator>();
             broker = Camera.main.gameObject.GetComponent<Broker>();
             flag = GetComponentInChildren<SpriteRenderer>();
 
@@ -64,6 +71,8 @@ namespace Library.src.units
             
             broker.Add(this);
             broker.LoadAs(this);
+
+            animator = unit.animator; //can only be assigned after the Unit is loaded. 
         }
 
 
@@ -82,7 +91,7 @@ namespace Library.src.units
         public void DealDamage()
         {
             FightAnimation();
-            anim.SetBool("inBrawl", true);           
+            animator.Brawl(true);           
             float x;
             inCombat = true;
             if (isAttacker == true)
@@ -100,7 +109,7 @@ namespace Library.src.units
 
             if (targetUnit.health <= 0f)
             {
-                anim.SetBool("inBrawl", false);
+                animator.Brawl(false);
                 targetUnit.controller.Die();
                 if (brawl) brawl.RemoveUnit(targetUnit.controller);
                 targetUnit = null;
@@ -128,7 +137,7 @@ namespace Library.src.units
                     Debug.Log("turn");
                     float turn_speed = 2f;
                     transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * turn_speed);
-                    anim.SetFloat("turning", 1f);                  
+                    animator.Turn(1f);                 
                     yield return null;
                 }
             }
@@ -137,7 +146,7 @@ namespace Library.src.units
         public void FightAnimation()
         {   
             if (inCombat == true)
-            anim.SetTrigger("isSlashing");
+            animator.Slash();
         }
       
         public void Flag(bool flag)
@@ -181,20 +190,20 @@ namespace Library.src.units
             targetPos = !target.Equals(null) ? target.position : targetPos;
 
             agent.SetDestination(targetPos);
-            anim.SetBool("move", true);
+            animator.Move( true);
 
             while (Vector3.Distance(targetPos, transform.position) > stoppingDistance)
             {
                 targetPos = !target.Equals(null) ? target.position : targetPos;
                 agent.SetDestination(targetPos);
                 var rot = transform.rotation.y - lastRot;
-                anim.SetFloat("turning", rot);
+                animator.Turn(rot);
                 lastRot = transform.rotation.y;
 
                 yield return null;
             }
 
-            anim.SetBool("move", false);
+            animator.Move(false);
             agent.SetDestination(agent.transform.position);
 
             if (toAttack && !InCombat())
@@ -205,7 +214,7 @@ namespace Library.src.units
 
         public void Halt()
         {
-            anim.SetBool("move", false);
+            animator.Move( false);
             if (movementRoutine != null) StopCoroutine(movementRoutine);
             agent.SetDestination(this.transform.position);
         }
@@ -242,7 +251,7 @@ namespace Library.src.units
             {
                 
                 Destroy(other.gameObject);
-                anim.SetBool("move", false);
+                animator.Move(false);
                 agent.SetDestination(agent.transform.position);
                 io.TakeLoot();
             }

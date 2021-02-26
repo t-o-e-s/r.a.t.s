@@ -41,7 +41,7 @@ namespace Library.src.util
             if (isTest)
             {
                 //instantiates a new unit object and loads it onto the controller
-                unitController.unit = new Unit(
+                unitController.unit = Unit.CreateUnit(
                     unitController.name,
                     unitController,
                     100f,
