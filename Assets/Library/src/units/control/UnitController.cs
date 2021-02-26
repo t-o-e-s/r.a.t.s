@@ -7,72 +7,45 @@ using Library.src.util;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Library.src.units
+namespace Library.src.units.control
 {
     public class UnitController : MonoBehaviour, IUnitController, ITimeSensitive
     {
+        //Unit Model ------------------------------------------
+        [HideInInspector] public Unit unit;
+        
+        //Animation -------------------------------------------
         AnimationHandler animator;
         
-        
-        
-        
-        
-        
-        
-        
-        
-        [HideInInspector]
-        public Unit unit;
-        [HideInInspector]
-        public bool playerUnit;
+        //Navigation ------------------------------------------
+        [HideInInspector] public NavMeshAgent agent;
 
-        //nav agent and related fields
-        public NavMeshAgent agent;
-        [Header("Navigation")]
-        [SerializeField]
-        protected float slowedSpeed = 5;
-        Coroutine movementRoutine;
-        
+        //Scene -----------------------------------------------
         Broker broker;
-        //sprite above the unit to dictate status
-        SpriteRenderer flag; 
         
-        //combat related fields
-        Brawl brawl = null;
+        //Combat ----------------------------------------------
+        Brawl brawl;
         Unit targetUnit;
-        [SerializeField] public float defence;
-        public bool isAttacker;
-        public bool inCombat;
-        bool isMoving;
-        IOHandler io;
-        [SerializeField] [Range(1.0f, 100.0f)]
-        public float attackPower;
-        [SerializeField] [Range(1, 10)]
-        int attackRate;
-        [SerializeField]
-        [Range(0, 100)]
-        public float health;
+        //TODO reimplement a way to load unit values in from an xml
+
+        //UI --------------------------------------------------
+        SpriteRenderer flag; //TODO move this into a UIHandler
         
-        //time fields
-        bool isForwarding = false;
-        bool isRewinding = false;
+        //Routines ---------------------------------------------
+        Coroutine movementRoutine;
+        Coroutine lookRoutine;
 
         void Awake()
         {
-            playerUnit = CompareTag("player_unit");
-        
-            agent = GetComponent<NavMeshAgent>();
-            broker = Camera.main.gameObject.GetComponent<Broker>();
-            flag = GetComponentInChildren<SpriteRenderer>();
+            var mainCamera = Camera.main;
+            if (mainCamera is null) {} //TODO implement scene quit
 
-            targetUnit = null;
-
-            io = Camera.main.GetComponent<IOHandler>();
+            broker = mainCamera.GetComponent<Broker>();
             
-            broker.Add(this);
-            broker.LoadAs(this);
+            agent = GetComponent<NavMeshAgent>();
+            flag = GetComponentInChildren<SpriteRenderer>(); //TODO move to a UIHandler
 
-            animator = unit.animator; //can only be assigned after the Unit is loaded. 
+            broker.Load(this);
         }
 
 
@@ -83,73 +56,62 @@ namespace Library.src.units
         {
             targetUnit = target.unit;
             Halt();
-            movementRoutine = StartCoroutine(MoveRoutine(target.transform, target.transform.position, true));
-            this.isAttacker = true;
-            inCombat = true;
+            
+            var targetTransform = target.transform;
+            movementRoutine = StartCoroutine(MoveRoutine(
+                targetTransform,
+                targetTransform.position,
+                true));
         }     
         
         public void DealDamage()
         {
-            FightAnimation();
-            animator.Brawl(true);           
-            float x;
-            inCombat = true;
-            if (isAttacker == true)
+            animator.Brawl(true);  
+            animator.Slash();
+            
+            //setting charge bonus
+            var x = 0.5f;
+            if (unit.charging)
             {
                 x = 1.0f;
             }
-            else
-            {
-                x = 0.5f;
-            }
+            
+            var damage = unit.attackPower * (unit.attackRate / 10f); //damage done by this unit
+            damage -= targetUnit.defence * x; //protection of the unit applied
+            targetUnit.health -= damage; //damage dealt
 
-            float damageDone = 1 * (attackPower * (attackRate / 10f)) - (targetUnit.controller.defence * x);
-            targetUnit.health -= damageDone;
-            Debug.Log(targetUnit.health);
-
-            if (targetUnit.health <= 0f)
-            {
-                animator.Brawl(false);
-                targetUnit.controller.Die();
-                if (brawl) brawl.RemoveUnit(targetUnit.controller);
-                targetUnit = null;
-                isAttacker = false;
-                inCombat = false;
-            }
-
-            //TODO give damage to enumerator
-            //TODO deal it to enemy
+            if (!(targetUnit.health <= 0f)) return; //if target is still alive we're done here
+            
+            animator.Brawl(false);
+            targetUnit.controller.Die();
+            brawl.RemoveUnit(targetUnit.controller);
+            targetUnit = null;
         }
 
-        public void LookAtUnit(Vector3 target)
+        public void LookAt(Vector3 target)
         {
-            Debug.Log("lookAT");
-            StartCoroutine(FaceOponent(target));
+            lookRoutine = StartCoroutine(LookRoutine(target));
         }
 
-       IEnumerator FaceOponent(Vector3 target)
-        {           
-            {
-                Quaternion _lookRotation = Quaternion.LookRotation((target - transform.position).normalized);
-                
-                while (this.inCombat == true)
-                {
-                    Debug.Log("turn");
-                    float turn_speed = 2f;
-                    transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * turn_speed);
-                    animator.Turn(1f);                 
-                    yield return null;
-                }
-            }
-        }
+       IEnumerator LookRoutine(Vector3 target)
+       {
+           yield return null;
+           //TODO this is just wrong
+           /*{
+               Quaternion _lookRotation = Quaternion.LookRotation((target - transform.position).normalized);
+               
+               while (this.inCombat == true)
+               {
+                   Debug.Log("turn");
+                   float turn_speed = 2f;
+                   transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * turn_speed);
+                   animator.Turn(1f);                 
+                   yield return null;
+               }
+           }*/
+       }
 
-        public void FightAnimation()
-        {   
-            if (inCombat == true)
-            animator.Slash();
-        }
-      
-        public void Flag(bool flag)
+       public void Flag(bool flag)
         {
             this.flag.enabled = flag;
         }
@@ -177,16 +139,29 @@ namespace Library.src.units
         /*====================================
         *     NAVIGATION
         ===================================*/
-        public void MoveTo(Vector3 target)
+        public void Move(Vector3 target)
         {
             Halt();
             movementRoutine = StartCoroutine(MoveRoutine(null, target, false));
         }
+        
+        public void Follow(Transform target)
+        {
+            movementRoutine = StartCoroutine(MoveRoutine(target, target.position, false));
+        }
 
         IEnumerator MoveRoutine(Transform target, Vector3 targetPos, bool toAttack)
         {
+            if (!(lookRoutine is null))
+            {
+                StopCoroutine(lookRoutine);
+                lookRoutine = null;
+            }
+            
+            unit.charging = toAttack;
+            
             var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
-            var lastRot = transform.rotation.y;
+            var lastRotation = transform.rotation.y;
             targetPos = !target.Equals(null) ? target.position : targetPos;
 
             agent.SetDestination(targetPos);
@@ -196,44 +171,27 @@ namespace Library.src.units
             {
                 targetPos = !target.Equals(null) ? target.position : targetPos;
                 agent.SetDestination(targetPos);
-                var rot = transform.rotation.y - lastRot;
-                animator.Turn(rot);
-                lastRot = transform.rotation.y;
-
+                var currentRotation = transform.rotation.y;
+                var rotation = currentRotation - lastRotation;
+                animator.Turn(rotation);
+                lastRotation = currentRotation;
                 yield return null;
             }
 
             animator.Move(false);
             agent.SetDestination(agent.transform.position);
 
-            if (toAttack && !InCombat())
-            {
-                InitiateBrawl();
-            }
+            if (toAttack && brawl is null) InitiateBrawl();
         }        
 
         public void Halt()
         {
             animator.Move( false);
-            if (movementRoutine != null) StopCoroutine(movementRoutine);
-            agent.SetDestination(this.transform.position);
-        }
-
-        public void Follow(Transform target, bool toAttack)
-        {
-           // StartCoroutine(FollowRoutine(target, toAttack));
-        }
-
-        //position sampling for slow speeds
-        protected void SamplePosition()
-        {
-            NavMeshHit navMeshHit;            
-
-            var speedToSet = NavMesh.SamplePosition(agent.transform.position, out navMeshHit, 1f, 8) ?
-                slowedSpeed :
-                unit.speed;
-
-            agent.speed = speedToSet;
+            if (!(movementRoutine is null)) StopCoroutine(movementRoutine);
+            if (!(lookRoutine is null)) StopCoroutine(lookRoutine);
+            unit.charging = false;
+            targetUnit = null;
+            agent.SetDestination(transform.position);
         }
 
         /*====================================
@@ -242,20 +200,21 @@ namespace Library.src.units
 
         public void FetchLoot(Vector3 target)
         {
+            //TODO there should be another check to confirm if we've got the RIGHT loot.
            movementRoutine = StartCoroutine(MoveRoutine(null, target, false));
         }
 
-        void OnTriggerEnter(Collider other)
+        //TODO loot objects should handle their own looting not the UC
+        /*void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.CompareTag("loot"))
             {
-                
                 Destroy(other.gameObject);
                 animator.Move(false);
                 agent.SetDestination(agent.transform.position);
                 io.TakeLoot();
             }
-        }
+        }*/
 
 
         /*====================================
@@ -278,25 +237,15 @@ namespace Library.src.units
         {
             return targetUnit;
         }
-        
-        public void LoadAs(Unit unit)
+
+        public bool InCombat()
         {
-            this.unit = unit;
+            return !(targetUnit is null) || !(brawl is null);
         }
         
         /*====================================
         *     INFO
         ===================================*/
-        public float GetSpeed()
-        {
-            return agent.speed;
-        }
-
-        bool InCombat()
-        {
-            return targetUnit != null 
-                   && brawl != null;
-        }
 
         public bool SaveRecord()
         {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Library.src.units.control;
+using UnityEngine;
 
 namespace Library.src.units
 {
@@ -7,7 +8,6 @@ namespace Library.src.units
         //Information & Utility
         Unit GetUnit();
         Unit GetTarget();
-        void LoadAs(Unit unit);
         void Flag(bool flag);
         void Die();
         
@@ -17,6 +17,7 @@ namespace Library.src.units
         void SetTarget(Unit unit);
 
         //Navigation
-        void MoveTo(Vector3 target);
+        void Move(Vector3 target);
+        void Follow(Transform target);
     }
 }

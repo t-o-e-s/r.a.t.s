@@ -1,4 +1,5 @@
-﻿using Library.src.util;
+﻿using Library.src.units.control;
+using Library.src.util;
 using UnityEngine;
 
 namespace Library.src.units.ai
@@ -39,7 +40,7 @@ namespace Library.src.units.ai
         void Update()
         {
             if (!on) return;
-            if (controller.inCombat) return;
+            if (controller.InCombat()) return;
             UpdateState();
         }
 
@@ -50,7 +51,7 @@ namespace Library.src.units.ai
                 CombatBehaviour();
             }
             else if ((!controller.agent.pathPending && canPatrol)
-                || !controller.inCombat && canPatrol && state == AIState.IDLE)
+                || controller.GetTarget() is null && canPatrol && state == AIState.IDLE)
             {
                 Patrol();
             }
@@ -76,7 +77,7 @@ namespace Library.src.units.ai
         void CombatBehaviour()
         {
             //if the enemy in vision is attacking this unit then defend
-            if (enemyInVision.isAttacker && enemyInVision.GetTarget().controller.Equals(controller)) Defend();
+            if (enemyInVision.unit.charging && enemyInVision.GetTarget().controller.Equals(controller)) Defend();
             else Attack();
         }
 
@@ -89,7 +90,7 @@ namespace Library.src.units.ai
         void Defend()
         {
             state = AIState.DEFEND;
-            controller.LookAtUnit(enemyInVision.transform.position);
+            controller.LookAt(enemyInVision.transform.position);
         }
 
         void Idle()

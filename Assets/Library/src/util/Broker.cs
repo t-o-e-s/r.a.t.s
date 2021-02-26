@@ -4,6 +4,7 @@ using Library.src.combat.Weapon;
 using Library.src.elements;
 using Library.src.time;
 using Library.src.units;
+using Library.src.units.control;
 using UnityEngine;
 
 namespace Library.src.util
@@ -13,7 +14,7 @@ namespace Library.src.util
         //HashSets for tracking active units
         public readonly HashSet<IUnitController> units = new HashSet<IUnitController>();
         public readonly HashSet<IUnitController> playerUnits = new HashSet<IUnitController>();
-        public readonly HashSet<IUnitController> aiUnits = new HashSet<IUnitController>();
+        public readonly HashSet<IUnitController> hostileUnits = new HashSet<IUnitController>();
         //tracking time sensitive objects
         public readonly HashSet<ITimeSensitive> recordables = new HashSet<ITimeSensitive>();
 
@@ -36,7 +37,7 @@ namespace Library.src.util
             if (isTest) TestSetUp();
         }
 
-        public void LoadAs(UnitController unitController)
+        public void Load(UnitController unitController)
         {
             if (isTest)
             {
@@ -45,16 +46,17 @@ namespace Library.src.util
                     unitController.name,
                     unitController,
                     100f,
-                    unitController.GetSpeed(),
+                    unitController.agent.speed,
                     new Status[0],
                     null,
                     Arsenal.Fists());
             }
+
+            Add(unitController);
         }
         
-        public bool Add(IUnitController controller)
+        bool Add(IUnitController controller)
         {
-            
             if (controller is ITimeSensitive timeSensitive) recordables.Add(timeSensitive);
             return units.Add(controller);
         }

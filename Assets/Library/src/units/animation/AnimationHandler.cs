@@ -6,23 +6,18 @@ namespace Library.src.animation
 {
     public class AnimationHandler
     {
-        Animator animator;
-        UnitController controller;
-        Unit unit;
-        GameObject gameObject;
-        
+        readonly Animator animator;
+
         //serializing animations
         readonly int brawl;
         readonly int move;
         readonly int slash;
         readonly int turn;
         
-
         public AnimationHandler(Unit unit)
         {
-            this.unit = unit;
-            controller = unit.controller;
-            gameObject = controller.gameObject;
+            var controller = unit.controller;
+            var gameObject = controller.gameObject;
 
             if (!gameObject.TryGetComponent(out animator))
             {
@@ -36,7 +31,6 @@ namespace Library.src.animation
             slash = Animator.StringToHash(EnvironmentUtil.ANIM_MOVE);
             turn = Animator.StringToHash(EnvironmentUtil.ANIM_TURNING);
         }
-
 
         public void Brawl(bool isBrawling)
         {
