@@ -2,6 +2,7 @@
 using Library.src.combat;
 using Library.src.combat.Weapon;
 using Library.src.elements;
+using Library.src.management.units;
 using Library.src.units.control;
 
 namespace Library.src.units
@@ -37,6 +38,7 @@ namespace Library.src.units
             statuses = unit.statuses;
             brawl = unit.brawl;
             weapon = unit.weapon;
+            animator = unit.animator;
         }
 
         Unit (string name, 
@@ -56,33 +58,18 @@ namespace Library.src.units
             this.weapon = weapon;
         }
 
-        public static Unit CreateUnit(
-            string name, 
-            UnitController controller, 
-            float health, 
-            float speed, 
-            Status[] statuses, 
-            Brawl brawl, 
-            Weapon weapon)
+        public static Unit CreateUnit(UnitController unitController, UnitLoadData loadData, Weapon weapon)
         {
             var unit = new Unit(
-                name,
-                controller,
-                health,
-                speed,
-                statuses,
-                brawl,
+                unitController.name,
+                unitController,
+                loadData.health,
+                loadData.speed,
+                new Status[12],
+                null,
                 weapon);
-
             unit.animator = new AnimationHandler(unit);
             return unit;
-        }
-        
-        public static Unit CreateUnit(Unit unit)
-        {
-            var newUnit = new Unit(unit);
-            unit.animator = new AnimationHandler(newUnit);
-            return newUnit;
         }
     }
 }

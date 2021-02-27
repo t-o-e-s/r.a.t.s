@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Library.src.util
 {
@@ -23,5 +24,13 @@ namespace Library.src.util
         public const string ANIM_MOVE = "move";
         public const string ANIM_SLASH = "isSlashing";
         public const string ANIM_TURNING = "turning";
+
+        //resource paths
+        public const string RESOURCE_PLAYER_UNIT = "Config/Units/PlayerConfiguration";
+        public const string RESOURCE_HOSTILE_UNIT = "Config/Units/HostileConfiguration";
+        public const string RESOURCE_WEAPONS = "Config/Weapons/Weapons";
+        
+        //defaults
+        public const string DEFAULT_UNIT = "default";
     }
 }

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Library.src.combat;
 using Library.src.combat.Weapon;
-using Library.src.elements;
+using Library.src.management;
+using Library.src.management.units;
 using Library.src.time;
 using Library.src.units;
 using Library.src.units.control;
@@ -17,39 +19,43 @@ namespace Library.src.util
         public readonly HashSet<IUnitController> hostileUnits = new HashSet<IUnitController>();
         //tracking time sensitive objects
         public readonly HashSet<ITimeSensitive> recordables = new HashSet<ITimeSensitive>();
-        
-        public static Brawl InitBrawl()
+
+        //units loaded in from json
+        public Dictionary<string, UnitLoadData> unitData;
+        //weapons loaded in form json
+        public Dictionary<int, Weapon> weaponData;
+
+        void Awake()
         {
-            var brawlObject = new GameObject();
-            brawlObject.name = "brawl_" + brawlObject.GetInstanceID().ToString().Replace("-", "");
-            //setting up brawl behaviour
-            return brawlObject.AddComponent<Brawl>();
+            unitData = LoadSystem.LoadUnits();
+            weaponData = LoadSystem.LoadWeapons();
         }
 
         public void Load(UnitController unitController)
         {
-            if (IsTest())
+            try
             {
-                //instantiates a new unit object and loads it onto the controller
-                unitController.unit = Unit.CreateUnit(
-                    unitController.name,
-                    unitController,
-                    100f,
-                    unitController.agent.speed,
-                    new Status[0],
-                    null,
-                    Arsenal.Fists());
-            }
+                UnitLoadData unit;
+                if (!unitData.TryGetValue(unitController.name, out unit))
+                {
+                    if (!unitData.TryGetValue(EnvironmentUtil.DEFAULT_UNIT, out unit)) throw new Exception();
+                }
 
-            if (Add(unitController)) print("Succesfully loaded: " + unitController.name);
-            else print("Failed to load: " + unitController.name);
+                Weapon weapon;
+                if (!weaponData.TryGetValue(unit.weapon, out weapon)) throw new Exception();
+
+                unitController.unit = Unit.CreateUnit(unitController, unit, weapon);
+                
+                if (Add(unitController)) print("Successfully loaded: " + unitController.name);
+                else throw new Exception();
+            }
+            catch (Exception e)
+            {
+                print("Failed to load: " + unitController.name);
+                Destroy(unitController.gameObject);
+            }
         }
-        
-        public bool IsTest()
-        {
-            return Application.isEditor;
-        }
-        
+
         bool Add(IUnitController controller)
         {
             if (controller is ITimeSensitive timeSensitive) recordables.Add(timeSensitive);
@@ -60,6 +66,14 @@ namespace Library.src.util
         {
             if (controller is ITimeSensitive timeSensitive) recordables.Remove(timeSensitive);
             return units.Remove(controller);
+        }
+        
+        public static Brawl InitBrawl()
+        {
+            var brawlObject = new GameObject();
+            brawlObject.name = "brawl_" + brawlObject.GetInstanceID().ToString().Replace("-", "");
+            //setting up brawl behaviour
+            return brawlObject.AddComponent<Brawl>();
         }
     }
 }

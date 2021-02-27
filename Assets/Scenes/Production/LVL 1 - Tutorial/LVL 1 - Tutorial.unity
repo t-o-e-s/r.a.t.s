@@ -2627,6 +2627,18 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 1701614917}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &921600890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921600888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1a80a3a59d4909b01f1c175f36c1ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &921600895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3206,9 +3218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f3184994ff74c498dc724475ee0ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeArray:
-  - {fileID: 875312248}
-  - {fileID: 890608774}
 --- !u!195 &1157479076 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 1728738530, guid: 3b45a1a45ec56b744be739a3194f2586,
@@ -4079,7 +4088,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606821295}
-  m_LocalRotation: {x: -0.21185943, y: 0.008041566, z: -0.037067503, w: -0.9765639}
+  m_LocalRotation: {x: -0.21185943, y: 0.008041564, z: -0.037067503, w: -0.9765639}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4122,12 +4131,12 @@ PrefabInstance:
     - target: {fileID: 2788161604720366324, guid: 6834fb4ca6ae2814ca577fc8204fb34c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000001820302
+      value: 0.000000001820302
       objectReference: {fileID: 0}
     - target: {fileID: 2788161604720366324, guid: 6834fb4ca6ae2814ca577fc8204fb34c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 3.9490322e-10
+      value: -3.9490322e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2788161604720366324, guid: 6834fb4ca6ae2814ca577fc8204fb34c,
         type: 3}
@@ -4935,6 +4944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3e7a0041d3a834799196351cc22c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolNodes: []
 --- !u!1 &2054218904
 GameObject:
   m_ObjectHideFlags: 0
