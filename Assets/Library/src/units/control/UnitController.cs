@@ -46,6 +46,7 @@ namespace Library.src.units.control
             flag = GetComponentInChildren<SpriteRenderer>(); //TODO move to a UIHandler
 
             broker.Load(this);
+            animator = new AnimationHandler(unit);
         }
 
 
@@ -162,7 +163,7 @@ namespace Library.src.units.control
             
             var stoppingDistance = toAttack ? unit.weapon.range : EnvironmentUtil.STOPPING_DISTANCE;
             var lastRotation = transform.rotation.y;
-            targetPos = !target.Equals(null) ? target.position : targetPos;
+            targetPos = !(target is null) ? target.position : targetPos;
 
             agent.SetDestination(targetPos);
             animator.Move( true);

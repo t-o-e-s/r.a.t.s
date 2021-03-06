@@ -17,6 +17,8 @@ namespace Library.src.units.ai
         bool on; //state machine will only work if this is on
         bool canPatrol;
 
+        int patrolIndex = 0;
+
         string enemyTag;
 
         /*
@@ -41,18 +43,25 @@ namespace Library.src.units.ai
         {
             if (!on) return;
             if (controller.InCombat()) return;
+            if (state == AIState.PATROL && !controller.agent.pathPending) 
             UpdateState();
         }
 
         void UpdateState()
         {
-            if (!enemyInVision.Equals(null))
+            if (!(enemyInVision is null))
             {
                 CombatBehaviour();
             }
             else if ((!controller.agent.pathPending && canPatrol)
                 || controller.GetTarget() is null && canPatrol && state == AIState.IDLE)
             {
+                if (patrolNodes.Length == 0)
+                {
+                    Idle();
+                    return;
+                }
+                state = AIState.PATROL;
                 Patrol();
             }
         }
@@ -65,13 +74,10 @@ namespace Library.src.units.ai
 
         void Patrol()
         {
-            if (patrolNodes.Length == 0)
-            {
-                Idle();
-                return;
-            }
-            
-            state = AIState.PATROL;
+            if (controller.agent.pathPending) return;
+            patrolIndex = patrolIndex >= (patrolNodes.Length - 1) ? 0 : patrolIndex++;
+            var patrolTarget = patrolNodes[patrolIndex];
+            controller.Move(patrolTarget.transform.position);
         }
 
         void CombatBehaviour()
