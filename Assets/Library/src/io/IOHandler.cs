@@ -53,7 +53,6 @@ public class IOHandler : MonoBehaviour
         RaycastHit hit;
        
         if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 150f))
-            Debug.Log(hit.point);
         {
             switch (hit.collider.tag)      
             {
@@ -66,6 +65,7 @@ public class IOHandler : MonoBehaviour
                     break;
 
                 case EnvironmentUtil.TAG_AI:
+                 
                     HandleAttack(hit.collider.gameObject);
                     break;
 
