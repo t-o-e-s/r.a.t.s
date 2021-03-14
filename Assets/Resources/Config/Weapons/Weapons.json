@@ -1,0 +1,21 @@
+﻿{
+  "weapons" : [
+    {
+      "id" : "0",
+      "name" : "Fists",
+      "damage" : "25",
+      "range" : "1",
+      "speed" : "1",
+      "weaponType" : "MELEE"
+    },
+    {
+      "id" : "1",
+      "name" : "Rusty Sword",
+      "damage" : "40",
+      "range" : "1",
+      "speed" : "0.8",
+      "weaponType" : "MELEE"
+    }
+    
+  ]
+}

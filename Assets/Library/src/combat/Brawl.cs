@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Library.src.units;
+using Library.src.units.control;
 using Library.src.util;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -105,14 +106,15 @@ namespace Library.src.combat
          */
         IEnumerator Fight()
         {
+            //TODO method prioritises player units - this will need sorting
             var unitCollections = new []{playerUnits, aiUnits};
-            
             //damage resolution is split over two frames, this can be increased if required
             foreach (var collection in unitCollections)
             {
                 foreach (var uC in collection)
                 {
-                    uC.DealDamage();                                                                                                                                                                                                
+                    uC.DealDamage();
+                    if (uC.GetTarget() is null) {} //TODO assign new target to the unit.
                 }
                 yield return null;
             }

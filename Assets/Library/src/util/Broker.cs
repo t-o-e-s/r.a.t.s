@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Library.src.combat;
 using Library.src.combat.Weapon;
-using Library.src.elements;
+using Library.src.management;
+using Library.src.management.units;
 using Library.src.time;
 using Library.src.units;
+using Library.src.units.control;
 using UnityEngine;
 
 namespace Library.src.util
@@ -13,64 +16,58 @@ namespace Library.src.util
         //HashSets for tracking active units
         public readonly HashSet<IUnitController> units = new HashSet<IUnitController>();
         public readonly HashSet<IUnitController> playerUnits = new HashSet<IUnitController>();
-        public readonly HashSet<IUnitController> aiUnits = new HashSet<IUnitController>();
+        public readonly HashSet<IUnitController> hostileUnits = new HashSet<IUnitController>();
         //tracking time sensitive objects
         public readonly HashSet<ITimeSensitive> recordables = new HashSet<ITimeSensitive>();
 
-        [SerializeField]
-        bool isTest = true;
-        int frameCount = 1;
+        //units loaded in from json
+        public Dictionary<string, UnitLoadData> unitData;
+        //weapons loaded in form json
+        public Dictionary<int, Weapon> weaponData;
 
         void Awake()
         {
-            IUnitController unit;
-            foreach (var go in GameObject.FindGameObjectsWithTag("player_unit"))
-            {
-                if (go.TryGetComponent(out unit)) playerUnits.Add(unit);
-            }
-            foreach (var go in GameObject.FindGameObjectsWithTag("enemy_unit"))
-            {
-                if (go.TryGetComponent(out unit)) playerUnits.Add(unit);
-            }
-        
-            if (isTest) TestSetUp();
+            unitData = LoadSystem.LoadUnits();
+            weaponData = LoadSystem.LoadWeapons();
         }
 
-        public void LoadAs(UnitController unitController)
+        public void Load(UnitController unitController)
         {
-            if (isTest)
+            try
             {
-                //instantiates a new unit object and loads it onto the controller
-                unitController.unit = new Unit(
-                    unitController.name,
-                    unitController,
-                    100f,
-                    unitController.GetSpeed(),
-                    new Status[0],
-                    null,
-                    Arsenal.Fists());
+                UnitLoadData unit;
+                if (!unitData.TryGetValue(unitController.name, out unit))
+                {
+                    if (!unitData.TryGetValue(EnvironmentUtil.DEFAULT_UNIT, out unit)) throw new Exception();
+                }
+
+                Weapon weapon;
+                if (!weaponData.TryGetValue(unit.weapon, out weapon)) throw new Exception();
+
+                unitController.unit = Unit.CreateUnit(unitController, unit, weapon);
+                
+                if (Add(unitController)) print("Successfully loaded: " + unitController.name);
+                else throw new Exception();
+            }
+            catch (Exception e)
+            {
+                print("Failed to load: " + unitController.name);
+                Destroy(unitController.gameObject);
             }
         }
-        
-        public bool Add(IUnitController controller)
+
+        bool Add(IUnitController controller)
         {
-            
             if (controller is ITimeSensitive timeSensitive) recordables.Add(timeSensitive);
             return units.Add(controller);
         }
 
-        public bool Remove(IUnitController controller)
+        bool Remove(IUnitController controller)
         {
             if (controller is ITimeSensitive timeSensitive) recordables.Remove(timeSensitive);
             return units.Remove(controller);
         }
-
-        // This method should change depending on what needs to be implemented as the project evolves
-        void TestSetUp()
-        {
         
-        }
-
         public static Brawl InitBrawl()
         {
             var brawlObject = new GameObject();
@@ -78,11 +75,5 @@ namespace Library.src.util
             //setting up brawl behaviour
             return brawlObject.AddComponent<Brawl>();
         }
-        
-        public bool IsTest()
-        {
-            return isTest;
-        }
-
     }
 }
