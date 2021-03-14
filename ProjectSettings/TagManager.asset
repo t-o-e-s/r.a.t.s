@@ -13,6 +13,7 @@ TagManager:
   - enemy_unit
   - canvas
   - loot
+  - Post_Processing
   - node
   - vision
   layers:
@@ -28,8 +29,8 @@ TagManager:
   - player
   - unitLead
   - unitEntity
-  - environment
-  - 
+  - Environment
+  - Post Processing
   - 
   - 
   - 

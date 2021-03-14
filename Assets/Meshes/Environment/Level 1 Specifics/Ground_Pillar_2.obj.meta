@@ -7,7 +7,7 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Ground_Pillar_2Mat
+      name: Ground_Pillar_002Mat
     second: {fileID: 2100000, guid: 77f8a55a0d9d5bb46a89a1486e7e0bc1, type: 2}
   materials:
     materialImportMode: 1
