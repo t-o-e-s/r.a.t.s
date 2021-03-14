@@ -14,6 +14,8 @@ TagManager:
   - canvas
   - loot
   - Post_Processing
+  - node
+  - vision
   layers:
   - Default
   - TransparentFX
