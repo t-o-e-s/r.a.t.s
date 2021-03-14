@@ -12,7 +12,7 @@ namespace Library.src.util
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create(Application.persistentDataPath + "/availableRoster.dat");
 
-            Roster roster = new Roster(broker.playerUnits, broker.aiUnits);
+            Roster roster = new Roster(broker.playerUnits, broker.hostileUnits);
 
             //TODO Currently only saving alive units to activeUnits Roster, I still need to save the unused Warband here as well      
             //TODO code to compare the new save with the roster of the previous save to see which rats have died

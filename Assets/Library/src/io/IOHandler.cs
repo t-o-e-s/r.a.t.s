@@ -1,80 +1,71 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Library.src.time;
-using Library.src.units;
+using Library.src.units.control;
 using Library.src.util;
 using UnityEngine;
 
-public class IOHandler : MonoBehaviour
+namespace Library.src.io
 {
-    Broker broker;
-    
-    Camera mainCam;
-
-    //buffers
-    UnitController unitBuffer;
-    TimeSensitive timedBuffer;
-
-    Time time;
-
-    bool aUnitSelected;
-
-    int lootTotal;
-
-    [SerializeField] int framerate = 60;
-    
-    // Start is called before the first frame update
-    void Awake()
+    public class IOHandler : MonoBehaviour
     {
-        mainCam = Camera.main;
-        TryGetComponent(out broker);
-        
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = framerate;
-    }
+        Camera mainCam;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Application.targetFrameRate != framerate) Application.targetFrameRate = framerate;
-        
-        if (Input.GetMouseButtonDown(0)) Cast();
-        
-        //reverse time
-        if (Input.GetKeyDown(KeyCode.R)) HandleRewind(timedBuffer);
+        //buffers
+        UnitController unitBuffer;
+        TimeSensitive timedBuffer;
 
-        //foreach (var timed in broker.recordables) timed.Record();
-        
-        
-    }
+        Time time;
 
-    void Cast()
-    {       
-        RaycastHit hit;
-       
-        if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 150f))
+        bool aUnitSelected;
+        int lootTotal;
+
+        [SerializeField] int framerate = 60;
+    
+        void Awake()
         {
-            switch (hit.collider.tag)      
+            mainCam = Camera.main;
+        
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = framerate;
+        }
+
+        void Update()
+        {
+            if (Application.targetFrameRate != framerate) Application.targetFrameRate = framerate;
+        
+            if (Input.GetMouseButtonDown(0)) Cast();
+        
+            //reverse time
+            if (Input.GetKeyDown(KeyCode.R)) HandleRewind(timedBuffer);
+        }
+
+        void Cast()
+        {       
+            RaycastHit hit;
+       
+            if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 150f))
             {
-                case "movement_tile":
-                    HandleMovement(hit.point);
-                    break;
+                switch (hit.collider.tag)      
+                {
+                    case "movement_tile":
+                        HandleMovement(hit.point);
+                        break;
 
-                case EnvironmentUtil.TAG_PLAYER:
-                    HandleSelection(hit.collider.gameObject);
-                    break;
+                    case EnvironmentUtil.TAG_PLAYER:
+                        HandleSelection(hit.collider.gameObject);
+                        break;
 
-                case EnvironmentUtil.TAG_AI:
-                 
-                    HandleAttack(hit.collider.gameObject);
-                    break;
+                    case EnvironmentUtil.TAG_AI:
+                        HandleAttack(hit.collider.gameObject);
+                        break;
 
-                case EnvironmentUtil.TAG_LOOT:
-                    HandleLooting(hit.collider.gameObject);
-                    break;
+                    case EnvironmentUtil.TAG_LOOT:
+                        HandleLooting(hit.collider.gameObject);
+                        break;
+                }
             }
         }
-    }
 
     void HandleMovement(Vector3 point)
     {
@@ -85,7 +76,6 @@ public class IOHandler : MonoBehaviour
     {
         if (unit.TryGetComponent(out UnitController controller)) Select(controller);
         unit.TryGetComponent(out timedBuffer);
-
     }
 
     void HandleAttack(GameObject target) 
@@ -101,11 +91,11 @@ public class IOHandler : MonoBehaviour
         unitBuffer.FetchLoot(loot.transform.position);
     }
 
-    void HandleRewind(TimeSensitive timed)
-    {
-        if (timed.IsRewinding()) timed.Stop();
-        else timed.Rewind();
-    }
+        void HandleRewind(TimeSensitive timed)
+        {
+            if (timed.IsRewinding()) timed.Stop();
+            else timed.Rewind();
+        }
 
     public void TakeLoot()
     {

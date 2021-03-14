@@ -1,0 +1,16 @@
+﻿{
+  "units" : [
+    {
+      "name" : "Viago",
+      "health" : "100",
+      "speed" : "3",
+      "weapon" : "1"
+    },
+    {
+      "name" : "Default",
+      "health" : "100",
+      "speed" : "3",
+      "weapon" : "1"
+    }
+  ]
+}
