@@ -51,13 +51,14 @@ public class IOHandler : MonoBehaviour
     void Cast()
     {       
         RaycastHit hit;
-
+       
         if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 150f))
+            Debug.Log(hit.point);
         {
-            switch (hit.collider.tag)
+            switch (hit.collider.tag)      
             {
                 case "movement_tile":
-                    HandleMovement(hit.collider.gameObject);
+                    HandleMovement(hit.point);
                     break;
 
                 case EnvironmentUtil.TAG_PLAYER:
@@ -75,9 +76,9 @@ public class IOHandler : MonoBehaviour
         }
     }
 
-    void HandleMovement(GameObject tile)
+    void HandleMovement(Vector3 point)
     {
-        if (unitBuffer) unitBuffer.MoveTo(tile.transform.position);
+        if (unitBuffer) unitBuffer.MoveTo(point);
     }
 
     void HandleSelection(GameObject unit)
