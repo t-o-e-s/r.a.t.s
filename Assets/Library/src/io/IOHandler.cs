@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Library.src.time;
+﻿using Library.src.time;
 using Library.src.units.control;
 using Library.src.util;
 using UnityEngine;
@@ -21,11 +19,11 @@ namespace Library.src.io
         int lootTotal;
 
         [SerializeField] int framerate = 60;
-    
+
         void Awake()
         {
             mainCam = Camera.main;
-        
+
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = framerate;
         }
@@ -33,20 +31,20 @@ namespace Library.src.io
         void Update()
         {
             if (Application.targetFrameRate != framerate) Application.targetFrameRate = framerate;
-        
+
             if (Input.GetMouseButtonDown(0)) Cast();
-        
+
             //reverse time
             if (Input.GetKeyDown(KeyCode.R)) HandleRewind(timedBuffer);
         }
 
         void Cast()
-        {       
+        {
             RaycastHit hit;
-       
+
             if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hit, 150f))
             {
-                switch (hit.collider.tag)      
+                switch (hit.collider.tag)
                 {
                     case "movement_tile":
                         HandleMovement(hit.point);
@@ -67,29 +65,29 @@ namespace Library.src.io
             }
         }
 
-    void HandleMovement(Vector3 point)
-    {
-        if (unitBuffer) unitBuffer.MoveTo(point);
-    }
-
-    void HandleSelection(GameObject unit)
-    {
-        if (unit.TryGetComponent(out UnitController controller)) Select(controller);
-        unit.TryGetComponent(out timedBuffer);
-    }
-
-    void HandleAttack(GameObject target) 
-    {
-        if (target.TryGetComponent(out UnitController controller))
+        void HandleMovement(Vector3 point)
         {
-            unitBuffer.Attack(controller);
+            if (unitBuffer) unitBuffer.Move(point);
         }
-    }
 
-    void HandleLooting(GameObject loot)
-    {
-        unitBuffer.FetchLoot(loot.transform.position);
-    }
+        void HandleSelection(GameObject unit)
+        {
+            if (unit.TryGetComponent(out UnitController controller)) Select(controller);
+            unit.TryGetComponent(out timedBuffer);
+        }
+
+        void HandleAttack(GameObject target)
+        {
+            if (target.TryGetComponent(out UnitController controller))
+            {
+                unitBuffer.Attack(controller);
+            }
+        }
+
+        void HandleLooting(GameObject loot)
+        {
+            unitBuffer.FetchLoot(loot.transform.position);
+        }
 
         void HandleRewind(TimeSensitive timed)
         {
@@ -97,28 +95,29 @@ namespace Library.src.io
             else timed.Rewind();
         }
 
-    public void TakeLoot()
-    {
-        int loot;
-        Loot.GetLoot();
-        loot = Loot.LOOT_CLASS;
-        lootTotal += loot;
-        print("Loot total =" + lootTotal);
-    }
+        public void TakeLoot()
+        {
+            int loot;
+            Loot.GetLoot();
+            loot = Loot.LOOT_CLASS;
+            lootTotal += loot;
+            print("Loot total =" + lootTotal);
+        }
 
-    void Select(UnitController unit)
-    {
-        //deflag the previously selected unit
-        if (unitBuffer) unitBuffer.Flag(false);
+        void Select(UnitController unit)
+        {
+            //deflag the previously selected unit
+            if (unitBuffer) unitBuffer.Flag(false);
 
-        unitBuffer = unit;
-        unitBuffer.Flag(true);
+            unitBuffer = unit;
+            unitBuffer.Flag(true);
 
-        timedBuffer = null;
-    }
+            timedBuffer = null;
+        }
 
-    public static void Log(Object obj, string message)
-    {
-        print("[" + obj.name + "] - " + message);
+        public static void Log(Object obj, string message)
+        {
+            print("[" + obj.name + "] - " + message);
+        }
     }
 }
