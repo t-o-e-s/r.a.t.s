@@ -31,7 +31,7 @@ All scripts that are used to Control GameObjects (i.e. tell them to move, resize
 - The methods within are used to order directives to the "Unit", methods such as moving to a location, attacking, looting, etc...
 - Values on the "Unit" should not be contained as variables on the `UnitController` (i.e. we don't want to have values like `speed` or `health`). This type of information should instead be tracked in a `Unit` model, which contains `health`, `speed`, `attackRate` etc.
 
-##### Handlers
+#### Handlers
 Handlers are used to handle a specific event or situation. The most notable is that of the `IOHandler` which handles the input and output given to the game.
 
 
