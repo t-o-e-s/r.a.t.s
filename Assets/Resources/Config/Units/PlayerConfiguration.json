@@ -11,6 +11,12 @@
       "health" : "100",
       "speed" : "3",
       "weapon" : "1"
+    },
+	{
+      "name" : "King_Rat",
+      "health" : "100",
+      "speed" : "3",
+      "weapon" : "1"
     }
   ]
 }
