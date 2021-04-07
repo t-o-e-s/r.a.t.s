@@ -43,8 +43,8 @@ namespace Library.src.units.ai
         {
             if (!on) return;
             if (controller.InCombat()) return;
-            if (state == AIState.PATROL && !controller.agent.pathPending) 
-            UpdateState();
+            if (state == AIState.PATROL && controller.agent.isStopped) 
+                UpdateState();
         }
 
         void UpdateState()
@@ -83,7 +83,14 @@ namespace Library.src.units.ai
         void CombatBehaviour()
         {
             //if the enemy in vision is attacking this unit then defend
-            if (enemyInVision.unit.charging && enemyInVision.GetTarget().controller.Equals(controller)) Defend();
+            if (enemyInVision.unit.charging 
+                && !(enemyInVision.GetTarget() is null)
+                && (enemyInVision.GetTarget().controller == controller))
+            {
+                Defend();
+
+            }
+
             else Attack();
         }
 

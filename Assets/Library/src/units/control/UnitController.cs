@@ -49,14 +49,13 @@ namespace Library.src.units.control
             animator = new AnimationHandler(unit);
         }
 
-
-        /*====================================
+         /*====================================
         *     COMBAT
         ===================================*/
         public void Attack(UnitController target)
         {
-            targetUnit = target.unit;
             Halt();
+            targetUnit = target.unit;           
             
             var targetTransform = target.transform;
             movementRoutine = StartCoroutine(MoveRoutine(
@@ -77,7 +76,7 @@ namespace Library.src.units.control
                 x = 1.0f;
             }
             
-            var damage = unit.attackPower * (unit.attackRate / 10f); //damage done by this unit
+            var damage = unit.weapon.damage * (unit.weapon.speed / 10f); //damage done by this unit
             damage -= targetUnit.defence * x; //protection of the unit applied
             targetUnit.health -= damage; //damage dealt
 
@@ -87,6 +86,7 @@ namespace Library.src.units.control
             targetUnit.controller.Die();
             brawl.RemoveUnit(targetUnit.controller);
             targetUnit = null;
+            Debug.Log(unit.health);
         }
 
         public void LookAt(Vector3 target)
@@ -165,12 +165,14 @@ namespace Library.src.units.control
             var lastRotation = transform.rotation.y;
             targetPos = !(target is null) ? target.position : targetPos;
 
+            agent.isStopped = false;
+
             agent.SetDestination(targetPos);
             animator.Move( true);
 
             while (Vector3.Distance(targetPos, transform.position) > stoppingDistance)
             {
-                targetPos = !target.Equals(null) ? target.position : targetPos;
+                targetPos = target != null ? target.position : targetPos;
                 agent.SetDestination(targetPos);
                 var currentRotation = transform.rotation.y;
                 var rotation = currentRotation - lastRotation;
@@ -181,6 +183,7 @@ namespace Library.src.units.control
 
             animator.Move(false);
             agent.SetDestination(agent.transform.position);
+            agent.isStopped = true;
 
             if (toAttack && brawl is null) InitiateBrawl();
         }        
