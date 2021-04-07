@@ -22,7 +22,7 @@ namespace Library.src.units
            currentHp = unitCon.unit.health;
            transform.localScale = new Vector3(currentHp / maxHp, 1.0f, 1.0f);
            //can.transform.LookAt(can.transform.position);
-           can.transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
+           can.transform.LookAt(cam.transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
 
         }
     }
