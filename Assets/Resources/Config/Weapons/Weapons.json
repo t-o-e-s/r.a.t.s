@@ -3,7 +3,7 @@
     {
       "id" : "0",
       "name" : "Fists",
-      "damage" : "30",
+      "damage" : "50",
       "range" : "1",
       "speed" : "1",
       "weaponType" : "MELEE"
@@ -11,7 +11,7 @@
     {
       "id" : "1",
       "name" : "Rusty Sword",
-      "damage" : "50",
+      "damage" : "70",
       "range" : "1",
       "speed" : "0.8",
       "weaponType" : "MELEE"

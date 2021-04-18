@@ -29,7 +29,8 @@ namespace Library.src.units.control
         //TODO reimplement a way to load unit values in from an xml
 
         //UI --------------------------------------------------
-        SpriteRenderer flag; //TODO move this into a UIHandler
+        //SpriteRenderer flag; //TODO move this into a UIHandler
+        public bool flagEnabled;
         
         //Routines ---------------------------------------------
         Coroutine movementRoutine;
@@ -43,7 +44,7 @@ namespace Library.src.units.control
             broker = mainCamera.GetComponent<Broker>();
             
             agent = GetComponent<NavMeshAgent>();
-            flag = GetComponentInChildren<SpriteRenderer>(); //TODO move to a UIHandler
+            //flag = GetComponentInChildren<SpriteRenderer>(); //TODO move to a UIHandler
 
             broker.Load(this);
             animator = new AnimationHandler(unit);
@@ -114,7 +115,14 @@ namespace Library.src.units.control
 
        public void Flag(bool flag)
         {
-            this.flag.enabled = flag;
+            if (flagEnabled == false)
+            {
+                flagEnabled = true;
+            }
+            else if (flagEnabled == true)
+            {
+                flagEnabled = false;
+            }
         }
 
         public void SetTarget(Unit unit)
