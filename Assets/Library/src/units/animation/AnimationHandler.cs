@@ -27,8 +27,8 @@ namespace Library.src.animation
             animator.SetBool(EnvironmentUtil.ANIM_SLASH, true);
 
             brawl = Animator.StringToHash(EnvironmentUtil.ANIM_BRAWL);
-            move = Animator.StringToHash(EnvironmentUtil.ANIM_SLASH);
-            slash = Animator.StringToHash(EnvironmentUtil.ANIM_MOVE);
+            move = Animator.StringToHash(EnvironmentUtil.ANIM_MOVE);
+            slash = Animator.StringToHash(EnvironmentUtil.ANIM_SLASH);
             turn = Animator.StringToHash(EnvironmentUtil.ANIM_TURNING);
         }
 

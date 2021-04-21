@@ -16,7 +16,7 @@ TagManager:
   - Post_Processing
   - node
   - vision
-  - Walkable
+  - hp
   layers:
   - Default
   - TransparentFX

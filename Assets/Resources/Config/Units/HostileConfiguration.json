@@ -5,6 +5,12 @@
       "health" : "100",
       "speed" : "3",
       "weapon" : "0"
-    }
+    },
+	{
+	"name" : "rat_computer",
+      "health" : "100",
+      "speed" : "3",
+      "weapon" : "0"
+	}
   ]
 }
