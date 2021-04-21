@@ -13,7 +13,7 @@
       "weapon" : "1"
     },
 	{
-      "name" : "King_Rat",
+      "name" : "rat_player",
       "health" : "100",
       "speed" : "3",
       "weapon" : "1"

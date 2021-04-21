@@ -16,6 +16,7 @@ TagManager:
   - Post_Processing
   - node
   - vision
+  - Walkable
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - unitEntity
   - Environment
   - Post Processing
-  - 
+  - Walkable
   - 
   - 
   - 
